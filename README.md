@@ -71,14 +71,6 @@ Before you can generate your documentation, you'll need to configure a few thing
 ```  
 ## Controller Configuration
 
-This package uses the HTTP controller doc blocks to create a table of contents and show descriptions for your API methods.
-
-Using `@group` in a controller doc block creates a Group within the API documentation. All routes handled by that controller will be grouped under this group in the sidebar. The short description after the `@group` should be unique to allow anchor tags to navigate to this section. A longer description can be included below. Custom formatting and `<aside>` tags are also supported. (see the [Documentarian docs](http://marcelpociot.de/documentarian/installation/markdown_syntax))
-
-> Note: using `@group` is optional. Ungrouped routes will be placed in a "general" group.
-
-Above each method within the controller you wish to include in your API documentation you should have a doc block. This should include a unique short description as the first entry. An optional second entry can be added with further information. Both descriptions will appear in the API documentation in a different format as shown below.
-You can also specify an `@group` on a single method to override the group defined at the controller level.
 
 ```php
 class UserController extends Controller
