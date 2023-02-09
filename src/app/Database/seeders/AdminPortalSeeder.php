@@ -35,7 +35,7 @@ class AdminPortalSeeder extends Seeder
                 'password' => Hash::make('P@ssw0rd'),
                 'role_permission_id' => $privileges->id,
                 'status' => 1,
-                'profile' => 'vendor/portaladmin/img/000m.jpg',
+                'profile' => 'adminportal/img/avatar.jpg',
             ]);
         }
     }

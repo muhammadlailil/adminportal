@@ -3,7 +3,8 @@ namespace Laililmahfud\Adminportal\Commands;
 
 use Illuminate\Console\Command;
 
-class AdminPortalInstalationCommand extends Command{
+class AdminPortalInstalationCommand extends Command
+{
     /**
      * The name and signature of the console command.
      *
@@ -47,6 +48,7 @@ class AdminPortalInstalationCommand extends Command{
                 str_replace($rootProject, '', __DIR__ . '/../Database/migrations/2023_01_16_083455_create_cms_moduls_table.php'),
             ],
         ]);
+        $this->createIndexController();
 
         $this->call('adminportal:api-key');
         $this->call('db:seed', ['--class' => 'Laililmahfud\Adminportal\Database\seeders\AdminPortalSeeder']);
@@ -59,5 +61,17 @@ class AdminPortalInstalationCommand extends Command{
         $this->info('username : portal@admin.com');
         $this->info('password : P@ssw0rd');
         $this->info('Instalation success...');
+    }
+
+    protected function createIndexController()
+    {
+        $controllerDir = app_path('Http/Controllers/Admin');
+        if (!file_exists($controllerDir)) {
+            @mkdir($controllerDir, 0755);
+        }
+        if (!file_exists("{$controllerDir}/AdminIndexController.php")) {
+            $controllerTemplate = file_get_contents(__DIR__ . '/../../stubs/AdminIndexController.php.stub');
+            file_put_contents($controllerDir . '/AdminIndexController.php', $controllerTemplate);
+        }
     }
 }

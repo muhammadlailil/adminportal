@@ -11,6 +11,8 @@
 ```sh
 $ composer require laililmahfud/adminportal
 ```
+> First, setting your database
+
 > Run the artisan command to install adminportal and all of its packages
 ```bash
 php artisan adminportal:install
