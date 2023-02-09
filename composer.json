@@ -1,0 +1,35 @@
+{
+    "name": "laililmahfud/adminportal",
+    "description": "A Simple CRUD Generator - Automatically generate simple CRUD modules.",
+    "type": "package",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Laililmahfud\\Adminportal\\": "src/app"
+        }
+    },
+    "authors": [
+        {
+            "name": "laililmahfud",
+            "email": "laililmahvut@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": "^8.0.2",
+        "maatwebsite/excel": "^3.1",
+        "firebase/php-jwt": "^6.3",
+        "barryvdh/laravel-dompdf": "^2.0",
+        "laililmahfud/apdoc": "^0.0.1"
+    },
+    "require-dev": {
+        "barryvdh/laravel-debugbar": "^3.7"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Laililmahfud\\Adminportal\\AdminPortalServiceProvider"
+            ]
+        }
+    }
+}

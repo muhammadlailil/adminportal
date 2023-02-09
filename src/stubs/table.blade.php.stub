@@ -1,0 +1,5 @@
+@foreach ($data as $row)
+<tr>
+[tableData]
+</tr>
+@endforeach

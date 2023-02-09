@@ -1,0 +1,36 @@
+<?php
+namespace App\Services;
+
+use Illuminate\Http\Request;
+use App\Models\[modelName];
+use Laililmahfud\Adminportal\Helpers\AdminPortal;
+use Laililmahfud\Adminportal\Services\AdminService;
+
+class [serviceName] extends AdminService
+{
+    public function __construct(
+        public $model = [modelName]::class,
+    ) {}
+
+    public function datatable(Request $request, $perPage = 10)
+    {
+        $search = $request->search ?? '';
+        
+        return $this->model::[defaultQuery]
+            ->datatable($perPage, "[tableName].created_at");
+
+    }
+    
+    public function store(Request $request)
+    {
+        return $this->model::create([
+            [storeData]
+        ]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        [updateData]
+        return $this->model::findOrFail($id)->update($data);
+    }
+}

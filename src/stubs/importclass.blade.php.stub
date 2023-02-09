@@ -1,0 +1,32 @@
+<?php
+namespace App\Imports;
+
+use App\Models\[modelName];
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Laililmahfud\Adminportal\Helpers\ImportExcel;
+
+class [importName] extends ImportExcel implements ShouldQueue
+{
+    /**
+     *  You can add your initial variable here
+     */
+    public function __init()
+    {
+
+    }
+    public function handle(array $row)
+    {
+        /**
+         *  usage $row :: $row['name'],
+         *  $this->importStatus for handle import log status
+         */
+
+
+        [modelName]::create([
+            
+        ]);
+
+        $this->importStatus = "success";
+    }
+
+}
