@@ -3,12 +3,13 @@ namespace Laililmahfud\Adminportal;
 
 use Illuminate\Routing\Router;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
+use Laililmahfud\Adminportal\Middleware\ApiPortalMiddleware;
 use Laililmahfud\Adminportal\Middleware\AdminPortalMiddleware;
 use Laililmahfud\Adminportal\Commands\AdminKeyGeneratorCommand;
 use Laililmahfud\Adminportal\Commands\AdminPortalInstalationCommand;
-use Illuminate\Support\Facades\Blade;
 
 class AdminPortalServiceProvider extends ServiceProvider
 {
@@ -33,6 +34,7 @@ class AdminPortalServiceProvider extends ServiceProvider
         
         $router = $this->app->make(Router::class);
         $router->aliasMiddleware('portal-admin', AdminPortalMiddleware::class);
+        $router->aliasMiddleware('portal-api', ApiPortalMiddleware::class);
         
         
         $this->loadViewsFrom(__DIR__ . '/../resources', 'portal');
