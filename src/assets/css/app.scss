@@ -85,7 +85,7 @@ body {
         }
         .nav-section {
             font-size: 14px;
-            color: #b2b2b2;
+            color: #fff;
             padding: 9px 18px;
         }
         .nav-profile {
@@ -133,7 +133,7 @@ body {
                         &.active,
                         &:hover {
                             border-radius: 0px;
-                            background: #0a0a0a;
+                            background: var(--app-primary-color);
                             color: #fff;
                             &::after {
                                 content: " ";
