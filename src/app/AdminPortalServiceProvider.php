@@ -41,7 +41,7 @@ class AdminPortalServiceProvider extends ServiceProvider
         $this->registeBladeDirective();
 
 
-        $this->publishes([__DIR__.'/../lang' => resource_path('lang')], 'portal-lang');
+        $this->publishes([__DIR__.'/../lang' => base_path('lang')], 'portal-lang');
         $this->publishes([__DIR__ . '/../config/adminportal.php' => config_path('adminportal.php')], 'portal-config');
         $this->publishes([
             __DIR__ . '/../assets' => public_path('adminportal'),
