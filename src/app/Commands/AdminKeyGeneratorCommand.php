@@ -50,16 +50,6 @@ class AdminKeyGeneratorCommand extends Command{
                 // create new entry
                 file_put_contents($path, "JWT_SECRET_KEY=$key".PHP_EOL, FILE_APPEND);
             } else {
-                if ($this->option('always-no')) {
-                    $this->comment('Secret key already exists. Skipping...');
-                    return;
-                }
-    
-                if ($this->isConfirmed() === false) {
-                    $this->comment('Phew... No changes were made to your secret key.');
-    
-                    return;
-                }
     
                 // update existing entry
                 file_put_contents($path, str_replace(
@@ -82,16 +72,6 @@ class AdminKeyGeneratorCommand extends Command{
                 // create new entry
                 file_put_contents($path, PHP_EOL."API_SECRET_KEY=$key".PHP_EOL, FILE_APPEND);
             } else {
-                if ($this->option('always-no')) {
-                    $this->comment('Secret key already exists. Skipping...');
-                    return;
-                }
-    
-                if ($this->isConfirmed() === false) {
-                    $this->comment('Phew... No changes were made to your secret key.');
-    
-                    return;
-                }
     
                 // update existing entry
                 file_put_contents($path, str_replace(
