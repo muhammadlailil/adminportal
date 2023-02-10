@@ -612,7 +612,7 @@ table {
     }
     input:checked::before,input[checked="true"]::before {
         content: " ";
-        border: 6px solid #075487;
+        border: 6px solid var(--app-primary-color);
     }
 }
 .dt-pagination {
