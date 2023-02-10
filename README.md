@@ -60,6 +60,15 @@ Before you can generate your documentation, you'll need to configure a few thing
 -   `nofitication`
     For display dropdown notification on header
 
+-   `nofitication_interval`
+    Interval pooling notification request, set null or 0 to disable pooling request, value in second
+
+-   `nofitication_path`
+    Route name to see all notification, you can change to your own route name
+
+-   `alert_message_type`
+    Type of notification alert, popup or alert
+
 -   `api`
     For API Configuration
     - `secret_key` Secret key for you application API
@@ -196,9 +205,6 @@ class UserController extends Controller
      * @return array
      */
     protected $data = [];
-    /**
-     * The function to new class of crud service
-     */
 }
 ```
 
