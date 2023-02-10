@@ -58,9 +58,7 @@ class AdminPortalInstalationCommand extends Command
         $this->call('vendor:publish', ['--tag' => 'portal-config', '--force' => true]);
         $this->call('vendor:publish', ['--tag' => 'portal-asset', '--force' => true]);
         $this->call('vendor:publish', ['--tag' => 'apdoc-config', '--force' => true]);
-        /**Create upload symlink */
-        app('files')->link(storage_path('app/uploads'), public_path('uploads'));
-
+        $this->createSymlink();
         $this->info('Login infromation');
         $this->info('username : portal@admin.com');
         $this->info('password : P@ssw0rd');
@@ -77,5 +75,15 @@ class AdminPortalInstalationCommand extends Command
             $controllerTemplate = file_get_contents(__DIR__ . '/../../stubs/AdminIndexController.php.stub');
             file_put_contents($controllerDir . '/AdminIndexController.php', $controllerTemplate);
         }
+    }
+
+
+    protected function createSymlink(){
+        /**Create upload symlink */
+        $uploadDir = storage_path('app/uploads');
+        if (!file_exists($uploadDir)) {
+            @mkdir($uploadDir, 0755);
+        }
+        app('files')->link(storage_path('app/uploads'), public_path('uploads'));
     }
 }

@@ -2,11 +2,11 @@
 namespace Laililmahfud\Adminportal\Api;
 
 class Error{
-    public static $NOT_FOUND = 'not_found';
-    public static $BAD_REQUEST = 'bad_request';
-    public static $INVALID_TOKEN = 'invalid_token';
-    public static $EXPIRED_TOKEN = 'expired_token';
-    public static $UNAUTHORIZED = 'unauthorized';
-    public static $FORBIDEN = 'forbidden';
-    public static $INVALID_LOGIN = 'invalid_login';
+    const NOT_FOUND = 'not_found';
+    const BAD_REQUEST = 'bad_request';
+    const INVALID_TOKEN = 'invalid_token';
+    const EXPIRED_TOKEN = 'expired_token';
+    const UNAUTHORIZED = 'unauthorized';
+    const FORBIDEN = 'forbidden';
+    const INVALID_LOGIN = 'invalid_login';
 }

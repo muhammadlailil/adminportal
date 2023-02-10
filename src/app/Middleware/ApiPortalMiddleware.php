@@ -22,7 +22,7 @@ class ApiPortalMiddleware
     {
         $token = JwtToken::getToken();
         if(!$token){
-            return $this->unauthorized('Your token was not found !',Error::$UNAUTHORIZED);
+            return $this->unauthorized('Your token was not found !');
         }
         try{
             $decodedToken = JwtToken::decode();
@@ -34,9 +34,9 @@ class ApiPortalMiddleware
             return $next($request);
         }catch(\Exception $e){
             if($e instanceof ExpiredException){
-                return $this->unauthorized("Your token was expired !",Error::$EXPIRED_TOKEN);
+                return $this->unauthorized("Your token was expired !",Error::EXPIRED_TOKEN);
             }
-            return $this->unauthorized('Your token was invalid',Error::$INVALID_LOGIN);
+            return $this->unauthorized('Your token was invalid',Error::INVALID_LOGIN);
         }
         return $next($request);
     }

@@ -7,8 +7,8 @@ use Firebase\JWT\Key;
 class JwtToken
 {
     protected static $algorithm = 'HS256';
-    private static $data = [];
     private static $expired = "+1 days";
+    private static $data = [];
 
     public static function setData($data){
         self::$data = $data;

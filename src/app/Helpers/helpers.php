@@ -3,7 +3,6 @@
 use Laililmahfud\Adminportal\Helpers\AdminPortal;
 use Laililmahfud\Adminportal\Models\CmsNotification;
 
-// for development only, remove this
 if (!function_exists('portal_config')) {
     function portal_config($config)
     {

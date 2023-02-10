@@ -1,6 +1,7 @@
 <?php
 namespace Laililmahfud\Adminportal\Traits;
 
+use Laililmahfud\Adminportal\Api\Error;
 use Laililmahfud\Adminportal\Api\JwtToken;
 
 trait JsonResponse
@@ -24,7 +25,7 @@ trait JsonResponse
         exit();
     }
 
-    public function unauthorized($message, $err)
+    public function unauthorized($message, $err = Error::UNAUTHORIZED)
     {
         return response()->json([
             'status' => 401,
@@ -34,7 +35,7 @@ trait JsonResponse
         exit();
     }
 
-    public function badRequest($message, $err = "bad_request")
+    public function badRequest($message, $err = Error::BAD_REQUEST)
     {
         return response()->json([
             'status' => 400,
@@ -44,7 +45,7 @@ trait JsonResponse
         exit();
     }
 
-    public function forbidden($message, $err = "forbidden")
+    public function forbidden($message, $err = Error::FORBIDEN)
     {
         return response()->json([
             'status' => 403,

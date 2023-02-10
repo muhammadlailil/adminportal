@@ -35,7 +35,6 @@ class ModuleBuilder
             if (!file_exists(app_path("Imports/{$importName}.php"))) {
                 $importTemplate = file_get_contents(__DIR__ . '/../../stubs/importclass.blade.php.stub');
 
-                $tableColumns = AdminPortal::getAllColumTable($table);
                 //assign all variable to model template
                 $importTemplate = str_replace('[importName]', $importName, $importTemplate);
                 $importTemplate = str_replace('[modelName]', $modelName, $importTemplate);

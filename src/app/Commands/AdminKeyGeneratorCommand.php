@@ -53,7 +53,7 @@ class AdminKeyGeneratorCommand extends Command{
     
                 // update existing entry
                 file_put_contents($path, str_replace(
-                    'JWT_SECRET_KEY='.$this->laravel['config']['jwt.secret'],
+                    'JWT_SECRET_KEY='.portal_config('api.jwt_secret_key'),
                     'JWT_SECRET_KEY='.$key, file_get_contents($path)
                 ));
             }
@@ -75,7 +75,7 @@ class AdminKeyGeneratorCommand extends Command{
     
                 // update existing entry
                 file_put_contents($path, str_replace(
-                    'API_SECRET_KEY='.$this->laravel['config']['jwt.secret'],
+                    'API_SECRET_KEY='.portal_config('api.secret_key'),
                     'API_SECRET_KEY='.$key, file_get_contents($path)
                 ));
             }
@@ -92,10 +92,6 @@ class AdminKeyGeneratorCommand extends Command{
      */
     protected function envPath()
     {
-        if (method_exists($this->laravel, 'environmentFilePath')) {
-            return $this->laravel->environmentFilePath();
-        }
-
         return $this->laravel->basePath('.env');
     }
 }

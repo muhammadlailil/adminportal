@@ -44,7 +44,7 @@ class ApiTokenController extends ApiController
             $token = JwtToken::setData(['scope' => 'auth'])->setExpired('+1 hours')->build();
             return $this->sendSuccess($token);
         }
-        return $this->unauthorized("Token was invalid",Error::$INVALID_TOKEN);
+        return $this->unauthorized("Token was invalid",Error::INVALID_TOKEN);
     }
 
     /**
@@ -68,9 +68,9 @@ class ApiTokenController extends ApiController
         try {
             $payload = JwtToken::decode();
             $newToken = JwtToken::setData($payload->data)->build();
-
         } catch (\Exception$e) {
             if ($e->getMessage() == "Expired token") {
+                $token = JwtToken::getToken();
                 list($header, $payload, $signature) = explode(".", $token);
                 $payload = json_decode(base64_decode($payload));
                 $newToken = JwtToken::setData($payload->data)->build();
@@ -79,6 +79,6 @@ class ApiTokenController extends ApiController
         if($newToken){
             return $this->sendSuccess($newToken);
         }
-        return $this->unauthorized('Token was invalid', Error::$INVALID_TOKEN);
+        return $this->unauthorized('Token was invalid', Error::INVALID_TOKEN);
     }
 }
