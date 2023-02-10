@@ -57,6 +57,9 @@ class AdminPortalInstalationCommand extends Command
         $this->call('vendor:publish', ['--tag' => 'portal-config', '--force' => true]);
         $this->call('vendor:publish', ['--tag' => 'portal-asset', '--force' => true]);
         $this->call('vendor:publish', ['--tag' => 'apdoc-config', '--force' => true]);
+        /**Create upload symlink */
+        app('files')->link(storage_path('app/uploads'), public_path('uploads'));
+        
         $this->info('Login infromation');
         $this->info('username : portal@admin.com');
         $this->info('password : P@ssw0rd');

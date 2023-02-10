@@ -96,3 +96,24 @@ if(!function_exists('adminurl')){
         return url(portal_config('admin_path')."/".$url);
     }
 }
+
+if (!function_exists('canDo')) {
+    function canDo($action)
+    {
+        $role = admin()->role;
+        if($role->is_superadmin){
+            return true;
+        }
+        $permission = $role->permissions;
+        return in_array($action,$permission);
+    }
+}
+
+if (!function_exists('redirect_if')) {
+    function redirect_if($if,$action)
+    {
+        if($if){
+            throw new \Illuminate\Http\Exceptions\HttpResponseException(call_user_func($action));
+        }
+    }
+}

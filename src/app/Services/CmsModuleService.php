@@ -43,15 +43,22 @@ class CmsModuleService
         return $this->model::oldest('sorting')->get();
     }
 
-    public function treeModuls($user_id = null)
+    public function treeModuls($issuperadmin = true,$modulesId=[])
     {
-        $subModul = $this->model::whereNotNull('parent_id')
+        
+        $subModul = $this->model::where('parent_id')
             ->select(['name', 'path', 'icon', 'id', 'parent_id', 'type'])
+            ->when(!$issuperadmin,function($q) use($modulesId) {
+                $q->whereIn('id',$modulesId);
+            })
             ->oldest('sorting')
             ->get();
 
         return json_decode($this->model::whereNull('parent_id')
                 ->select(['name', 'path', 'icon', 'id', 'type'])
+                ->when(!$issuperadmin,function($q) use($modulesId) {
+                    $q->whereIn('id',$modulesId);
+                })
                 ->oldest('sorting')
                 ->get()
                 ->map(function ($row) use ($subModul) {

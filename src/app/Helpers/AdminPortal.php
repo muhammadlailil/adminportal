@@ -31,7 +31,7 @@ class AdminPortal{
         unset($user->roles);
         session()->put("{$prefix}.user",$user);
         session()->put("{$prefix}.role",$roles);
-        session()->put("{$prefix}.modules",self::userModuls($user->id));
+        session()->put("{$prefix}.modules",self::userModuls($roles->is_superadmin,$roles->permission_modules));
         return new static;
     }
 
@@ -64,7 +64,7 @@ class AdminPortal{
         return $columns;
     }
 
-    public static function userModuls($user_id){
-        return (new CmsModuleService())->treeModuls($user_id);
+    public static function userModuls($isSuperadmin,$modules){
+        return (new CmsModuleService())->treeModuls($isSuperadmin,$modules);
     }
 }

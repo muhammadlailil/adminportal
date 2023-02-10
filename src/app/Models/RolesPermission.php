@@ -12,9 +12,10 @@ class RolesPermission extends Model
     use HasFactory,HasUuids,HasDatatable;
 
     protected $table = 'roles_permission';
-    protected $fillable = ['name', 'is_superadmin','permissions'];
+    protected $fillable = ['name', 'is_superadmin','permissions','permission_modules'];
 
     protected $casts = [
         'permissions' => 'array',
+        'permission_modules' => 'array',
     ];
 }

@@ -8,6 +8,7 @@ use Illuminate\Support\ServiceProvider;
 use Laililmahfud\Adminportal\Middleware\AdminPortalMiddleware;
 use Laililmahfud\Adminportal\Commands\AdminKeyGeneratorCommand;
 use Laililmahfud\Adminportal\Commands\AdminPortalInstalationCommand;
+use Illuminate\Support\Facades\Blade;
 
 class AdminPortalServiceProvider extends ServiceProvider
 {
@@ -37,6 +38,7 @@ class AdminPortalServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__ . '/../resources', 'portal');
         $this->loadViewsFrom(__DIR__ . '/../resources/module', 'portalmodule');
         $this->registerRoutes();
+        $this->registeBladeDirective();
 
 
         $this->publishes([__DIR__.'/../lang' => resource_path('lang')], 'portal-lang');
@@ -72,5 +74,12 @@ class AdminPortalServiceProvider extends ServiceProvider
             ->group(function () {
                 $this->loadRoutesFrom(__DIR__ . '/../routes/api.php');
             });
+    }
+
+
+    private function registeBladeDirective(){
+        Blade::if('canDo', function ($do) {
+            return canDo($do);
+        });
     }
 }

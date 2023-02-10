@@ -23,14 +23,34 @@ class RolePermissionService extends AdminService
     }
 
     public function store(Request $request){
-        return $this->model::create($request->only(['name','is_superadmin','permissions']));
+        $data = array_merge($request->only(['name','is_superadmin']),$this->getRequestPermission());
+        return $this->model::create($data);
     }
 
     public function update(Request $request,$id){
-        return $this->model::findOrFail($id)->update($request->only(['name','is_superadmin','permissions']));
+        $data = array_merge($request->only(['name','is_superadmin']),$this->getRequestPermission());
+        return $this->model::findOrFail($id)->update($data);
     }
 
     public function listModuls(){
         return json_decode($this->cmsModuleService->all()->values()->toJson());
+    }
+
+    private function getRequestPermission(){
+        $permissions = ["view admin.dashboard"];
+        $permission_module = [];
+        foreach(request('permissions',[]) as $permission){
+            $id = key($permission);
+            $access = $permission[$id];
+            array_push($permissions,$access);
+
+            if(str_contains($access,"view admin.")){
+                array_push($permission_module,$id);
+            }
+        }
+        return  [
+            'permissions' => $permissions,
+            'permission_modules' => array_values(array_unique($permission_module)),
+        ];
     }
 }

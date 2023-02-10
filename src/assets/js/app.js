@@ -91,6 +91,15 @@ setTimeout(() => {
                 .forEach((item) => {
                     item.checked = this.checked
                 });
+            tableCeklistHandling();
+        });
+
+     document
+        .querySelectorAll(".datatable .table-checkbox")
+        .forEach((item) => {
+            item.addEventListener('click',function(){
+                tableCeklistHandling();
+            })
         });
 });
 
@@ -128,6 +137,13 @@ function Confirmation(message, action, method = "POST") {
     new bootstrap.Modal(modal).toggle();
 }
 
+function Confirm(message) {
+    const modal = document.getElementById("modal-confirm");
+    modal.querySelector(".message").innerHTML = message;
+    new bootstrap.Modal(modal).toggle();
+    return modal;
+}
+
 // alert-information
 function Information(message,type='success'){
     const modal = document.getElementById("alert-information");
@@ -154,3 +170,30 @@ document.querySelectorAll('select.select-icons').forEach((item)=>{
         currentSelected.insertAdjacentHTML("beforeend",`<i class="isax ${icon} select-icon-item"></i>${icon}`)
     })
 })
+
+const dataTableForm = document.getElementById('form-data-table')
+document.querySelectorAll('#btn-bulk-action .action').forEach((item)=>{
+    item.addEventListener('click',function(){
+        if(document.querySelectorAll(".datatable .table-checkbox:checked").length){
+            const action = item.getAttribute('data-action') ?? 'delete'
+            dataTableForm.querySelector('input[name="bulk_action"]')?.remove()
+            dataTableForm.insertAdjacentHTML("beforeend",`<input type="hidden" name="bulk_action" value="${action}"/>`)
+            Confirm(`Are you sure you want to ${action} the selected data?`).querySelector('button.btn-oke').addEventListener('click',function(){
+                dataTableForm.submit()
+            })
+        }else{
+            Information("Please select at least one data !","warning")
+        }
+    })
+})
+
+
+function tableCeklistHandling(){
+   if(document.querySelectorAll(".datatable .table-checkbox:checked").length){
+        document.getElementById('btn-bulk-action').classList.remove('d-none')
+        document.getElementById('btn-add-table').classList.add('d-none')
+   }else{
+    document.getElementById('btn-bulk-action').classList.add('d-none')
+    document.getElementById('btn-add-table').classList.remove('d-none')
+   }
+}

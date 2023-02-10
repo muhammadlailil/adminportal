@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('name',150);
             $table->boolean('is_superadmin');
             $table->json('permissions')->nullable();
+            $table->json('permission_modules')->nullable();
         });
     }
 

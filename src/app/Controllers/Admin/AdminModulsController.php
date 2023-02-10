@@ -83,6 +83,7 @@ class AdminModulsController extends Controller
         if(!$request->has_edit) array_push($except,"edit","update");
         if($request->has_import) array_push($actions,"import");
         if($request->has_export) array_push($actions,"export");
+        if($request->bulk_action) array_push($actions,"bulk-action");
         
         $this->cmsModuleService->create([
             'name' => $request->module_name,
@@ -102,6 +103,7 @@ class AdminModulsController extends Controller
 
     private function syncModulsSession(){
         $prefix = portal_config('auth.session_name_prefix');
-        session()->put("{$prefix}.modules",AdminPortal::userModuls(admin()->user->id));
+        $roles = admin()->role;
+        session()->put("{$prefix}.modules",AdminPortal::userModuls($roles->is_superadmin,$roles->permission_modules));
     }
 }

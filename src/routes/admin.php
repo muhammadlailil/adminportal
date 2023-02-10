@@ -21,7 +21,11 @@ Route::middleware(['portal-admin'])->group(function () {
         Route::post('/logout', 'logout')->name('auth.logout');
     });
     Route::resource('/portal/user-admin', AdminUsersController::class)->except(['show']);
+    Route::post("/portal/user-admin/bulk-action", [AdminUsersController::class, "bulkAction"])->name("user-admin.bulk-action");
+
     Route::resource('/portal/role-permission', AdminRolePermissionController::class)->except(['show']);
+    Route::post("/portal/role-permission/bulk-action", [AdminRolePermissionController::class, "bulkAction"])->name("role-permission.bulk-action");
+
     Route::group(['as' => 'cms-moduls.', 'prefix' => 'app-moduls', 'controller' => AdminModulsController::class], function () {
         Route::get('/', 'index')->name('index');
         Route::get('/builder', 'builder')->name('builder');
@@ -48,12 +52,11 @@ Route::middleware(['portal-admin'])->group(function () {
                 if (in_array("import", $actions)) {
                     Route::post("{$row->path}/import", ["\App\Http\Controllers\Admin\\$row->controller", "import"])->name("{$name}.import");
                 }
+                if (in_array("bulk-action", $actions)) {
+                    Route::post("{$row->path}/bulk-action", ["\App\Http\Controllers\Admin\\$row->controller", "bulkAction"])->name("{$name}.bulk-action");
+                }
             }
         }
     } catch (Exception $e) {
     }
 });
-
-// Route::get('link',function(){
-//     return app('files')->link(storage_path('app/uploads'), public_path('uploads'));
-// });

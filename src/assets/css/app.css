@@ -840,12 +840,12 @@ table .th-checkbox .form-checkbox {
 .alert {
   border: none;
   padding: 20px;
+  font-size: 14px;
+  font-family: "Krub-Regular";
 }
 .alert.alert-warning {
   background: rgba(249, 159, 27, 0.11);
   border-radius: 9px;
-  font-size: 14px;
-  font-family: "Krub-Regular";
   color: #000;
 }
 .alert.alert-warning .icon {
@@ -990,4 +990,8 @@ table .th-checkbox .form-checkbox {
 .select-icons .current i {
   font-size: 25px;
   margin-right: 15px;
+}
+
+#btn-bulk-action .dropdown-item {
+  padding: 10px 25px;
 }/*# sourceMappingURL=app.css.map */

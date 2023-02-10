@@ -128,10 +128,15 @@ class AdminController extends Controller
      * @return array
      */
     protected $data = [];
+
+    /**
+     * Custom message actions
+     */
+    protected $message = [];
+    
     /**
      * The function to new class of crud service
      */
-    
     protected function crudService()
     {
         return (new $this->crudService);
@@ -142,17 +147,24 @@ class AdminController extends Controller
      */
     public function index(Request $request)
     {
+        redirect_if(
+            !canDo($this->moduleName("view ")),
+            function(){
+                return to_route('admin.dashboard')->with(['alert_error'=>__('adminportal.dont_have_access')]);
+            }
+        );
+
         $this->data = array_merge($this->data, [
             "page_title" => $this->pageTitle,
             "datatable_views" => "{$this->resourcePath}.table",
             "table_columns" => $this->tableColumns,
             "route" => $this->routePath,
             "button" => [
-                "add" => $this->canAdd,
+                "add" => $this->canAdd && canDo($this->moduleName("add ")),
                 "filter" => $this->canFilter,
-                "bulkAction" => $this->bulkAction,
-                "tableAction" => $this->tableAction,
-                "import" => $this->canImport,
+                "bulkAction" => $this->bulkAction && canDo($this->moduleName("delete ")),
+                "tableAction" => $this->tableAction && canDo($this->moduleName("edit ")) || canDo($this->moduleName("delete ")),
+                "import" => $this->canImport && canDo($this->moduleName("add ")),
                 "export" => $this->canExport,
             ],
             "data" => $this->crudService()->datatable($request, $this->perPage),
@@ -165,6 +177,12 @@ class AdminController extends Controller
      */
     public function create(Request $request)
     {
+        redirect_if(
+            !canDo($this->moduleName("add ")),
+            function(){
+                return to_route('admin.dashboard')->with(['alert_error'=>__('adminportal.dont_have_access')]);
+            }
+        );
         $this->data = array_merge($this->data, [
             "page_title" => $this->pageTitle,
             "route" => $this->routePath,
@@ -181,6 +199,12 @@ class AdminController extends Controller
      */
     public function edit(Request $request, $id)
     {
+        redirect_if(
+            !canDo($this->moduleName("edit ")),
+            function(){
+                return to_route('admin.dashboard')->with(['alert_error'=>__('adminportal.dont_have_access')]);
+            }
+        );
         $this->data = array_merge($this->data, [
             "page_title" => $this->pageTitle,
             "route" => $this->routePath,
@@ -198,15 +222,21 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
+        redirect_if(
+            !canDo($this->moduleName("add ")),
+            function(){
+                return redirect()->back()->with(['alert_error'=>__('adminportal.dont_have_access')]);
+            }
+        );
         $request->validate($this->validationRules('create'));
         try {
             $this->crudService()->store($request);
             return redirect(return_url() ?: route("{$this->routePath}.index"))->with([
-                'success' => __('adminportal.data_success_add'),
+                'success' => @$this->message['store'] ?? __('adminportal.data_success_add'),
             ]);
         } catch (\Exception$e) {
             return redirect()->back()->with([
-                'error' => __('adminportal.data_failed_add', [
+                'error' =>  @$this->message['failed_store'] ?? __('adminportal.data_failed_add', [
                     'reason' => $e->getMessage(),
                 ]),
             ]);
@@ -218,17 +248,24 @@ class AdminController extends Controller
      */
     public function update(Request $request, $id)
     {
+        redirect_if(
+            !canDo($this->moduleName("edit ")),
+            function(){
+                return redirect()->back()->with(['alert_error'=>__('adminportal.dont_have_access')]);
+            }
+        );
+
         $request->validate($this->validationRules('update', $id));
 
         try {
             $this->crudService()->update($request, $id);
 
             return redirect(return_url() ?: route("{$this->routePath}.index"))->with([
-                'success' => __('adminportal.data_success_update'),
+                'success' =>  @$this->message['update'] ?? __('adminportal.data_success_update'),
             ]);
         } catch (\Exception$e) {
             return redirect()->back()->with([
-                'error' => __('adminportal.data_failed_update', [
+                'error' => @$this->message['failed_update'] ?? __('adminportal.data_failed_update', [
                     'reason' => $e->getMessage(),
                 ]),
             ]);
@@ -237,15 +274,22 @@ class AdminController extends Controller
 
     public function destroy(Request $request, $id)
     {
+        redirect_if(
+            !canDo($this->moduleName("delete ")),
+            function(){
+                return redirect()->back()->with(['alert_error'=>__('adminportal.dont_have_access')]);
+            }
+        );
+
         try {
             $this->crudService()->delete($id);
 
             return redirect(return_url() ?: route("{$this->routePath}.index"))->with([
-                'success' => __('adminportal.data_success_delete'),
+                'success' =>  @$this->message['delete'] ?? __('adminportal.data_success_delete'),
             ]);
         } catch (\Exception$e) {
             return redirect()->back()->with([
-                'error' => __('adminportal.data_failed_delete', [
+                'error' =>  @$this->message['failed_delete'] ?? __('adminportal.data_failed_delete', [
                     'reason' => $e->getMessage(),
                 ]),
             ]);
@@ -254,6 +298,13 @@ class AdminController extends Controller
 
     public function export(Request $request)
     {
+        redirect_if(
+            !canDo($this->moduleName("view ")),
+            function(){
+                return redirect()->back()->with(['alert_error'=>__('adminportal.dont_have_access')]);
+            }
+        );
+
         $file_format = $request->file_format;
         $data = $this->crudService()->datatable($request, null);
         switch ($file_format) {
@@ -285,6 +336,13 @@ class AdminController extends Controller
      */
     public function import(Request $request)
     {
+        redirect_if(
+            !canDo($this->moduleName("add ")),
+            function(){
+                return redirect()->back()->with(['alert_error'=>__('adminportal.dont_have_access')]);
+            }
+        );
+
         if(!$this->importExcel){
             return redirect()->back()->with(['error' => "Please define importExcel class first"]);
         }
@@ -305,6 +363,31 @@ class AdminController extends Controller
         return redirect()->back()->with(['success' => __('adminportal.import_data_in_progres')]);
     }
 
+
+    public function bulkAction (Request $request){
+        $bulk_action = $request->bulk_action;
+        $selected_ids = $request->selected_ids;
+        if($bulk_action=='delete'){
+            redirect_if(
+                !canDo($this->moduleName("delete ")),
+                function(){
+                    return to_route('admin.dashboard')->with(['alert_error'=>__('adminportal.dont_have_access')]);
+                }
+            );
+            $this->crudService()->bulkDelete($selected_ids);
+            return redirect(return_url() ?: route("{$this->routePath}.index"))->with([
+                'success' =>  @$this->message['bulk_delete'] ??__('adminportal.data_success_delete'),
+            ]);
+        }
+        return $this->actionSelected($bulk_action,$selected_ids);
+    }
+
+    public function actionSelected($type,$selectedIds){
+        return redirect(return_url() ?: route("{$this->routePath}.index"))->with([
+            'success' => "Not implement",
+        ]);
+    }
+
     protected function validationRules($type, $id = null)
     {
         $rules = ($type == 'create')
@@ -320,5 +403,9 @@ class AdminController extends Controller
             $item = str_replace('{id}', $id, $item);
             return $item;
         })->toArray();
+    }
+
+    protected function moduleName($str = ""){
+        return $str.$this->routePath;
     }
 }

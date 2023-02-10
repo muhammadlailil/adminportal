@@ -59,4 +59,7 @@ return [
     "password_validation_message" => "The password must be at least 8 characters combined with numbers and letters",
 
     "import_data_in_progres" => "Import data in progess, waiting for the result in Import Data Log's Module.",
+
+    "delete_selected" => "Delete Selected",
+    "dont_have_access" => "You don't have access to this resource"
 ];

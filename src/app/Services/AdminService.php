@@ -22,4 +22,10 @@ class AdminService
     {
         return $this->model::findOrFail($id);
     }
+
+    public function bulkDelete($ids)
+    {
+        return $this->model::whereIn('id',$ids)->delete();
+    }
+
 }

@@ -4,7 +4,7 @@ $limit = request('limit');
 @endphp
 {{@$html}}
 <div class="header-datatable d-flex justify-content-between">
-    <div class="left-side d-flex">
+    <div class="left-side d-flex align-items-center">
         <form action="" method="get" id="form_data_table_filter">
             {!!input_query(['search']) !!}
             <div class="input-icon input-search" title="Enter untuk menjalankan pencarian">
@@ -12,20 +12,6 @@ $limit = request('limit');
                 <i class="isax icon-search-normal-1 icon"></i>
             </div>
         </form>
-        <div>
-            <a href="javascript:;" class="btn btn-dark btn-icon rounded-100 me-2" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="isax icon-task-square icon"></i>
-                @lang('adminportal.bulk_action')
-            </a>
-            <ul class="dropdown-menu  p-0 shadow-sm dropdown-menu-end">
-                <li>
-                    <a href="javascript:;" class="dropdown-item">
-                        Delete Selected
-                    </a>
-                </li>
-                {{@$actions_selected}}
-            </ul>
-        </div>
         @if(@$button['filter'])
         <a href="" class="btn btn-dark btn-icon rounded-100 me-2">
             <i class="isax icon-setting-4 icon"></i>
@@ -47,10 +33,26 @@ $limit = request('limit');
     </div>
     <div class="right-side d-flex">
         {{@$buttons}}
+        @if(@$button['bulkAction'])
+        <div id="btn-bulk-action" class="d-none">
+            <a href="javascript:;" class="btn btn-dark" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="isax icon-task-square icon"></i>
+                @lang('adminportal.bulk_action')
+            </a>
+            <ul class="dropdown-menu  p-0 shadow-sm">
+                <li>
+                    <a href="javascript:;" class="dropdown-item p-10 action" data-action="delete">
+                        @lang('adminportal.delete_selected')
+                    </a>
+                </li>
+                {{@$actions_selected}}
+            </ul>
+        </div>
+        @endif
         @if(@$button['add'])
         <a href="{{route("{$route}.create",[
             'return_url' => urlencode(request()->fullUrl())
-        ])}}" class="btn btn-dark btn-icon text-upper">
+        ])}}" class="btn btn-dark btn-icon text-upper ms-2" id="btn-add-table">
             <i class="isax icon-add-circle icon"></i>
             @lang('adminportal.add_data')
         </a>
@@ -62,55 +64,58 @@ $limit = request('limit');
 @php
     $tableClass = ($result->count()>=5 || count($columns)>=10)?'table-responsive':'';
 @endphp
-<div class="{{$tableClass}} datatable-content">
-    <table id="app-datatable" class="table datatable" cellpadding="1" cellspacing="1">
-        <thead>
-            <tr>
-                @if(@$button['bulkAction'])
-                <th class="th-checkbox">
-                    <div class="form-checkbox">
-                        <input type="checkbox" id="input_checkall_datatable">
-                    </div>
-                </th>
-                @endif
-                @foreach($columns as $column)
-                    @if($filter_column && @$filter_column[$column['name']])
-                        @if(@$filter_column[$column['name']]=='asc')
-                            @php
-                            $icon = '<i class="isax sort-icon icon-arrow-up-3"></i>';
-                            $sort = 'desc';
-                            @endphp
+<form action="{{route("{$route}.bulk-action")}}" id="form-data-table" method="POST">
+    @csrf
+    <div class="{{$tableClass}} datatable-content">
+        <table id="app-datatable" class="table datatable" cellpadding="1" cellspacing="1">
+            <thead>
+                <tr>
+                    @if(@$button['bulkAction'])
+                    <th class="th-checkbox">
+                        <div class="form-checkbox">
+                            <input type="checkbox" id="input_checkall_datatable">
+                        </div>
+                    </th>
+                    @endif
+                    @foreach($columns as $column)
+                        @if($filter_column && @$filter_column[$column['name']])
+                            @if(@$filter_column[$column['name']]=='asc')
+                                @php
+                                $icon = '<i class="isax sort-icon icon-arrow-up-3"></i>';
+                                $sort = 'desc';
+                                @endphp
+                            @else
+                                @php
+                                $icon = '<i class="isax sort-icon icon-arrow-down"></i>';
+                                $sort = 'asc';
+                                @endphp
+                            @endif
                         @else
                             @php
-                            $icon = '<i class="isax sort-icon icon-arrow-down"></i>';
-                            $sort = 'asc';
+                            $icon = '<i class="isax sort-icon icon-arrow-down"></i><i class="isax sort-icon icon-arrow-up-3"></i>';
+                            $sort = 'desc';
                             @endphp
                         @endif
-                    @else
-                        @php
-                        $icon = '<i class="isax sort-icon icon-arrow-down"></i><i class="isax sort-icon icon-arrow-up-3"></i>';
-                        $sort = 'desc';
-                        @endphp
+                    <th>
+                        <a href="{{urlFilterColumn($column['name'],$sort)}}">{{@$column['label']}} {!! $icon !!}</a>
+                    </th>
+                    @endforeach
+                    @if(@$button['tableAction'])
+                    <th class="text-end">@lang('adminportal.actions')</th>
                     @endif
-                <th>
-                    <a href="{{urlFilterColumn($column['name'],$sort)}}">{{@$column['label']}} {!! $icon !!}</a>
-                </th>
-                @endforeach
-                @if(@$button['tableAction'])
-                <th class="text-end">@lang('adminportal.actions')</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{$slot}}
+                @if(!$result->count())
+                <tr>
+                    <td class="no-data" colspan="{{count($columns)+2}}">@lang('adminportal.no_data_available')</td>
+                </tr>
                 @endif
-            </tr>
-        </thead>
-        <tbody>
-            {{$slot}}
-            @if(!$result->count())
-            <tr>
-                <td class="no-data" colspan="{{count($columns)+2}}">@lang('adminportal.no_data_available')</td>
-            </tr>
-            @endif
-        </tbody>
-    </table>
-</div>
+            </tbody>
+        </table>
+    </div>
+</form>
 <div class="d-flex paginate-footer justify-content-between">
     <div>
         {{ $result->appends(request()->query())->onEachSide(2)->links() }}

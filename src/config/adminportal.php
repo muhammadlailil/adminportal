@@ -33,7 +33,7 @@ return [
      | --------------------------------------------
      | Configuration for login view
      | --------------------------------------------
-     | view_path => base resource path of login view
+     | view_path => the base resource path of login view
      | banner => image banner for login if you use default view
      | banner_title => banner title for login if you use default view
      | banner_description => banner description for login if you use default view
@@ -68,6 +68,24 @@ return [
      | --------------------------------------------
      */
     'nofitication' => false,
+
+     /*
+     | --------------------------------------------
+     | For display interval notification request
+     | set null or 0 to disable interval request
+     | value in seconds
+     | --------------------------------------------
+     */
+    'nofitication_interval' => null,
+
+    /*
+     | --------------------------------------------
+     | For display alert after action
+     | popup | alert
+     | --------------------------------------------
+     */
+    'alert_message_type' => 'popup',
+    
 
 
     /*
