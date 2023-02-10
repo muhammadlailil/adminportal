@@ -57,7 +57,7 @@ if (ShowNotification) {
                         <span>You don't have notification</span>
                     </li>`;
           headerNotification.querySelector(".icon").classList.add("d-none");
-          headerNotification.querySelector(".new").classList.remove("d-none");
+          headerNotification.querySelector(".new").classList.add("d-none");
         }
       }
     });
