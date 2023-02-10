@@ -127,3 +127,11 @@ if (!function_exists('redirect_if')) {
         }
     }
 }
+
+if (!function_exists('listTypeFieldModel')) {
+    function listTypeFieldModel()
+    {
+        $file = file_get_contents(__DIR__ . '/../../resources/model-column.json');
+        return json_decode($file, true);
+    }
+}

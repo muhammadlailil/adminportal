@@ -36,6 +36,7 @@ Route::middleware(['portal-admin'])->group(function () {
     Route::group(['as' => 'cms-moduls.', 'prefix' => 'app-moduls', 'controller' => AdminModulsController::class], function () {
         Route::get('/', 'index')->name('index');
         Route::get('/builder', 'builder')->name('builder');
+        Route::get('/create-mm', 'createMigrationModule')->name('create-mm');
         Route::get('/load-columns/{table}', 'loadColumns')->name('load-columns');
         Route::post('/build-module', 'buildModule')->name('build-module');
         Route::post('/sorting-menu', 'sortingMenu')->name('sort-menu');

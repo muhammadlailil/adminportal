@@ -27,7 +27,7 @@ class ApiPortalMiddleware
         try{
             $decodedToken = JwtToken::decode();
             $user = $decodedToken->data;
-            if($role && in_array(@$user->role,  explode('|',$role))){
+            if(($role && in_array(@$user->role,  explode('|',$role))) || !$user){
                 return $this->forbidden("You don't have access to this endpoint");
             }
             // $request->auth = $user;

@@ -116,6 +116,9 @@
                         <h5 class="form-title">@lang('adminportal.order_application_module')</h5>
                     </div>
                     <div class="right-side d-flex">
+                        <a href="{{route('admin.cms-moduls.create-mm')}}" class="btn btn-dark text-upper ms-3" title="Create Migration And Model">
+                            CREATE MM
+                        </a>
                         <a href="{{route('admin.cms-moduls.builder')}}" class="btn btn-dark text-upper ms-3">
                             @lang('adminportal.generate_new_module')
                         </a>

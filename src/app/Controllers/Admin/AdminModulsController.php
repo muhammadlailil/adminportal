@@ -100,6 +100,11 @@ class AdminModulsController extends Controller
         ]);
     }
 
+    public function createMigrationModule(Request $request){
+        return view('portalmodule::app-module.create-mm',[
+            'column_type'=> listTypeFieldModel()
+        ]);
+    }
 
     private function syncModulsSession(){
         $prefix = portal_config('auth.session_name_prefix');
