@@ -20,7 +20,7 @@
         "maatwebsite/excel": "^3.1",
         "firebase/php-jwt": "^6.3",
         "barryvdh/laravel-dompdf": "^2.0",
-        "laililmahfud/apdoc": "^0.0.1"
+        "laililmahfud/apdoc": "^0.0.2"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.7"
