@@ -46,7 +46,7 @@ class CmsModuleService
     public function treeModuls($issuperadmin = true,$modulesId=[])
     {
         
-        $subModul = $this->model::where('parent_id')
+        $subModul = $this->model::whereNotNull('parent_id')
             ->select(['name', 'path', 'icon', 'id', 'parent_id', 'type'])
             ->when(!$issuperadmin,function($q) use($modulesId) {
                 $q->whereIn('id',$modulesId);
