@@ -90,7 +90,6 @@ class ImportExcel implements OnEachRow, WithHeadingRow, WithChunkReading, WithEv
     protected function progres($index){
         $totalData = cache("total_data_{$this->sessionId}");
         $progres = round($index / $totalData * 100);
-        echo $index." : progres :".$progres."<br>";
         CmsImportLog::whereId($this->sessionId)->update([
             'progres' => $progres,
         ]);
