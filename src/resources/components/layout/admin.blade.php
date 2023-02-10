@@ -3,6 +3,8 @@
 
 <head>    
     @include('portal::partials.css')
+    <meta name="notification-interval" content="{{portal_config('nofitication_interval')}}">
+    <meta name="admin-base-url" content="{{url(portal_config('admin_path'))}}">
 </head>
 
 <body>
@@ -26,7 +28,7 @@
             @endif
             @if(session('success') && portal_config('alert_message_type')=='alert')
             <div class="alert alert-success alert-dismissible d-flex align-items-center mb-4" role="alert">
-                <i class="isax-b icon-info-circle icon"></i>
+                <i class="isax-b icon-tick-circle icon"></i>
                 {{session('success')}}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
@@ -40,6 +42,7 @@
     @include('portal::components.alert.confirmation')
     @include('portal::components.alert.confirm')
     @include('portal::partials.js')
+    <script src="{{asset('adminportal/js/notification.js?'.date('YmdHis'))}}"></script>
     @if(session('success') && portal_config('alert_message_type')=='popup')
     <script>
         Information("{{session('success')}}")

@@ -260,6 +260,28 @@ body {
 
         .notification-list {
             max-width: 400px;
+            min-width: 350px;
+            .empty-notification{
+                font-size: 14px;
+                font-style: italic;
+                font-family: "Krub-Medium";
+                padding: 40px;
+                text-align: center;
+            }
+            #notification-list-items{
+                max-height: 300px;
+                overflow: hidden;
+                overflow-y: auto;
+                &::-webkit-scrollbar {
+                    width: 6px;
+                    height: 6px;
+                    background-color: transparent;
+                }
+                &::-webkit-scrollbar-thumb {
+                    background: #4d5154;
+                    border-radius: 5px;
+                }
+            }
         }
         li {
             font-family: "Krub-SemiBold";
@@ -371,8 +393,9 @@ body {
     }
     .all a {
         justify-content: center;
-        font-family: "Krub-Regular";
-        font-size: 12px;
+        font-family: "Krub-Medium";
+        font-size: 12px !important;
+        padding: 15px 25px !important;
     }
 }
 .header-datatable {

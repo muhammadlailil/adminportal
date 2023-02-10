@@ -1,6 +1,7 @@
 <?php
 
 use Laililmahfud\Adminportal\Helpers\AdminPortal;
+use Laililmahfud\Adminportal\Models\CmsNotification;
 
 // for development only, remove this
 if (!function_exists('portal_config')) {
@@ -17,6 +18,15 @@ if (!function_exists('admin')) {
         return AdminPortal::user();
     }
 }
+
+
+if (!function_exists('Notification')) {
+    function Notification($receivers)
+    {
+        return CmsNotification::setReceivers($receivers);
+    }
+}
+
 
 if(!function_exists('return_url')){
     function return_url(){

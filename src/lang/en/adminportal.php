@@ -28,6 +28,7 @@ return [
     "subnit" => "Submit",
     "cancel" => "Cancel",
     "no_data_available" => "No Data Available",
+    "detail" => "Detail",
 
 
     "data_success_add" => "The data has been added !",
@@ -61,5 +62,6 @@ return [
     "import_data_in_progres" => "Import data in progess, waiting for the result in Import Data Log's Module.",
 
     "delete_selected" => "Delete Selected",
-    "dont_have_access" => "You don't have access to this resource"
+    "dont_have_access" => "You don't have access to this resource",
+    "see_all" => "See All"
 ];

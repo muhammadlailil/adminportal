@@ -63,8 +63,12 @@ $limit = request('limit');
 
 @php
     $tableClass = ($result->count()>=5 || count($columns)>=10)?'table-responsive':'';
+    $bulkAction = '';
+    if(@$button['bulkAction']){
+        $bulkAction = route("{$route}.bulk-action");
+    }
 @endphp
-<form action="{{route("{$route}.bulk-action")}}" id="form-data-table" method="POST">
+<form action="{{$bulkAction}}" id="form-data-table" method="POST">
     @csrf
     <div class="{{$tableClass}} datatable-content">
         <table id="app-datatable" class="table datatable" cellpadding="1" cellspacing="1">

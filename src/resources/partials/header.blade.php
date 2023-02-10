@@ -26,7 +26,7 @@
     <ul class="header-navigation">
         @if(portal_config('nofitication'))
         <li class="notification">
-            <a href="javascript:;" data-bs-toggle="dropdown" aria-expanded="false">
+            <a href="javascript:;" data-bs-toggle="dropdown" aria-expanded="false" class="dropdown-notification">
                 <span class="new"></span>
                 <i class="isax icon-notification icon"></i>
                 <span class="text">@lang('adminportal.notification')</span>
@@ -36,44 +36,9 @@
                 <li class="title">
                     <a href="javascript:;">Notifikasi</a>
                 </li>
-                <li class="items">
-                    <a href="" class="d-flex unread">
-                        <div class="icons">
-                            <i class="isax-b icon-notification-bing"></i>
-                        </div>
-                        <div class="d-flex flex-column">
-                            <p class="title">Request Non Active Toko</p>
-                            <span class="desc">Toko PT Jaya Abadi</span>
-                            <span class="date">Sabtu, 22 Jan 2023, 08.00</span>
-                        </div>
-                    </a>
-                </li>
-                <li class="items">
-                    <a href="" class="d-flex unread">
-                        <div class="icons">
-                            <i class="isax-b icon-notification-bing"></i>
-                        </div>
-                        <div class="d-flex flex-column">
-                            <p class="title">Request Non Active Toko</p>
-                            <span class="desc">Toko PT Jaya Abadi</span>
-                            <span class="date">Sabtu, 22 Jan 2023, 08.00</span>
-                        </div>
-                    </a>
-                </li>
-                <li class="items">
-                    <a href="" class="d-flex">
-                        <div class="icons">
-                            <i class="isax-b icon-notification-bing"></i>
-                        </div>
-                        <div class="d-flex flex-column">
-                            <p class="title">Request Non Active Toko</p>
-                            <span class="desc">Toko PT Jaya Abadi</span>
-                            <span class="date">Sabtu, 22 Jan 2023, 08.00</span>
-                        </div>
-                    </a>
-                </li>
-                <li class="all">
-                    <a href="">Lihat Semua Notifikasi</a>
+                <li id="notification-list-items"></li>
+                <li class="all p-2 text-center">
+                    <a href="{{route(portal_config('nofitication_path'))}}" class="btn btn-light d-inline-block text-upper fw-bold">@lang('adminportal.see_all')</a>
                 </li>
             </ul>
         </li>

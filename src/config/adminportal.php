@@ -67,7 +67,7 @@ return [
      | For display dropdown notification on header
      | --------------------------------------------
      */
-    'nofitication' => false,
+    'nofitication' => true,
 
      /*
      | --------------------------------------------
@@ -76,7 +76,14 @@ return [
      | value in seconds
      | --------------------------------------------
      */
-    'nofitication_interval' => null,
+    'nofitication_interval' => 120,
+
+    /*
+     | --------------------------------------------
+     | Route name for display all notification list
+     | --------------------------------------------
+     */
+    'nofitication_path' => 'admin.notification.index',
 
     /*
      | --------------------------------------------

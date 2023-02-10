@@ -48,7 +48,7 @@ class AdminKeyGeneratorCommand extends Command{
         }else{
             if (Str::contains(file_get_contents($path), 'JWT_SECRET_KEY') === false) {
                 // create new entry
-                file_put_contents($path, PHP_EOL."JWT_SECRET_KEY=$key".PHP_EOL, FILE_APPEND);
+                file_put_contents($path, "JWT_SECRET_KEY=$key".PHP_EOL, FILE_APPEND);
             } else {
                 if ($this->option('always-no')) {
                     $this->comment('Secret key already exists. Skipping...');

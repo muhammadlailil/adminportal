@@ -1,12 +1,13 @@
 <?php
 
-use App\Http\Controllers\Admin\AdminIndexController;
 use Illuminate\Support\Facades\Route;
-use Laililmahfud\Adminportal\Controllers\Admin\AdminMainController;
-use Laililmahfud\Adminportal\Controllers\Admin\AdminModulsController;
-use Laililmahfud\Adminportal\Controllers\Admin\AdminRolePermissionController;
-use Laililmahfud\Adminportal\Controllers\Admin\AdminUsersController;
 use Laililmahfud\Adminportal\Models\CmsModuls;
+use App\Http\Controllers\Admin\AdminIndexController;
+use Laililmahfud\Adminportal\Controllers\Admin\AdminMainController;
+use Laililmahfud\Adminportal\Controllers\Admin\AdminUsersController;
+use Laililmahfud\Adminportal\Controllers\Admin\AdminModulsController;
+use Laililmahfud\Adminportal\Controllers\Admin\AdminNotificationController;
+use Laililmahfud\Adminportal\Controllers\Admin\AdminRolePermissionController;
 
 Route::group(['prefix' => 'auth', 'as' => 'auth.', 'controller' => AdminMainController::class], function () {
     Route::get('login', 'getLogin')->name('index');
@@ -25,6 +26,12 @@ Route::middleware(['portal-admin'])->group(function () {
 
     Route::resource('/portal/role-permission', AdminRolePermissionController::class)->except(['show']);
     Route::post("/portal/role-permission/bulk-action", [AdminRolePermissionController::class, "bulkAction"])->name("role-permission.bulk-action");
+
+    Route::group(['prefix'=>'notification-admin','as'=>'notification.','controller'=>AdminNotificationController::class],function(){
+        Route::get('/','index')->name('index');
+        Route::get('/read/{id}','read')->name('read');
+        Route::get('/list','list')->name('list');
+    });
 
     Route::group(['as' => 'cms-moduls.', 'prefix' => 'app-moduls', 'controller' => AdminModulsController::class], function () {
         Route::get('/', 'index')->name('index');

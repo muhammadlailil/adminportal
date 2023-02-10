@@ -46,6 +46,7 @@ class AdminPortalInstalationCommand extends Command
                 str_replace($rootProject, '', __DIR__ . '/../Database/migrations/2023_01_10_114353_create_jobs_table.php'),
                 str_replace($rootProject, '', __DIR__ . '/../Database/migrations/2023_01_10_191113_create_data_import_log_table.php'),
                 str_replace($rootProject, '', __DIR__ . '/../Database/migrations/2023_01_16_083455_create_cms_moduls_table.php'),
+                str_replace($rootProject, '', __DIR__ . '/../Database/migrations/2023_02_10_020201_create_cms_notifications_table.php'),
             ],
         ]);
         $this->createIndexController();
@@ -59,7 +60,7 @@ class AdminPortalInstalationCommand extends Command
         $this->call('vendor:publish', ['--tag' => 'apdoc-config', '--force' => true]);
         /**Create upload symlink */
         app('files')->link(storage_path('app/uploads'), public_path('uploads'));
-        
+
         $this->info('Login infromation');
         $this->info('username : portal@admin.com');
         $this->info('password : P@ssw0rd');
