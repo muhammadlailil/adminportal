@@ -4,6 +4,7 @@
 <head>    
     @include('portal::partials.css')
     <meta name="notification-interval" content="{{portal_config('nofitication_interval')}}">
+    <meta name="app-nofitication" content="{{portal_config('nofitication')}}">
     <meta name="admin-base-url" content="{{url(portal_config('admin_path'))}}">
 </head>
 
