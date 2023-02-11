@@ -412,7 +412,7 @@ class ModuleBuilder
                 if (($i == 0 && $joinQuery) || ($i != 0 && !$joinQuery)) {
                     $filterQuery .= '                ';
                 }
-                $filterQuery .= '$q->where("' . $tableSelect . $col . '", "like", "%" . $search . "%");';
+                $filterQuery .= '$q->orWhere("' . $tableSelect . $col . '", "like", "%" . $search . "%");';
                 if ($i != count($table_columns) - 1) {
                     $filterQuery .= "\r\n";
                 }
