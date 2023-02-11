@@ -30,7 +30,7 @@ class ApiPortalMiddleware
             if($role && in_array(@$user->role,  explode('|',$role))){
                 return $this->forbidden("You don't have access to this endpoint");
             }
-            // $request->auth = $user;
+            $request['authApi'] = $user;
             return $next($request);
         }catch(\Exception $e){
             if($e instanceof ExpiredException){
