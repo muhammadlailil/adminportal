@@ -2,9 +2,10 @@
 
 namespace Laililmahfud\Adminportal\Helpers;
 
+use Illuminate\Support\Facades\Http;
+
 class FCM
 {
-
     protected static $firebaseUrl = "https://fcm.googleapis.com/fcm/send";
     protected static $firebaseKey;
     protected static $regids = [];
@@ -28,7 +29,7 @@ class FCM
         self::$regids = $regids;
         return new static();
     }
-    
+
     /**
      * Usage example
      * 
@@ -47,7 +48,7 @@ class FCM
         if (count(self::$regids)) {
             $regids = array_values(array_unique(self::$regids));
 
-            $fields = [
+            $postData = [
                 'registration_ids' => $regids,
                 'data' => $data,
                 'content_available' => true,
@@ -55,27 +56,16 @@ class FCM
             ];
 
             if (self::$platform == "ios") {
-                $fields['notification'] = [
+                $postData['notification'] = [
                     'sound' => 'default',
                     'title' => trim(strip_tags($data['title'])),
                     'body' => trim(strip_tags($data['message'])),
                 ];
             }
-
-            $ch = curl_init(self::$firebaseUrl);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fields));
-            curl_setopt($ch, CURLOPT_HTTPHEADER, [
-                'Authorization:key=' . self::$firebaseKey,
-                'Content-Type:application/json',
-            ]);
-            curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
-            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
-            curl_setopt($ch, CURLOPT_POST, 1);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            $chresult = curl_exec($ch);
-            curl_close($ch);
-
-            return $chresult;
+            $response = Http::withHeaders([
+                'Authorization' => "key=" . self::$firebaseKey
+            ])->post(self::$firebaseUrl, $postData);
+            return  $response->json();
         }
     }
 }
