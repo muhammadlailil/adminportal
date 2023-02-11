@@ -1,6 +1,7 @@
 <?php
 namespace Laililmahfud\Adminportal\Helpers;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Laililmahfud\Adminportal\Services\CmsModuleService;
 
@@ -45,7 +46,7 @@ class AdminPortal{
 
     public static function listDatabaseTables()
     {
-        $tables =  \DB::select("SELECT table_name as name FROM information_schema.tables WHERE table_schema  = '" . env('DB_DATABASE') . "' and table_name not like 'cms_%' and table_name not in ('migrations','personal_access_tokens','jobs','failed_jobs','roles_permission')");
+        $tables =  DB::select("SELECT table_name as name FROM information_schema.tables WHERE table_schema  = '" . env('DB_DATABASE') . "' and table_name not like 'cms_%' and table_name not in ('migrations','personal_access_tokens','jobs','failed_jobs','roles_permission')");
         array_push($tables,(object)[
             'name'=>'cms_admin'
         ]);
@@ -55,7 +56,7 @@ class AdminPortal{
 
     public static function getAllColumTable($table_name,$exclude=['id','created_at','updated_at']){
         $columns = [];
-        $describeTable = \DB::select("DESCRIBE {$table_name}");
+        $describeTable = DB::select("DESCRIBE {$table_name}");
         foreach ($describeTable as $key => $value) {
            if(!in_array($value->Field, $exclude)){
             $columns[] = $value->Field;
