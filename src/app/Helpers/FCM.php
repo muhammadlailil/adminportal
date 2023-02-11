@@ -8,8 +8,6 @@ class FCM
     protected static $firebaseUrl = "https://fcm.googleapis.com/fcm/send";
     protected static $firebaseKey;
     protected static $regids = [];
-    protected static $title;
-    protected static $message;
     protected static $platform;
 
     public function __construct()
@@ -30,38 +28,28 @@ class FCM
         self::$regids = $regids;
         return new static();
     }
-
-    public static function setTitle($title)
-    {
-        self::$title = $title;
-        return new static();
-    }
-
-    public static function setMessage($message)
-    {
-        self::$message = $message;
-        return new static();
-    }
-
     
     /**
      * Usage example
      * 
-     * FCM::ios(['',''])->setTitle('Halo selamat pagi!')->setMessage('Jangan lupa untuk mengerjakan tugas hari ini')->send();
-     * FCM::android(['',''])->setTitle('Halo selamat pagi!')->setMessage('Jangan lupa untuk mengerjakan tugas hari ini')->send();
+     * FCM::ios(['',''])->send([
+     *      'title' => 'Halo selamat pagi!',
+     *      'message' => 'Jangan lupa untuk mengerjakan tugas hari ini'
+     * ]);
+     * FCM::android(['',''])->send([
+     *      'title' => 'Halo selamat pagi!',
+     *      'message' => 'Jangan lupa untuk mengerjakan tugas hari ini'
+     * ]);
      * 
      */
-    public static function send()
+    public static function send($data)
     {
         if (count(self::$regids)) {
             $regids = array_values(array_unique(self::$regids));
 
             $fields = [
                 'registration_ids' => $regids,
-                'data' => [
-                    'title' => self::$title,
-                    'message' => self::$message
-                ],
+                'data' => $data,
                 'content_available' => true,
                 'priority' => 'high',
             ];
@@ -69,8 +57,8 @@ class FCM
             if (self::$platform == "ios") {
                 $fields['notification'] = [
                     'sound' => 'default',
-                    'title' => trim(strip_tags(self::$title)),
-                    'body' => trim(strip_tags(self::$message)),
+                    'title' => trim(strip_tags($data['title'])),
+                    'body' => trim(strip_tags($data['message'])),
                 ];
             }
 

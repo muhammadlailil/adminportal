@@ -3,6 +3,7 @@ namespace Laililmahfud\Adminportal\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Laililmahfud\Adminportal\Helpers\ExportPdf;
 use Laililmahfud\Adminportal\Helpers\ExportExcel;
@@ -325,7 +326,7 @@ class AdminController extends Controller
                 $format = \Maatwebsite\Excel\Excel::XLSX;
                 break;
         }
-        return \Excel::download(new ExportExcel([
+        return Excel::download(new ExportExcel([
             'view' => "{$this->resourcePath}.export",
             'data' => $data,
         ]), "{$request->file_name}.{$file_format}", $format);
@@ -356,9 +357,9 @@ class AdminController extends Controller
         
         $importClass = (new $this->importExcel($logs->id));
         if ($importClass instanceof ShouldQueue) {
-            \Excel::queueImport($importClass, $importFile);
+            Excel::queueImport($importClass, $importFile);
         }else{
-            \Excel::import($importClass, $importFile);
+            Excel::import($importClass, $importFile);
         }        
         return redirect()->back()->with(['success' => __('adminportal.import_data_in_progres')]);
     }
