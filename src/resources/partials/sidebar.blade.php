@@ -76,12 +76,6 @@
                         Module Management
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="{{route('apdoc.api-documentation')}}" target="_blank" class="nav-link {{activeMenu('api-management')}}">
-                        <i class="isax icon-book nav-icon"></i>
-                        API Documentation
-                    </a>
-                </li>
             @endif
         </ul>
     </nav>
