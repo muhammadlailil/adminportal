@@ -55,7 +55,7 @@ trait JsonResponse
         exit();
     }
 
-    public function user(){
+    public function auth(){
         try{
             $decodedToken = JwtToken::decode();
             return $decodedToken->data;
