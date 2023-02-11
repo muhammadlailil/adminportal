@@ -21,11 +21,11 @@ class ApiPortalMiddleware
     public function handle(Request $request, Closure $next,$role=null)
     {
         $token = JwtToken::getToken();
-        if(!$token){
+        if((portal_config('api.validate_blacklist') && JwtToken::isBlacklist()) || !$token){
             return $this->unauthorized('Your token was not found !');
         }
         try{
-            $decodedToken = JwtToken::decode();
+            $decodedToken = JwtToken::decode($token);
             $user = $decodedToken->data;
             if($role && in_array(@$user->role,  explode('|',$role))){
                 return $this->forbidden("You don't have access to this endpoint");

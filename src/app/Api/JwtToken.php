@@ -20,6 +20,12 @@ class JwtToken
         self::$expired = $expired;
         return new static();
     }
+    
+
+    public static function getToken(){
+        $token = request()->header('authorization');
+        return str_replace('Bearer ','',$token);;
+    }
 
     public static function build()
     {
@@ -43,14 +49,37 @@ class JwtToken
         ];
     }
 
-    public static function decode(){
+    public static function decode($token = null){
         $secretKey = portal_config('api.jwt_secret_key');
-        $token = self::getToken();
+        $token = $token ?: self::getToken();
         return JWT::decode($token, new Key($secretKey, self::$algorithm));
     }
 
-    public static function getToken(){
-        $token = request()->header('authorization');
-        return str_replace('Bearer ','',$token);;
+    public static function isBlacklist($token = null){
+        $token = $token ?: self::getToken();
+        $blacklistDir = storage_path('framework/blacklist-token');
+        $file = "{$blacklistDir}/".date('Ymd');
+        if (file_exists($file)) {
+            $blackListToken = file_get_contents($file);
+            return str_contains($blackListToken,$token);
+        }
+        return false;
     }
+
+    public static function blacklist($token =  null){
+        $token = $token ?: self::getToken();
+
+        $blacklistDir = storage_path('framework/blacklist-token');
+        if (!file_exists($blacklistDir)) {
+            @mkdir($blacklistDir, 0755);
+        }
+        $file = "{$blacklistDir}/".date('Ymd');
+        $lastContent = "";
+        if (file_exists($file)) {
+            $lastContent = file_get_contents($file);
+        }
+        $lastContent .= $token."\r\n";
+        file_put_contents($file, $lastContent);
+    }
+
 }
