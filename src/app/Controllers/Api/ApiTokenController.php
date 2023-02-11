@@ -41,7 +41,7 @@ class ApiTokenController extends ApiController
         $token = base64_decode($token);
         $tokens = explode('|', $token);
         if ($tokens[0] == date('Y-m-d') && $tokens[1] == $this->apiSecretKey) {
-            $token = JwtToken::setData(['scope' => 'auth'])->setExpired('+1 hours')->build();
+            $token = JwtToken::setData(['scope' => 'auth'])->setExpired(portal_config('api.expired_duration_get_token'))->build();
             return $this->sendSuccess($token);
         }
         return $this->unauthorized("Token was invalid",Error::INVALID_TOKEN);
