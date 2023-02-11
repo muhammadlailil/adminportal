@@ -65,6 +65,9 @@ class ApiTokenController extends ApiController
     public function renewToken(Request $request)
     {
         $newToken = null;
+        if((portal_config('api.validate_blacklist') && JwtToken::isBlacklist())){
+            return $this->unauthorized('Your token was not found !');
+        }
         try {
             $payload = JwtToken::decode();
             $newToken = JwtToken::setData($payload->data)->build();
