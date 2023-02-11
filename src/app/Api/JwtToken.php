@@ -57,7 +57,7 @@ class JwtToken
 
     public static function isBlacklist($token = null){
         $token = $token ?: self::getToken();
-        $blacklistDir = storage_path('framework/blacklist-token');
+        $blacklistDir = storage_path('blacklist-token');
         $file = "{$blacklistDir}/".date('Ymd');
         if (file_exists($file)) {
             $blackListToken = file_get_contents($file);
@@ -69,7 +69,7 @@ class JwtToken
     public static function blacklist($token =  null){
         $token = $token ?: self::getToken();
 
-        $blacklistDir = storage_path('framework/blacklist-token');
+        $blacklistDir = storage_path('blacklist-token');
         if (!file_exists($blacklistDir)) {
             @mkdir($blacklistDir, 0755);
         }
