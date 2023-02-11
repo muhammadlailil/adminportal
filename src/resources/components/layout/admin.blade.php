@@ -43,7 +43,7 @@
     @include('portal::components.alert.confirmation')
     @include('portal::components.alert.confirm')
     @include('portal::partials.js')
-    <script src="{{asset('adminportal/js/notification.js?'.date('YmdHis'))}}"></script>
+    <script src="{{asset('adminportal/js/notification.js?')}}"></script>
     @if(session('success') && portal_config('alert_message_type')=='popup')
     <script>
         Information("{{session('success')}}")
