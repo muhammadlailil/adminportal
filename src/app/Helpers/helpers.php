@@ -4,9 +4,9 @@ use Laililmahfud\Adminportal\Helpers\AdminPortal;
 use Laililmahfud\Adminportal\Models\CmsNotification;
 
 if (!function_exists('portal_config')) {
-    function portal_config($config)
+    function portal_config($config,$default = "")
     {
-        return config("adminportal.{$config}");
+        return config("adminportal.{$config}") ?: $default;
     }
 }
 
@@ -88,7 +88,8 @@ if (!function_exists('activeMenu')) {
     function activeMenu($menu)
     {
         $admin = config('adminportal.admin_path');
-        return (request()->is("{$admin}/{$menu}*")) ? 'active' : '';
+        $admin = ($admin) ? "{$admin}/":"";
+        return (request()->is("{$admin}{$menu}*")) ? 'active' : '';
     }
 }
 

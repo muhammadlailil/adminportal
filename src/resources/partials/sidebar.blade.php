@@ -21,7 +21,7 @@
         <ul class="nav flex-column navbar-menu flex-grow-1 ps-0" id="nav_accordion">
             <li class="nav-section pb-1">Menu</li>
             <li class="nav-item">
-                <a class="nav-link {{(request()->is(config('adminportal.admin_path'))) ? 'active' : ''}}" href="{{route('admin.dashboard')}}">
+                <a class="nav-link {{(request()->is(portal_config('admin_path','/'))) ? 'active' : ''}}" href="{{route('admin.dashboard')}}">
                     <i class="isax icon-home nav-icon"></i>
                     Dashboard
                 </a>
