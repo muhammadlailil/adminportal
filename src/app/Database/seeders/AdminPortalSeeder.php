@@ -30,7 +30,7 @@ class AdminPortalSeeder extends Seeder
         }
         if (!CmsAdmin::where('email', 'portal@admin.com')->first()) {
             CmsAdmin::create([
-                'name' => 'Lailil Mahfud',
+                'name' => 'Jhon Doe',
                 'email' => 'portal@admin.com',
                 'password' => Hash::make('P@ssw0rd'),
                 'role_permission_id' => $privileges->id,
