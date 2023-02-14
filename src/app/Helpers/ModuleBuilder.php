@@ -81,14 +81,20 @@ class ModuleBuilder
 
         if (!file_exists(app_path("Services/{$serviceName}.php"))) {
             $serviceTemplate = file_get_contents(__DIR__ . '/../../stubs/service.blade.php.stub');
+            $useClass = '';
 
             //assign all variable to service template
+            $storeData = $this->createStoreData();
+            if($storeData->has_file){
+                $useClass = 'use Laililmahfud\Adminportal\Helpers\AdminPortal;';
+            }
             $serviceTemplate = str_replace('[serviceName]', $serviceName, $serviceTemplate);
             $serviceTemplate = str_replace('[modelName]', $modelName, $serviceTemplate);
             $serviceTemplate = str_replace('[tableName]', $table, $serviceTemplate);
             $serviceTemplate = str_replace('[defaultQuery]', $this->createDefaultQuery(), $serviceTemplate);
-            $serviceTemplate = str_replace('[storeData]', $this->createStoreData(), $serviceTemplate);
+            $serviceTemplate = str_replace('[storeData]', $storeData->html, $serviceTemplate);
             $serviceTemplate = str_replace('[updateData]', $this->createUpdateData(), $serviceTemplate);
+            $serviceTemplate = str_replace('[useClass]', $useClass, $serviceTemplate);
 
             file_put_contents($serviceDir . '/' . $serviceName . '.php', $serviceTemplate);
         }
@@ -235,6 +241,7 @@ class ModuleBuilder
 
         $str = '';
         $hasSelect = false;
+        $hasEditor = false;
         foreach ($form_name as $i => $name) {
             $type = $form_type[$i];
             $label = $form_label[$i];
@@ -273,13 +280,13 @@ class ModuleBuilder
                     $str .= '<x-portal::input type="tidatetime-localme" name="' . $name . '" label="' . $label . '" placeholder="' . $label . '" horizontal>' . $value . '</x-portal::input>';
                     break;
                 case 'googlemaps':
-                    $str .= '<x-portal::input type="text" name="' . $name . '" label="' . $label . '" placeholder="' . $label . '" horizontal>' . $value . '</x-portal::input>';
+                    $str .= '<x-portal::input type="text" name="' . $name . '" label="' . $label . '" placeholder="Location" horizontal>' . $value . '</x-portal::input>';
                     break;
                 case 'hidden':
                     $str .= '<input name="' . $name . '" type="hidden" value=""/>';
                     break;
                 case 'money':
-                    # code...
+                    $str .= '<x-portal::input type="number" step="any" name="' . $name . '" label="' . $label . '" placeholder="' . $label . '" horizontal>' . $value . '</x-portal::input>';
                     break;
                 case 'radio':
                     $str .= '<x-portal::input type="number" name="' . $name . '" label="' . $label . '" placeholder="' . $label . '" class="input-money" horizontal>' . $value . '</x-portal::input>';
@@ -300,7 +307,9 @@ class ModuleBuilder
                     $str .= '<x-portal::input.textarea name="' . $name . '" label="' . $label . '" placeholder="' . $label . '" horizontal>' . $value . '</x-portal::input.textarea>';
                     break;
                 case 'wysiwyg':
-                    $str .= '<x-portal::input.textarea name="' . $name . '" label="' . $label . '" placeholder="' . $label . '" horizontal>' . $value . '</x-portal::input.textarea>';
+                    $values = ($isEdit) ? '{!!$row->' . $name . '!!}' : '{!!old(\'' . $name . '\')!!}';
+                    $str .= '<x-portal::input.wysiwyg name="'.$name.'" label="'.$label.'" placeholder="'.$label.'" horizontal>'.$values.'</x-portal::input.wysiwyg>';
+                    $hasEditor = true;
                     break;
                 default:
                     break;
@@ -311,6 +320,9 @@ class ModuleBuilder
         }
         if ($hasSelect) {
             $str .= "\r\n<x-portal::input.select.asset />";
+        }
+        if($hasEditor){
+            $str .= "\r\n<x-portal::input.wysiwyg.asset/>";
         }
         return $str;
     }
@@ -435,6 +447,7 @@ class ModuleBuilder
         $form_name = request('form_name');
         $form_type = request('form_type');
         $str = '';
+        $hasFile = false;
         foreach ($form_name as $i => $name) {
             $type = $form_type[$i];
             if ($i != 0) {
@@ -444,6 +457,7 @@ class ModuleBuilder
                 $str .= '"' . $name . '" => \Hash::make($request->' . $name . '),';
             } else if (in_array($type, ['file', 'foto'])) {
                 $str .= '"' . $name . '" => AdminPortal::uploadFile($request->' . $name . '),';
+                $hasFile = true;
             } else {
                 $str .= '"' . $name . '" => $request->' . $name . ',';
             }
@@ -451,7 +465,10 @@ class ModuleBuilder
                 $str .= "\r\n";
             }
         }
-        return $str;
+        return (object)[
+            'html' => $str,
+            'has_file' => $hasFile
+        ];
     }
 
     public function createUpdateData()

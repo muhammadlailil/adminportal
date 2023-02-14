@@ -3,9 +3,8 @@ namespace App\Services;
 
 use Illuminate\Http\Request;
 use App\Models\[modelName];
-use Laililmahfud\Adminportal\Helpers\AdminPortal;
 use Laililmahfud\Adminportal\Services\AdminService;
-
+[useClass]
 class [serviceName] extends AdminService
 {
     public function __construct(
