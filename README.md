@@ -9,7 +9,7 @@
 > Note: PHP 8 and Laravel 9.19 or higher are the minimum dependencies.
 
 ```sh
-$ composer require laililmahfud/adminportal
+composer require laililmahfud/adminportal
 ```
 > First, setting your database
 
