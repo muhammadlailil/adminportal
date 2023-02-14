@@ -16,7 +16,7 @@
                                 @lang('adminportal.change_password')
                             </a>
                         </li>
-                        @if(portal_config('nofitication'))
+                        @if(portal_config('nofitication') && portal_config('nofitication_path')=='admin.notification.index')
                         <li class="list-group-item">
                             <a href="{{route('admin.profile',['view'=>'notification'])}}">
                                 <i class="isax-b icon-notification icon"></i>
