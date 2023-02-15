@@ -132,6 +132,16 @@ class AdminController extends Controller
 
     /**
      * Custom message actions
+     * 
+     * protected $message = [
+     *      "store" => "",
+     *      "failed_store => "",
+     *      "update" => "",
+     *      "failed_update" => "",
+     *      "delete" => "",
+     *      "failed_delete" => "",
+     *      "bulk_delete" => ""
+     * ];
      */
     protected $message = [];
     
