@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('title');
             $table->text('description');
             $table->string('url_detail');
-            $table->boolean('is_read')->default(0);
+            $table->boolean('is_read')->default(0)->index('cms_notifications_is_read');
         });
     }
 

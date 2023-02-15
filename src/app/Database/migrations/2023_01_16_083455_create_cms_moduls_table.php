@@ -17,13 +17,13 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->timestamps();
             $table->string('name');
-            $table->string('path');
+            $table->string('path')->index('cms_module_path');
             $table->string('icon');
             $table->enum('type',['menu','module'])->default('menu');
             $table->string('controller')->nullable();
             $table->json('except_route')->nullable();
-            $table->uuid('parent_id')->nullable();
-            $table->integer('sorting')->default(1);
+            $table->uuid('parent_id')->nullable()->index('cms_module_parent_id');
+            $table->integer('sorting')->default(1)->index('cms_module_sorting');
             $table->json('actions')->nullable();
         });
     }

@@ -19,7 +19,7 @@ class CmsModuleService
         return $this->model::create($attributes);
     }
 
-    public function update($attributes = [], $id)
+    public function update($attributes, $id)
     {
         return $this->model::findOrFail($id)->update($attributes);
     }
