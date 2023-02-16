@@ -41,7 +41,7 @@ document.querySelector('.btn-unselect').addEventListener('click',function(){
                     @php
                     $pathLeft = explode('/',$item->path);
                     $pathLeft = $pathLeft[count($pathLeft)-1];
-                    $addLeft = in_array("view add.".str()->slug($pathLeft),$row->permissions);
+                    $addLeft = in_array("add admin.".str()->slug($pathLeft),$row->permissions);
                     $viewLeft = in_array("view admin.".str()->slug($pathLeft),$row->permissions);
                     $editLeft = in_array("edit admin.".str()->slug($pathLeft),$row->permissions);
                     $deleteLeft = in_array("delete admin.".str()->slug($pathLeft),$row->permissions);
