@@ -84,7 +84,9 @@ Before you can generate your documentation, you'll need to configure a few thing
 
 
 ```php
-class UserController extends Controller
+use Laililmahfud\Adminportal\Controllers\AdminController;
+
+class UserController extends AdminController
 {
 
 	/**
