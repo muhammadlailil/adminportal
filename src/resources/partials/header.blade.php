@@ -3,10 +3,10 @@
         <div>
             <a id="btn-sidebar-toggle"><i class="isax icon-menu-1"></i></a>
         </div>
-        <div>
-            <h5 class="page-title">{{@$page}}</h5>
+        <div class="py-2">
+            <h5 class="page-title font-24px">{{@$page}}</h5>
             <nav aria-label="breadcrumb">
-                <ol class="breadcrumb mb-0">
+                <ol class="breadcrumb mb-0 mt-1 font-075rem">
                     <li class="breadcrumb-item"><a href="#">Database</a></li>
                     @if(@$type=="List")
                     <li class="breadcrumb-item active" aria-current="page">List {{@$page}}</li>
