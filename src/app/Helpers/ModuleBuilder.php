@@ -235,7 +235,7 @@ class ModuleBuilder
 
     public function createResourceFormData($isEdit = false)
     {
-        $form_name = request('form_name');
+        $form_name = request('form_name') ?? [];
         $form_type = request('form_type');
         $form_label = request('form_label');
 
@@ -444,7 +444,7 @@ class ModuleBuilder
 
     public function createStoreData()
     {
-        $form_name = request('form_name');
+        $form_name = request('form_name') ?? [];
         $form_type = request('form_type');
         $str = '';
         $hasFile = false;
@@ -473,7 +473,7 @@ class ModuleBuilder
 
     public function createUpdateData()
     {
-        $form_name = request('form_name');
+        $form_name = request('form_name') ?? [];
         $form_type = request('form_type');
         $requestUpdate = "'" . implode("','", $form_name) . "'";
         $str = '$data =  $request->only([' . $requestUpdate . ']);' . "\r\n";
@@ -533,7 +533,7 @@ class ModuleBuilder
 
     public function createRules($name)
     {
-        $form_name = request('form_name');
+        $form_name = request('form_name') ?? [];
         $rules = request($name);
         $str = '';
         $index = 0;
@@ -557,7 +557,7 @@ class ModuleBuilder
     {
         $hasRules = false;
         $str = '';
-        foreach (request('rules_create') as $rule) {
+        foreach (request('rules_create') ?? [] as $rule) {
             if ($rule) {$hasRules = true;
                 break;}
         }
@@ -574,7 +574,7 @@ class ModuleBuilder
     {
         $hasRules = false;
         $str = '';
-        foreach (request('rules_update') as $rule) {
+        foreach (request('rules_update') ?? [] as $rule) {
             if ($rule) {$hasRules = true;
                 break;}
         }
