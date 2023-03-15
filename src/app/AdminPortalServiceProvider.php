@@ -10,6 +10,7 @@ use Laililmahfud\Adminportal\Middleware\ApiPortalMiddleware;
 use Laililmahfud\Adminportal\Middleware\AdminPortalMiddleware;
 use Laililmahfud\Adminportal\Commands\AdminKeyGeneratorCommand;
 use Laililmahfud\Adminportal\Commands\AdminPortalInstalationCommand;
+use Laililmahfud\Adminportal\Commands\AdminPortalMigrationCommand;
 
 class AdminPortalServiceProvider extends ServiceProvider
 {
@@ -52,6 +53,7 @@ class AdminPortalServiceProvider extends ServiceProvider
         $this->commands([
             AdminPortalInstalationCommand::class,
             AdminKeyGeneratorCommand::class,
+            AdminPortalMigrationCommand::class
         ]);
         
     }
