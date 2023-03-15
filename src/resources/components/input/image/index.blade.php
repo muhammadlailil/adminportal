@@ -8,7 +8,7 @@
     @if(@$horizontal)
     <div class="col-sm-6">
         <div class="form-image-upload rounded"
-            style="background-image: url('{{asset($slot)}}');">
+            style="background-image: url('{{asset($slot)}}'); background-position: center; background-size: cover;">
             <input type="file" name="{{$name}}" id="{{$name}}" class="form-control {{@$class}}"
                 {{(@$required)?'':'required'}} accept="image/*">
         </div>
