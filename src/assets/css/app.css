@@ -1171,3 +1171,12 @@ table .th-checkbox .form-checkbox {
 .ql-editor{
     min-height: 200px;
 }
+
+
+.font-075rem {
+    font-size: 0.75rem !important;
+}
+
+.font-24px {
+    font-size: 24px !important;
+}
