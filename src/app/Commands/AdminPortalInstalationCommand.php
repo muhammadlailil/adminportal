@@ -37,9 +37,8 @@ class AdminPortalInstalationCommand extends Command
     public function handle()
     {
         $this->createIndexController();
-        
+
         $this->call('adminportal:api-key');
-        $this->call('db:seed', ['--class' => 'Laililmahfud\Adminportal\Database\seeders\AdminPortalSeeder']);
         $this->call('vendor:publish', ['--provider' => 'Laililmahfud\Adminportal\AdminPortalServiceProvider']);
         $this->call('vendor:publish', ['--tag' => 'portal-lang', '--force' => true]);
         $this->call('vendor:publish', ['--tag' => 'portal-config', '--force' => true]);
