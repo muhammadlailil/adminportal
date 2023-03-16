@@ -21,7 +21,7 @@ return new class extends Migration
             $table->integer('row_count');
             $table->integer('progres');
             $table->dateTime('complete_at');
-            $table->json('data')->nullable();
+            $table->longText('data')->nullable();
         });
     }
 
