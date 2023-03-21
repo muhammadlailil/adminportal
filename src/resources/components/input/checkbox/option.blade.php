@@ -1,5 +1,12 @@
-
+@php
+    if(!@$attributes['required']){
+        $attributes['required'] = true;
+    }else{
+        unset($attributes['required']);
+    }
+    $required = @$attributes['required'];
+@endphp
 <div class="form-checkbox {{@$class}}">
-    <input type="checkbox" id="{{$name}}_{{strtolower($label)}}" {{(@$checked)?'checked':''}} value="{{$value}}" name="{{$name}}" {{(@$required)?'':'required'}}>
+    <input type="checkbox" id="{{$name}}_{{strtolower($label)}}" value="{{$value}}" name="{{$name}}" {{$attributes}}>
     <label class="right" for="{{$name}}_{{strtolower($label)}}">{{$label}}</label>
 </div>
