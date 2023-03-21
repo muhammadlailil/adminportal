@@ -1,8 +1,13 @@
 <x-portal::layout.admin :page="$page_title" type="List">
     <section class="app-content shadow-sm">
+        @if(!$is_js_table)
         <x-portal::table.datatable :columns="$table_columns" :button="$button" :result="$data" :route="$route">
             @include($datatable_views)
         </x-portal::table.datatable>
+        @else
+        <x-portal::table.jstable :columns="$table_columns" :button="$button" :result="$data" :route="$route">
+        </x-portal::table.jstable>
+        @endif
     </section>
 
     @if(@$button['export'])

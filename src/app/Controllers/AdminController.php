@@ -125,6 +125,12 @@ class AdminController extends Controller
     protected $perPage = 10;
 
     /**
+     * If you prefer use js data table
+     * see : https://jstable.github.io/index.html
+     */
+    protected $jsTable = false;
+
+    /**
      * The variable for assign data to view
      * @return array
      */
@@ -170,6 +176,7 @@ class AdminController extends Controller
             "datatable_views" => "{$this->resourcePath}.table",
             "table_columns" => $this->tableColumns,
             "route" => $this->routePath,
+            'is_js_table' => $this->jsTable,
             "button" => [
                 "add" => $this->canAdd && canDo($this->moduleName("add ")),
                 "filter" => $this->canFilter,
@@ -178,9 +185,17 @@ class AdminController extends Controller
                 "import" => $this->canImport && canDo($this->moduleName("add ")),
                 "export" => $this->canExport,
             ],
-            "data" => $this->crudService()->datatable($request, $this->perPage),
+            "data" => (!$this->jsTable)?$this->crudService()->datatable($request, $this->perPage):[],
         ]);
         return view("portal::default.datatable", $this->data);
+    }
+
+
+    /**
+     * The main function to generate json datatable for jstable 
+     */
+    public function jsTable(Request $request){
+        return $this->crudService()->jstable($request, $this->perPage);
     }
 
     /**

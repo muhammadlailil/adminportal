@@ -23,6 +23,7 @@ Route::middleware(['portal-admin'])->group(function () {
     });
     Route::resource('/portal/user-admin', AdminUsersController::class)->except(['show']);
     Route::post("/portal/user-admin/bulk-action", [AdminUsersController::class, "bulkAction"])->name("user-admin.bulk-action");
+    Route::get("/portal/user-admin/jstable", [AdminUsersController::class, "jsTable"])->name("user-admin.jstable");
 
     Route::resource('/portal/role-permission', AdminRolePermissionController::class)->except(['show']);
     Route::post("/portal/role-permission/bulk-action", [AdminRolePermissionController::class, "bulkAction"])->name("role-permission.bulk-action");

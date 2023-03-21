@@ -2,7 +2,7 @@
 <tr>
     <td>
         <div class="form-checkbox">
-            <input type="checkbox" class="table-checkbox">
+            <input type="checkbox" class="table-checkbox" value="{{$row->id}}" name="selected_ids[]">
         </div>
     </td>
     <td>
