@@ -63,5 +63,6 @@ return [
 
     "delete_selected" => "Delete Selected",
     "dont_have_access" => "You don't have access to this resource",
-    "see_all" => "See All"
+    "see_all" => "See All",
+    "import_data_success" => "Import data successfully !"
 ];

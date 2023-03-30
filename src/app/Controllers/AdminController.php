@@ -366,12 +366,14 @@ class AdminController extends Controller
         ]);
         
         $importClass = (new $this->importExcel($logs->id));
+        $message = __('adminportal.import_data_in_progres');
         if ($importClass instanceof ShouldQueue) {
             Excel::queueImport($importClass, $importFile);
         }else{
+            $message = __('adminportal.import_data_success');
             Excel::import($importClass, $importFile);
         }        
-        return redirect()->back()->with(['success' => __('adminportal.import_data_in_progres')]);
+        return redirect()->back()->with(['success' => $message]);
     }
 
 
