@@ -14,7 +14,7 @@
     @endif
     @if(@$button['import'])
     <x-portal::popup.import-data>
-        <x-slot name="title">Import {{$page_title}}n</x-slot>
+        <x-slot name="title">Import {{$page_title}}</x-slot>
         <x-slot name="action">{{route("{$route}.import")}}</x-slot>
         <x-slot name="sample_file">{{url('import-excel/sample-import-'.str()->slug($page_title).".xlsx")}}</x-slot>
     </x-portal::popup.import-data>
