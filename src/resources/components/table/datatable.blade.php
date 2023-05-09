@@ -35,7 +35,7 @@ $limit = request('limit');
         {{@$buttons}}
         @if(@$button['bulkAction'])
         <div id="btn-bulk-action" class="d-none">
-            <a href="javascript:;" class="btn btn-dark" data-bs-toggle="dropdown" aria-expanded="false">
+            <a href="javascript:;" class="btn btn-dark text-upper" data-bs-toggle="dropdown" aria-expanded="false">
                 <i class="isax icon-task-square icon"></i>
                 @lang('adminportal.bulk_action')
             </a>

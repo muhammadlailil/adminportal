@@ -1,7 +1,7 @@
 @import url("./app-media.css");
 
 :root {
-    --app-sidebar-width: 280px;
+    --app-sidebar-width: 250px;
     --app-primary-color: #0a0a0a;
 }
 
@@ -100,14 +100,12 @@ body {
 }
 
 .main-sidebar nav .nav-section {
-    font-size: 14px;
+    font-size: 11px;
     color: #fff;
-    padding: 9px 18px;
+    padding: 5px 18px;
+    margin-top: 7px;
 }
 
-.main-sidebar nav .nav-profile {
-    padding: 10px;
-}
 
 .main-sidebar nav .nav-profile a {
     font-size: 16px;
@@ -121,6 +119,7 @@ body {
     width: 160px;
     height: 1.2em;
     white-space: nowrap;
+    font-size: 14px;
 }
 
 .main-sidebar nav .nav-profile a img {
@@ -129,7 +128,7 @@ body {
 }
 
 .main-sidebar nav .nav-item {
-    padding: 9px 15px;
+    padding: 3px 15px;
 }
 
 .main-sidebar nav .nav-item.has-submenu .nav-parent::after {
@@ -178,17 +177,17 @@ body {
 }
 
 .main-sidebar nav .nav-item .nav-link {
-    font-size: 16px;
+    font-size: 13px;
     position: relative;
     display: flex;
     align-items: center;
     font-family: "Krub-Medium";
-    padding: 12px;
-    border-radius: 14px;
+    padding: 8px 10px;
+    border-radius: 10px;
 }
 
 .main-sidebar nav .nav-item .nav-link .nav-icon {
-    font-size: 23px;
+    font-size: 19px;
     margin-right: 13px;
 }
 
@@ -204,6 +203,7 @@ body {
     width: var(--app-sidebar-width);
     background-color: var(--app-primary-color);
     bottom: 0;
+    font-size: 13px;
 }
 
 .main-sidebar .nav-navigation-bottom .nav-link {
@@ -211,7 +211,7 @@ body {
 }
 
 .main-sidebar .nav-navigation-bottom .nav-link .nav-icon {
-    font-size: 24px;
+    font-size: 19px;
 }
 
 .app-wrapper {
@@ -220,7 +220,12 @@ body {
 }
 
 .fs-sm {
-    font-size: 13px;
+    font-size: 11px;
+    font-family: "Krub-Regular";
+}
+
+.fs-14 {
+    font-size: 14px;
     font-family: "Krub-Regular";
 }
 
@@ -229,12 +234,12 @@ body {
 }
 
 .app-content-wrapper {
-    padding: 25px;
+    padding: 20px;
 }
 
 .app-content {
     background-color: #fff;
-    padding: 25px;
+    padding: 20px;
     border-radius: 15px;
     margin-bottom: 25px;
 }
@@ -268,7 +273,7 @@ body {
     position: sticky;
     top: 0;
     z-index: 10;
-    padding: 10px 25px;
+    padding: 0px 15px;
 }
 
 .navbar-header .module .page-title {
@@ -280,7 +285,7 @@ body {
 
 .navbar-header .module .breadcrumb {
     color: #0b0b0b;
-    font-size: 14px;
+    font-size: 11px !important;
 }
 
 .navbar-header .module .breadcrumb a {
@@ -302,12 +307,12 @@ body {
 }
 
 .navbar-header .header-navigation .notification-list {
-    max-width: 400px;
-    min-width: 350px;
+    max-width: 350px;
+    min-width: 300px;
 }
 
 .navbar-header .header-navigation .notification-list .empty-notification {
-    font-size: 14px;
+    font-size: 11px;
     font-style: italic;
     font-family: "Krub-Medium";
     padding: 40px;
@@ -338,15 +343,15 @@ body {
 .navbar-header .header-navigation li a {
     text-decoration: none;
     color: #0b0b0b;
-    font-size: 16px;
+    font-size: 13px;
     margin: 1px;
-    padding: 10px 15px;
+    padding: 7px 10px;
     display: flex;
     align-items: center;
 }
 
 .navbar-header .header-navigation li a .icon {
-    font-size: 30px;
+    font-size: 19px;
 }
 
 .navbar-header .header-navigation li.notification .icon {
@@ -356,12 +361,15 @@ body {
 
 .navbar-header .header-navigation li.notification .new {
     background: #d53f37;
-    width: 12px;
-    height: 12px;
+    width: 7px;
+    height: 7px;
     border-radius: 100%;
     position: absolute;
     margin-top: -11px;
-    margin-left: 16px;
+    margin-left: 9px;
+}
+.navbar-header .header-navigation li.notification .text{
+    font-size: 13px;
 }
 
 .navbar-header .header-navigation li.notification .count {
@@ -370,6 +378,7 @@ body {
     color: #fff;
     padding: 1px 6px;
     margin-left: 9px;
+    font-size: 12px;
 }
 
 .notification-list {
@@ -390,7 +399,7 @@ body {
 .notification-list .items a.unread,
 .notification-list .items a:hover {
     background: rgba(7, 84, 135, .05);
-    border-radius: 24px;
+    border-radius: 15px;
 }
 
 .notification-list .items a.unread .icons::after {
@@ -401,15 +410,15 @@ body {
     border-radius: 100%;
     position: absolute;
     top: 11px;
-    left: 15px;
+    left: 10px;
 }
 
 .notification-list .items a .icons {
     background: #292d32;
     border-radius: 20px;
     color: #fff;
-    min-width: 60px;
-    height: 60px;
+    min-width: 45px;
+    height: 45px;
     justify-content: center;
     align-items: center;
     display: flex;
@@ -417,11 +426,11 @@ body {
 }
 
 .notification-list .items a .icons i {
-    font-size: 35px;
+    font-size: 25px;
 }
 
 .notification-list .items .title {
-    font-size: 15px;
+    font-size: 13px;
     font-family: "Krub-SemiBold";
     margin: 0;
     width: 300px;
@@ -433,7 +442,7 @@ body {
 
 .notification-list .items .desc,
 .notification-list .items .date {
-    font-size: 14px;
+    font-size: 12px;
     color: #000;
     font-family: "Krub-Medium";
     width: 300px;
@@ -447,7 +456,7 @@ body {
 .notification-list .items .date {
     font-family: "Krub-Regular";
     display: block;
-    font-size: 11px;
+    font-size: 10px;
     color: #b2b2b2;
 }
 
@@ -455,7 +464,7 @@ body {
     justify-content: center;
     font-family: "Krub-Medium";
     font-size: 12px !important;
-    padding: 15px 25px !important;
+    padding: 10px 21px !important
 }
 
 .header-datatable {
@@ -473,15 +482,16 @@ body {
 .btn {
     display: flex;
     align-items: center;
-    border-radius: 12px;
-    min-height: 50px;
-    padding: 10px 20px;
+    border-radius: 10px;
+    min-height: 40px;
+    padding: 5px 20px;
     font-family: "Krub-SemiBold";
+    font-size: 12px;
 }
 
 .btn .icon {
     margin-right: 10px;
-    font-size: 20px;
+    font-size: 16px;
 }
 
 .input-icon {
@@ -494,10 +504,10 @@ body {
 
 .input-icon .icon {
     position: absolute;
-    top: 15px;
+    top: 14px;
     color: #b2b2b2;
-    font-size: 20px;
-    right: 20px;
+    font-size: 16px;
+    right: 16px;
 }
 
 .nice-select {
@@ -546,12 +556,12 @@ body {
 
 .form-control {
     font-family: "Krub-Medium";
-    font-size: 14px;
+    font-size: 12px;
     outline: none !important;
     box-shadow: none !important;
     border: 1px solid rgba(221, 221, 221, .5882352941);
-    border-radius: 12px !important;
-    padding: 14px 20px;
+    border-radius: 10px !important;
+    padding: 12px 15px;
 }
 
 .form-control::-moz-placeholder {
@@ -609,7 +619,7 @@ table tr {
 
 table tr th {
     color: #b2b2b2;
-    font-size: 13px;
+    font-size: 11px;
     text-transform: uppercase;
     font-family: "Krub-SemiBold";
     font-weight: normal;
@@ -627,7 +637,7 @@ table tr th a {
 
 table tr td {
     color: #0b0b0b;
-    font-size: 12px;
+    font-size: 11px;
     font-family: "Krub-Medium";
     vertical-align: middle !important;
     white-space: nowrap;
@@ -636,9 +646,8 @@ table tr td {
 table .btn-action {
     font-family: "Krub-SemiBold";
     text-transform: uppercase;
-    font-size: 12px;
-    font-size: 12px;
-    padding: 8px 15px;
+    font-size: 10px;
+    padding: 3px 9px;
     min-height: unset;
 }
 
@@ -651,7 +660,7 @@ table .th-checkbox .form-checkbox {
 }
 
 .dropdown-action .dropdown-item {
-    font-size: 14px;
+    font-size: 12px;
     font-family: "Krub-SemiBold";
 }
 
@@ -671,7 +680,7 @@ table .th-checkbox .form-checkbox {
     cursor: pointer;
     content: "\ec65";
     font-family: "iconsax-outline" !important;
-    font-size: 22px;
+    font-size: 18px;
     color: #e5e5e5;
     position: absolute;
     top: -4px;
@@ -700,9 +709,9 @@ table .th-checkbox .form-checkbox {
     cursor: pointer;
     content: " ";
     position: absolute;
-    top: 2px;
-    width: 22px;
-    height: 22px;
+    top: 4px;
+    width: 18px;
+    height: 18px;
     border: 1px solid #ddd;
     border-radius: 100%;
 }
@@ -742,7 +751,7 @@ table .th-checkbox .form-checkbox {
 }
 
 .form-title {
-    font-size: 20px;
+    font-size: 15px;
     font-family: "Krub-SemiBold";
     margin-bottom: 0;
 }
@@ -753,12 +762,12 @@ table .th-checkbox .form-checkbox {
 }
 
 .help-text {
-    font-size: 12px;
+    font-size: 10px;
 }
 
 .form-group {
     align-items: center;
-    margin-bottom: 25px;
+    margin-bottom: 15px;
 }
 
 .form-group.has-error .label {
@@ -772,7 +781,7 @@ table .th-checkbox .form-checkbox {
 .form-group .label {
     color: #0b0b0b;
     font-family: "Krub-Medium";
-    font-size: 15px;
+    font-size: 12px;
 }
 
 .form-group .label.text-bold {
@@ -981,8 +990,8 @@ table .th-checkbox .form-checkbox {
 
 .alert {
     border: none;
-    padding: 20px;
-    font-size: 14px;
+    padding: 15px;
+    font-size: 12px;
     font-family: "Krub-Regular";
 }
 
@@ -1044,7 +1053,7 @@ table .th-checkbox .form-checkbox {
     padding: 13px 0;
     align-items: center;
     padding-bottom: 7px;
-    font-size: 14px;
+    font-size: 11px;
     font-family: "Krub-Medium";
     color: #7e7e7e;
 }
@@ -1068,11 +1077,11 @@ table .th-checkbox .form-checkbox {
 
 .paginate-footer nav ul .page-link {
     border: none;
-    font-size: 14px;
+    font-size: 11px;
     font-family: "Krub-Medium";
     color: #7e7e7e;
     border-radius: 5px;
-    padding: 7px 13px;
+    padding: 3px 10px;
     outline: none !important;
     box-shadow: none !important;
 }
@@ -1084,9 +1093,9 @@ table .th-checkbox .form-checkbox {
 .nav-tabs a {
     border: none !important;
     color: #B2B2B2;
-    font-size: 16px;
+    font-size: 13px;
     font-family: "Krub-SemiBold";
-    padding: 15px 18px;
+    padding: 7px 11px;
 }
 
 .nav-tabs a.active {
@@ -1100,6 +1109,7 @@ table .th-checkbox .form-checkbox {
 
 .form-checkbox label.right,
 .form-radio label.right {
+    font-size: 13px;
     margin-left: 23px;
 }
 
@@ -1178,5 +1188,5 @@ table .th-checkbox .form-checkbox {
 }
 
 .font-24px {
-    font-size: 24px !important;
+    font-size: 20px !important;
 }

@@ -1,5 +1,5 @@
 <aside class="main-sidebar d-flex flex-column">
-    <a href="" class="w-100 text-center p-3 d-block">
+    <a href="" class="w-100 text-center p-2 d-block">
         <img src="{{asset(portal_config('app_icon'))}}" alt="" width="130px">
     </a>
     <nav>
@@ -7,7 +7,7 @@
             <li class="nav-section">Profile</li>
             <li>
                 <a href="{{route('admin.profile')}}" class="d-flex align-items-center text-decoration-none">
-                    <img src="{{asset(admin()->user->profile)}}" class="rounded-circle" width="50px"
+                    <img src="{{asset(admin()->user->profile)}}" class="rounded-circle" width="40px"
                         alt="">
                     <div class="text-white ms-2 d-flex flex-column">
                         <span class="name">{{admin()->user->name}}</span>
