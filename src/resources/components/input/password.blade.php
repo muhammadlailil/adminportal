@@ -1,15 +1,24 @@
+@php
+    if(!@$attributes['required']){
+        $attributes['required'] = true;
+    }else{
+        unset($attributes['required']);
+    }
+    $required = @$attributes['required'];
+@endphp
+
 <div class="form-group {{(@$horizontal)?'row':''}} {{($errors->has($name))?'has-error':''}}">
     <label for="" class="label {{(@$horizontal)?'col-sm-2':'text-bold'}}">
         {{$label}}
-        @if(!@$required)
+        @if(@$required)
         <span class="required">*</span>
         @endif
     </label>
     @if(@$horizontal)
     <div class="col-sm-6">
         <div class="input-icon input-password">
-            <input type="password" name="{{$name}}" id="{{$name}}" class="form-control {{@$class}}"
-                {{(@$required)?'':'required'}} placeholder="{{@$placeholder}}">
+            <input {{$attributes}} type="password" name="{{$name}}" id="{{$name}}" class="form-control {{@$class}}"
+                placeholder="{{@$placeholder}}">
             <i class="isax icon-eye icon"></i>
         </div>
         @if($errors->has($name))
@@ -21,8 +30,8 @@
     </div>
     @else
     <div class="input-icon input-password">
-        <input type="password" name="{{$name}}" id="{{$name}}" class="form-control {{@$class}}"
-            {{(@$required)?'':'required'}} placeholder="{{@$placeholder}}">
+        <input {{$attributes}} type="password" name="{{$name}}" id="{{$name}}" class="form-control {{@$class}}"
+            placeholder="{{@$placeholder}}">
         <i class="isax icon-eye icon"></i>
     </div>
     @if($errors->has($name))

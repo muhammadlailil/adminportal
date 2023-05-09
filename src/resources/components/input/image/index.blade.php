@@ -1,23 +1,32 @@
+@php
+    if(!@$attributes['required']){
+        $attributes['required'] = true;
+    }else{
+        unset($attributes['required']);
+    }
+    $required = @$attributes['required'];
+@endphp
+
 <div class="form-group {{(@$horizontal)?'row':''}} {{($errors->has($name))?'has-error':''}}">
     <label for="" class="label {{(@$horizontal)?'col-sm-2':'text-bold'}}">
         {{$label}}
-        @if(!@$required)
+        @if(@$required)
         <span class="required">*</span>
         @endif
     </label>
     @if(@$horizontal)
     <div class="col-sm-6">
         <div class="form-image-upload rounded"
-            style="background-image: url('{{asset($slot)}}'); background-position: center; background-size: cover;">
+            style="background-image: url('{{($slot!='')?asset($slot):'https://ui-avatars.com/api/?name='.config('app.name').'&color=FFF&background='.portal_config('theme_color').''}}'); background-position: center; background-size: cover;">
             <input type="file" name="{{$name}}" id="{{$name}}" class="form-control {{@$class}}"
-                {{(@$required)?'':'required'}} accept="image/*">
+                {{$attributes}} accept="image/*">
         </div>
     </div>
     @else
     <div class="form-image-upload rounded"
-        style="background-image: url('{{asset($slot)}}');">
+        style="background-image: url('{{asset(($slot=='')?'adminportal/img/avatar.jpg':$slot)}}');">
         <input type="file" name="{{$name}}" id="{{$name}}" class="form-control {{@$class}}"
-            {{(@$required)?'':'required'}} accept="image/*">
+            {{$attributes}} accept="image/*">
     </div>
     @endif
     @if($errors->has($name))

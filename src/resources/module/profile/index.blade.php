@@ -18,7 +18,7 @@
                         </li>
                         @if(portal_config('nofitication') && portal_config('nofitication_path')=='admin.notification.index')
                         <li class="list-group-item">
-                            <a href="{{route('admin.profile',['view'=>'notification'])}}">
+                            <a href="{{route(portal_config('nofitication_path'))}}">
                                 <i class="isax-b icon-notification icon"></i>
                                 @lang('adminportal.notification')
                             </a>

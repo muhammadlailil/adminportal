@@ -20,7 +20,7 @@ return new class extends Migration
             $table->foreignUuid('import_by')->constrained('cms_admin')->onDelete('cascade');
             $table->integer('row_count');
             $table->integer('progres');
-            $table->dateTime('complete_at');
+            $table->dateTime('complete_at')->nullable();
             $table->longText('data')->nullable();
         });
     }

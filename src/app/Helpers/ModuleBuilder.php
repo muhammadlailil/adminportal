@@ -360,7 +360,7 @@ class ModuleBuilder
         }
         if (($has_edit || $has_delete) && $index) {
             $str .= '    <td class="text-end">' . "\r\n";
-            $str .= "        @if(canDo('edit admin.faq') || canDo('delete admin.{$module_path}'))\r\n";
+            $str .= "        @if(canDo('edit admin.{$module_path}') || canDo('delete admin.{$module_path}'))\r\n";
             $str .= '        <div class="btn-group">' . "\r\n";
             $str .= '            <button type="button" class="btn btn-secondary dropdown-toggle btn-action" data-bs-toggle="dropdown" aria-expanded="false">' . "\r\n";
             $str .= "                Action\r\n";
