@@ -1,4 +1,5 @@
 <x-portal::input.select name="table" label="Table" horizontal class="searchable">
+    <option value="">Select Table</option>
     @foreach ($tables as $table)
     <option value="{{$table->name}}">{{$table->name}}</option>
     @endforeach
@@ -12,6 +13,7 @@
 </x-portal::input>
 
 <x-portal::input.select name="module_icon" label="Module Icon" class="searchable select-icons" horizontal>
+    <option value="">Select Icon</option>
     @foreach ($icons as $icon)
     <option value="{{$icon}}">{{$icon}}</option>
     @endforeach
