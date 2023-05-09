@@ -78,7 +78,6 @@
         const menuIcon = document.getElementById('menu_icon')
         document.querySelectorAll('.btn-edit').forEach((item) => {
             item.addEventListener('click', function() {
-                const niceIcon = menuIcon.parentElement.querySelector('.nice-select2 .ts-control .item')
                 const id = item.getAttribute('data-id');
                 const name = item.getAttribute('data-name');
                 const path = item.getAttribute('data-path');
@@ -86,9 +85,7 @@
                 menuName.value = name;
                 menuPath.value = path
                 menuIcon.value = icon
-                niceIcon.innerHTML = ''
-                niceIcon.insertAdjacentHTML("beforeend",
-                    `<i class="isax ${icon} select-icon-item"></i>${icon}`)
+                window['select_menu_icon'].setValue(icon)
                 btnCancel.classList.remove('d-none')
                 titleForm.innerHTML = 'Update Static Menu';
                 formMenu.insertAdjacentHTML("beforeend", `<input type="hidden" name="id" value="${id}"/>`)
@@ -100,7 +97,7 @@
             menuName.value = ''
             menuPath.value = ''
             menuIcon.value = ''
-            niceIcon.innerHTML = 'Select an option'
+            window['select_menu_icon'].clear()
             btnCancel.classList.add('d-none')
             titleForm.innerHTML = 'Create Static Menu';
             formMenu.querySelector('input[name="id"]')?.remove()
