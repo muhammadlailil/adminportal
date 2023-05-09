@@ -7,6 +7,6 @@ class Error{
     const INVALID_TOKEN = 'invalid_token';
     const EXPIRED_TOKEN = 'expired_token';
     const UNAUTHORIZED = 'unauthorized';
-    const FORBIDEN = 'forbidden';
+    const FORBIDDEN = 'forbidden';
     const INVALID_LOGIN = 'invalid_login';
 }

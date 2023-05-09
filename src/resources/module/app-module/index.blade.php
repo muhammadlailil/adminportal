@@ -97,7 +97,7 @@
             menuName.value = ''
             menuPath.value = ''
             menuIcon.value = ''
-            window['select_menu_icon'].clear()
+            window['select_menu_icon'].setValue('')
             btnCancel.classList.add('d-none')
             titleForm.innerHTML = 'Create Static Menu';
             formMenu.querySelector('input[name="id"]')?.remove()
