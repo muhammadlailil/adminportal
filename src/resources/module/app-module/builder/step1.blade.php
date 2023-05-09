@@ -17,11 +17,11 @@
     @endforeach
 </x-portal::input.select>
 <x-portal::input.checkbox name="action" label="Configuration" horizontal>
-    <x-portal::input.checkbox.option required="false" class="me-5" checked name="bulk_action" label="Bulk Action?" value="1"></x-portal::input.checkbox.option>
-    <x-portal::input.checkbox.option required="false" class="me-5" checked name="has_create" label="Create?" value="1"></x-portal::input.checkbox.option>
-    <x-portal::input.checkbox.option required="false" class="me-5" checked name="has_edit" label="Edit?" value="1"></x-portal::input.checkbox.option>
-    <x-portal::input.checkbox.option required="false" class="me-5" checked name="has_delete" label="Delete?" value="1"></x-portal::input.checkbox.option>
-    <x-portal::input.checkbox.option required="false" class="me-5" name="has_filter" label="Filter?" value="1"></x-portal::input.checkbox.option>
-    <x-portal::input.checkbox.option required="false" class="me-5" name="has_import" label="Import?" value="1"></x-portal::input.checkbox.option>
-    <x-portal::input.checkbox.option required="false" class="me-5" name="has_export" label="Export?" value="1"></x-portal::input.checkbox.option>
+    <x-portal::input.checkbox.option required="false" checked name="bulk_action" label="Bulk Action?" value="1"></x-portal::input.checkbox.option>
+    <x-portal::input.checkbox.option required="false" checked name="has_create" label="Create?" value="1"></x-portal::input.checkbox.option>
+    <x-portal::input.checkbox.option required="false" checked name="has_edit" label="Edit?" value="1"></x-portal::input.checkbox.option>
+    <x-portal::input.checkbox.option required="false" checked name="has_delete" label="Delete?" value="1"></x-portal::input.checkbox.option>
+    <x-portal::input.checkbox.option required="false" name="has_filter" label="Filter?" value="1"></x-portal::input.checkbox.option>
+    <x-portal::input.checkbox.option required="false" name="has_import" label="Import?" value="1"></x-portal::input.checkbox.option>
+    <x-portal::input.checkbox.option required="false" name="has_export" label="Export?" value="1"></x-portal::input.checkbox.option>
 </x-portal::input.checkbox>

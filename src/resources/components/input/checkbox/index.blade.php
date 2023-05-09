@@ -8,14 +8,14 @@
 @endphp
 
 <div class="form-group {{(@$horizontal)?'row':''}} {{($errors->has($name))?'has-error':''}}">
-    <label for="" class="label {{(@$horizontal)?'col-sm-2':'text-bold'}}">
+    <label for="" class="label {{(@$horizontal)?'col-sm-2':'text-bold'}}"  style="gap:25px">
         {{$label}}
         @if(@$required)
         <span class="required">*</span>
         @endif
     </label>
     @if(@$horizontal)
-    <div class="col-sm-10  d-flex">
+    <div class="col-sm-10  d-flex"  style="gap:25px">
         {{$slot}}
         @if($errors->has($name))
         <span class="error-text">{{$errors->first($name)}}</span>

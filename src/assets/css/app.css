@@ -1190,3 +1190,25 @@ table .th-checkbox .form-checkbox {
 .font-24px {
     font-size: 20px !important;
 }
+
+.ts-wrapper.form-control{
+    padding: 0px !important;
+    border: none !important;
+} 
+.ts-wrapper .ts-control{
+    border: 1px solid rgba(221, 221, 221, .5882352941);
+    border-radius: 10px !important;
+    padding: 12px 15px !important;
+}
+.ts-wrapper .ts-control::after{
+    content: "\e924";
+    font-family: 'iconsax-outline'!important;
+    right: 11px;
+    position: absolute;
+}
+.ts-dropdown{
+    margin-top: 0px !important;
+    box-shadow: 0 0 0 1px rgba(68,68,68,.11);
+    border: 1px solid rgba(221, 221, 221, 0.368627451);
+    border-radius: 10px;
+}
