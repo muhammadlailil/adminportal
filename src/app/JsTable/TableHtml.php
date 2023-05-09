@@ -4,7 +4,7 @@ namespace Laililmahfud\Adminportal\JsTable;
 
 class TableHtml
 {
-     public static function bulkCheckbox($id)
+     public static function checkbox($id)
      {
           return '<div class="form-checkbox">
                <input type="checkbox" class="table-checkbox" value="' . $id . '" name="selected_ids[]">

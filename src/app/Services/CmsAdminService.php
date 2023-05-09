@@ -1,4 +1,5 @@
 <?php
+
 namespace Laililmahfud\Adminportal\Services;
 
 use Illuminate\Http\Request;
@@ -12,26 +13,24 @@ class CmsAdminService extends AdminService
 {
     public function __construct(
         public $model = CmsAdmin::class,
-        public $jsTableResource = new UserJsTableResources
-    ) {}
+        public $userJsTableResources = new UserJsTableResources
+    ) {
+    }
 
-    public function jstable(Request $request)
+    public function datatable(Request $request, $perPage = 10)
     {
         $search = $request->search ?? '';
-
-        return $this->jsTableResource->send(
-            $this->model::join('roles_permission', 'cms_admin.role_permission_id', 'roles_permission.id')
+        $data =  $this->model::join('roles_permission', 'cms_admin.role_permission_id', 'roles_permission.id')
             ->where(function ($q) use ($search) {
                 $q->where('cms_admin.name', 'like', "%{$search}%");
                 $q->orWhere('cms_admin.email', 'like', "%{$search}%");
                 $q->orWhere('roles_permission.name', 'like', "%{$search}%");
             })
             ->select(['cms_admin.id', 'cms_admin.name', 'cms_admin.profile', 'cms_admin.email', 'cms_admin.status', 'roles_permission.name as role_name'])
-            ->jstable("cms_admin.created_at")
-        );
-
+            ->datatable($perPage, "cms_admin.created_at");
+        return $this->userJsTableResources->send($data);
     }
-    
+
     public function store(Request $request)
     {
         return $this->model::create([

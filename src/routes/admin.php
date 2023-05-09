@@ -23,7 +23,7 @@ Route::middleware(['portal-admin'])->group(function () {
     });
     Route::resource('/portal/user-admin', AdminUsersController::class)->except(['show']);
     Route::post("/portal/user-admin/bulk-action", [AdminUsersController::class, "bulkAction"])->name("user-admin.bulk-action");
-    Route::get("/portal/user-admin/jstable", [AdminUsersController::class, "jsTable"])->name("user-admin.jstable");
+    Route::get("/portal/user-admin/datatable", [AdminUsersController::class, "datatable"])->name("user-admin.datatable");
 
     Route::resource('/portal/role-permission', AdminRolePermissionController::class)->except(['show']);
     Route::post("/portal/role-permission/bulk-action", [AdminRolePermissionController::class, "bulkAction"])->name("role-permission.bulk-action");
@@ -62,6 +62,10 @@ Route::middleware(['portal-admin'])->group(function () {
                 }
                 if (in_array("bulk-action", $actions)) {
                     Route::post("{$row->path}/bulk-action", ["\App\Http\Controllers\Admin\\$row->controller", "bulkAction"])->name("{$name}.bulk-action");
+                }
+                
+                if (in_array("datatable", $actions)) {
+                    Route::get("{$row->path}/datatable", ["\App\Http\Controllers\Admin\\$row->controller", "datatable"])->name("{$name}.datatable");
                 }
             }
         }

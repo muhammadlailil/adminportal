@@ -68,7 +68,7 @@ $limit = request('limit');
 <form action="{{$bulkAction}}" id="form-data-table" method="POST">
     @csrf
     <div class="table-responsive datatable-content">
-        <table id="js-datatable" class="table datatable" data-url="{{route("{$route}.jstable")}}" cellpadding="1" cellspacing="1" data-empty="@lang('adminportal.no_data_available')">
+        <table id="js-datatable" class="table datatable" data-url="{{route("{$route}.datatable")}}" cellpadding="1" cellspacing="1" data-empty="@lang('adminportal.no_data_available')">
             <thead>
                 <tr>
                     @if(@$button['bulkAction'])

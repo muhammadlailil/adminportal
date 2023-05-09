@@ -1,12 +1,12 @@
 <?php
 namespace Laililmahfud\Adminportal\JsTable\Resources;
 
-use Laililmahfud\Adminportal\Helpers\JsTableResources;
 use Laililmahfud\Adminportal\JsTable\TableHtml;
+use Laililmahfud\Adminportal\JsTable\JsTableResources;
 
 class UserJsTableResources extends JsTableResources{
 
-     public function toJson($row){
+     public function toArray($row){
           return [
                TableHtml::bulkCheckbox($row->id),
                TableHtml::profileUser($row->name,$row->profile),

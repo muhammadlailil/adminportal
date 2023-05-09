@@ -876,7 +876,7 @@ table .th-checkbox .form-checkbox {
     border-radius: 16px;
     display: flex;
     position: relative;
-    background-position: top;
+    background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
 }
@@ -1211,4 +1211,11 @@ table .th-checkbox .form-checkbox {
     box-shadow: 0 0 0 1px rgba(68,68,68,.11);
     border: 1px solid rgba(221, 221, 221, 0.368627451);
     border-radius: 10px;
+}
+.dt-pagination a, .dt-pagination span{
+    padding: 2px 10px !important;
+    font-size: 11px !important;
+}
+.dt-top .dt-info, .dt-bottom .dt-info{
+    font-size: 11px !important;
 }

@@ -12,7 +12,7 @@ class AdminUsersController extends AdminController
     protected $pageTitle = "Users Admin";
     protected $resourcePath = "portalmodule::user-admin";
     protected $crudService = CmsAdminService::class;
-    protected $jsTable = true;
+    protected $jstable = true;
 
     protected $tableColumns = [
         ["label" => "Name", "name" => "cms_admin.name"], ["label" => "Email", "name" => "cms_admin.email"],

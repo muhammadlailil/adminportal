@@ -67,3 +67,8 @@ jstable.on("update", function () {
           jsTableElement.classList.add('table-has-data')
      }
 });
+
+
+function queryParams() {
+     return new URLSearchParams(window.location.search);
+ }

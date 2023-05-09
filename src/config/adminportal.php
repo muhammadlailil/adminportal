@@ -43,8 +43,8 @@ return [
         'banner' => 'adminportal/img/login-banner.svg',
         'banner_title' => 'Welcome Back !',
         'banner_description' => "Use your access in the ".config('app.name')." application and login to your dashboard account.",
-        'forgot_password' => url('admin/auth/forgot-password'),
-        'register' => url('admin/auth/register'),
+        'forgot_password' => 'admin/auth/forgot-password',
+        'register' => 'admin/auth/register',
     ],
 
     /*

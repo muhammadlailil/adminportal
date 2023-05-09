@@ -20,7 +20,7 @@
                     placeholder="Password"></x-portal::input.password>
                 @if (portal_config('login.forgot_password'))
                     <div class="text-end fs-14" style="margin-top: -10px">
-                        <a href="{{ portal_config('login.forgot_password') }}"
+                        <a href="{{ url(portal_config('login.forgot_password')) }}"
                             class="text-decoration-none text-black">@lang('adminportal.forgot_password')</a>
                     </div>
                 @endif
@@ -28,7 +28,7 @@
                     class="btn btn-dark w-100 btn-block justify-content-center text-upper mb-3 mt-5">@lang('adminportal.login')</button>
                 <div class="text-center">
                     <p class="fs-14">@lang('adminportal.dont_have_account_yet')
-                        <a href="{{ portal_config('login.forgot_password') }}"
+                        <a href="{{ url(portal_config('login.forgot_password')) }}"
                             class="text-decoration-none text-primary">@lang('adminportal.register')</a>
                     </p>
                 </div>
