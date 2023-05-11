@@ -57,6 +57,7 @@ class ImportExcel implements OnEachRow, WithHeadingRow, WithChunkReading, WithEv
     {
         return [
             BeforeImport::class => function (BeforeImport $event) {
+                $this->beforeImport();
                 $totalRows = $event->getReader()->getTotalRows();
                 if (filled($totalRows)) {
                     $totalRows = array_values($totalRows)[0];
@@ -67,6 +68,7 @@ class ImportExcel implements OnEachRow, WithHeadingRow, WithChunkReading, WithEv
                 }
             },
             AfterImport::class => function (AfterImport $event) {
+                $this->afterImport();
                 $colection = cache("import_rows_{$this->sessionId}");
 
                 CmsImportLog::whereId($this->sessionId)->update([
@@ -80,6 +82,10 @@ class ImportExcel implements OnEachRow, WithHeadingRow, WithChunkReading, WithEv
         ];
     }
 
+    public function beforeImport(){
+    }
+    public function afterImport(){
+    }
     protected function putColection($row)
     {
         $lastColection = cache("import_rows_{$this->sessionId}") ?? [];

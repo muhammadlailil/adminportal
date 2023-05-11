@@ -1,4 +1,5 @@
 <?php
+
 namespace Laililmahfud\Adminportal\Controllers\Admin;
 
 use Illuminate\Http\Request;
@@ -20,6 +21,8 @@ class AdminMainController extends Controller
 
     public function postLogin(Request $request)
     {
+        if (portal_config('login.url') != 'admin/auth/login') return;
+
         $request->validate([
             'email' => 'required|email|exists:cms_admin,email|min:10|max:50',
             'password' => 'required|min:8|max:50|regex:/^.*(?=.{3,})(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).*$/',
@@ -56,12 +59,12 @@ class AdminMainController extends Controller
             'password' => 'required|min:8|confirmed|max:50|regex:/^.*(?=.{3,})(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).*$/',
             'password_confirmation' => 'required|min:8|max:50,regex:/^.*(?=.{3,})(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).*$/',
         ]);
-        if(!Hash::check($request->old_password,CmsAdmin::findOrFail(admin()->user->id)->value('password'))){
+        if (!Hash::check($request->old_password, CmsAdmin::findOrFail(admin()->user->id)->value('password'))) {
             throw ValidationException::withMessages([
                 'old_password' => 'The password you entered does not match ',
             ]);
         }
-        CmsAdmin::findOrFail(admin()->user->id)->update(['password'=>Hash::make($request->password)]);
-        return redirect()->back()->with(['success'=>'Password updated successfully']);
+        CmsAdmin::findOrFail(admin()->user->id)->update(['password' => Hash::make($request->password)]);
+        return redirect()->back()->with(['success' => 'Password updated successfully']);
     }
 }

@@ -11,27 +11,29 @@
             </div>
         </div>
         <div class="col-sm-6 right-side d-flex justify-content-center align-items-center bg-light">
-            <form action="{{ route('admin.auth.login') }}" method="post" class="content">
+            <form action="{{ url(portal_config('login.url')) }}" method="post" class="content">
                 @csrf
                 <h5 class="page-title-card mb-5">@lang('adminportal.login')</h5>
                 <x-portal::input type="email" label="{{ __('adminportal.email') }}" name="email"
                     placeholder="your@email.com">{{ old('email') }}</x-portal::input>
                 <x-portal::input.password label="{{ __('adminportal.password') }}" name="password"
                     placeholder="Password"></x-portal::input.password>
-                @if (portal_config('login.forgot_password'))
+                @if (portal_config('login.forgot_password_url'))
                     <div class="text-end fs-14" style="margin-top: -10px">
-                        <a href="{{ url(portal_config('login.forgot_password')) }}"
+                        <a href="{{ url(portal_config('login.forgot_password_url')) }}"
                             class="text-decoration-none text-black">@lang('adminportal.forgot_password')</a>
                     </div>
                 @endif
                 <button type="submit"
                     class="btn btn-dark w-100 btn-block justify-content-center text-upper mb-3 mt-5">@lang('adminportal.login')</button>
-                <div class="text-center">
-                    <p class="fs-14">@lang('adminportal.dont_have_account_yet')
-                        <a href="{{ url(portal_config('login.forgot_password')) }}"
-                            class="text-decoration-none text-primary">@lang('adminportal.register')</a>
-                    </p>
-                </div>
+                @if (portal_config('login.forgot_password_url'))
+                    <div class="text-center">
+                        <p class="fs-14">@lang('adminportal.dont_have_account_yet')
+                            <a href="{{ url(portal_config('login.forgot_password_url')) }}"
+                                class="text-decoration-none text-primary">@lang('adminportal.register')</a>
+                        </p>
+                    </div>
+                @endif
             </form>
         </div>
     </div>
