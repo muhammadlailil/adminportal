@@ -49,8 +49,8 @@ body {
     content: "\e924";
     font-family: "iconsax-outline" !important;
     border: none;
-    font-size: 15px;
-    margin-left: 5px;
+    font-size: 13px;
+    margin-top: -1px;
 }
 
 .dropdown-item.active,
@@ -370,6 +370,7 @@ body {
 }
 .navbar-header .header-navigation li.notification .text{
     font-size: 13px;
+    font-family: "Krub-Regular";
 }
 
 .navbar-header .header-navigation li.notification .count {
@@ -487,6 +488,7 @@ body {
     padding: 5px 20px;
     font-family: "Krub-SemiBold";
     font-size: 12px;
+    /* box-shadow: 0 .125rem .25rem rgba(0,0,0,.075)!important; */
 }
 
 .btn .icon {
@@ -649,6 +651,7 @@ table .btn-action {
     font-size: 10px;
     padding: 3px 9px;
     min-height: unset;
+    border-radius: 5px;
 }
 
 table .th-checkbox {
@@ -1048,6 +1051,9 @@ table .th-checkbox .form-checkbox {
 .dt-wrapper {
     display: grid;
 }
+.dt-wrapper .dt-top{
+    padding: 0px !important;
+}
 
 .paginate-footer {
     padding: 13px 0;
@@ -1208,9 +1214,13 @@ table .th-checkbox .form-checkbox {
 }
 .ts-dropdown{
     margin-top: 0px !important;
-    box-shadow: 0 0 0 1px rgba(68,68,68,.11);
-    border: 1px solid rgba(221, 221, 221, 0.368627451);
-    border-radius: 10px;
+    box-shadow: 0 0 0 1px rgba(68,68,68,.11) !important;
+    border: 1px solid rgba(221, 221, 221, 0.368627451) !important;
+    border-radius: 10px !important;
+}
+.ts-dropdown [data-selectable].option{
+    font-size: 13px;
+    padding: 8px 15px;
 }
 .dt-pagination a, .dt-pagination span{
     padding: 2px 10px !important;
@@ -1218,4 +1228,37 @@ table .th-checkbox .form-checkbox {
 }
 .dt-top .dt-info, .dt-bottom .dt-info{
     font-size: 11px !important;
+}
+.datatable thead tr{
+    background-color: #EFF0F2;
+}
+.datatable thead tr th{
+    color: #000;
+    padding: 10px 9px;
+    font-family: "Krub-Bold";
+}
+.datatable thead tr th a{
+    color: #000;
+}
+input[type="date"],
+input[type="time"] {
+    position: relative;
+}
+input[type="date"]::-webkit-calendar-picker-indicator,
+input[type="time"]::-webkit-calendar-picker-indicator  {
+    display: block;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    background: transparent;
+}
+input[type=date]::after{
+    content: "\ebcd";
+    font-family: 'iconsax-outline';
+}
+input[type=time]::after{
+    content: "\e9b6";
+    font-family: 'iconsax-outline';
 }

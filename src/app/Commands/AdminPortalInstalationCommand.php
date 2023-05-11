@@ -1,4 +1,5 @@
 <?php
+
 namespace Laililmahfud\Adminportal\Commands;
 
 use Illuminate\Console\Command;
@@ -46,9 +47,9 @@ class AdminPortalInstalationCommand extends Command
         $this->call('vendor:publish', ['--tag' => 'apdoc-config', '--force' => true]);
 
         $this->createSymlink();
+        $this->createPartialAssetFile();
 
         $this->call('adminportal:migration');
-        
     }
 
     protected function createIndexController()
@@ -64,12 +65,27 @@ class AdminPortalInstalationCommand extends Command
     }
 
 
-    protected function createSymlink(){
+    protected function createSymlink()
+    {
         /**Create upload symlink */
         $uploadDir = storage_path('app/uploads');
         if (!file_exists($uploadDir)) {
             @mkdir($uploadDir, 0755);
         }
         app('files')->link(storage_path('app/uploads'), public_path('uploads'));
+    }
+
+    protected function createPartialAssetFile()
+    {
+        $partials_dir = resource_path('views/admin/partials');
+        if (!file_exists($partials_dir)) {
+            @mkdir($partials_dir, 0755);
+        }
+        if (!file_exists("$partials_dir/js.blade.php")) {
+            file_put_contents("$partials_dir/js.blade.php", '');
+        }
+        if (!file_exists("$partials_dir/css.blade.php")) {
+            file_put_contents("$partials_dir/css.blade.php", '');
+        }
     }
 }

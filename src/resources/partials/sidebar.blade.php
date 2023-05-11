@@ -6,7 +6,7 @@
         <ul class="nav-profile ps-0 mb-2">
             <li class="nav-section">Profile</li>
             <li>
-                <a href="{{route('admin.profile')}}" class="d-flex align-items-center text-decoration-none">
+                <a href="{{url(portal_config('profile_url'))}}" class="d-flex align-items-center text-decoration-none">
                     <img src="{{asset(admin()->user->profile)}}" class="rounded-circle" width="40px"
                         alt="">
                     <div class="text-white ms-2 d-flex flex-column">

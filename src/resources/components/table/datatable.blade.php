@@ -13,19 +13,19 @@ $limit = request('limit');
             </div>
         </form>
         @if(@$button['filter'])
-        <a href="" class="btn btn-dark btn-icon rounded-100 me-2">
+        <a href="" class="btn btn-light btn-icon me-2">
             <i class="isax icon-setting-4 icon"></i>
             @lang('adminportal.filter')
         </a>
         @endif
         @if(@$button['import'])
-        <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#modal-import-data" class="btn btn-dark btn-icon rounded-100 me-2">
+        <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#modal-import-data" class="btn btn-light btn-icon  me-2">
             <i class="isax icon-import icon"></i>
             @lang('adminportal.import')
         </a>
         @endif
         @if(@$button['export'])
-        <a href="javascript:;"  data-bs-toggle="modal" data-bs-target="#modal-export-data" class="btn btn-dark btn-icon rounded-100 me-2">
+        <a href="javascript:;"  data-bs-toggle="modal" data-bs-target="#modal-export-data" class="btn btn-light btn-icon  me-2">
             <i class="isax icon-export icon"></i>
             @lang('adminportal.export')
         </a>

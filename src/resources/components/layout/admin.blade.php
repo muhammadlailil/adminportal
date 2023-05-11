@@ -6,6 +6,7 @@
     <meta name="app-nofitication" content="{{portal_config('nofitication')}}">
     <meta name="admin-base-url" content="{{url(portal_config('admin_path'))}}">
     @include('portal::partials.css')
+    @include('admin.partials.css')
 </head>
 
 <body>
@@ -43,7 +44,9 @@
     @include('portal::components.alert.confirmation')
     @include('portal::components.alert.confirm')
     @include('portal::partials.js')
+    @include('admin.partials.js')
     <script src="{{asset('adminportal/js/notification.js?')}}"></script>
+
     @if(session('success') && portal_config('alert_message_type')=='popup')
     <script>
         Information("{{session('success')}}")
