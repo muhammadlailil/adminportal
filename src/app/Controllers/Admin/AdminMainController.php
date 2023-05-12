@@ -28,12 +28,12 @@ class AdminMainController extends Controller
             'password' => 'required|min:8|max:50|regex:/^.*(?=.{3,})(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).*$/',
         ]);
 
-        $user = CmsAdmin::with('roles')->active()->whereEmail($request->email)->firstOrFail();
-        if (!Hash::check($request->password, $user->password)) {
-            throw ValidationException::withMessages([
-                'password' => 'The password you entered does not match ',
-            ]);
-        }
+        $user = CmsAdmin::with('roles')->active()->whereEmail($request->email)->first();
+        if (!$user)
+            throw ValidationException::withMessages(['email' => 'The users email account is not active ']);
+
+        if (!Hash::check($request->password, $user->password))
+            throw ValidationException::withMessages(['password' => 'The password you entered does not match ']);
 
         AdminPortal::login($user);
 
@@ -49,7 +49,7 @@ class AdminMainController extends Controller
 
     public function profile(Request $request)
     {
-        if(portalconfig('profile_url')!='admin/profile') abort(404);
+        if (portalconfig('profile_url') != 'admin/profile') abort(404);
         return view('portalmodule::profile.index');
     }
 
@@ -60,12 +60,10 @@ class AdminMainController extends Controller
             'password' => 'required|min:8|confirmed|max:50|regex:/^.*(?=.{3,})(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).*$/',
             'password_confirmation' => 'required|min:8|max:50,regex:/^.*(?=.{3,})(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).*$/',
         ]);
-        if (!Hash::check($request->old_password, CmsAdmin::findOrFail(admin()->user->id)->value('password'))) {
-            throw ValidationException::withMessages([
-                'old_password' => 'The password you entered does not match ',
-            ]);
-        }
-        CmsAdmin::findOrFail(admin()->user->id)->update(['password' => Hash::make($request->password)]);
+        if (!Hash::check($request->old_password, CmsAdmin::findOrFail(admin()->user->id)->value('password')))
+            throw ValidationException::withMessages(['old_password' => 'The password you entered does not match ',]);
+
+            CmsAdmin::findOrFail(admin()->user->id)->update(['password' => Hash::make($request->password)]);
         return redirect()->back()->with(['success' => 'Password updated successfully']);
     }
 }

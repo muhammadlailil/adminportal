@@ -61,14 +61,10 @@ class AdminPortal
 
     public static function getAllColumTable($table_name, $exclude = ['id', 'created_at', 'updated_at'])
     {
-        $columns = [];
-        $describeTable = DB::select("DESCRIBE {$table_name}");
-        return collect($describeTable)
-            ->filter(function ($row) use ($exclude) {
-                return !in_array($row->Field, $exclude);
-            })
-            ->pluck('Field')
-            ->toArray();
+        $columns = DB::getSchemaBuilder()->getColumnListing($table_name);
+        return collect($columns)->filter(function($name) use($exclude){
+            return !in_array($name, $exclude);
+        })->values()->toArray();
     }
 
     public static function userModuls($isSuperadmin, $modules)

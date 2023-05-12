@@ -13,8 +13,8 @@
     @endforeach
 </x-portal::input.select>
 <x-portal::input.radio name="status" label="Status" horizontal>
-    <x-portal::input.radio.option class="me-4" name="status" checked="{{$row->status!=0}}" label="Active" value="1"></x-portal::input.radio.option>
-    <x-portal::input.radio.option name="status" checked="{{$row->status==0}}" label="Non Active" value="0"></x-portal::input.radio.option>
+    <x-portal::input.radio.option class="me-4" name="status" label="Active" value="1" selected="{{$row->status==1}}"></x-portal::input.radio.option>
+    <x-portal::input.radio.option name="status"  label="Non Active" value="0" selected="{{$row->status==0}}"></x-portal::input.radio.option>
 </x-portal::input.radio>
 <x-portal::input.password  name="password" label="Password" placeholder="Password" horizontal required="false">update</x-portal::input.password>
 

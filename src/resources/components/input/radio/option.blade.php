@@ -8,6 +8,6 @@
 @endphp
 
 <div class="form-radio {{@$class}}">
-    <input type="radio" id="{{$name}}_{{strtolower($label)}}" class="" value="{{$value}}" name="{{$name}}" {{$attributes}}>
+    <input @checked(@$attributes['selected']) type="radio" id="{{$name}}_{{strtolower($label)}}" class="" value="{{$value}}" name="{{$name}}" {{$attributes}}>
     <label class="right" for="{{$name}}_{{strtolower($label)}}">{{$label}}</label>
 </div>
