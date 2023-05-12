@@ -10,7 +10,7 @@ class [controllerName] extends AdminController
     protected $routePath = "[routePath]";
     protected $pageTitle = "[pageTitle]";
     protected $resourcePath = "[resourcePath]";
-    protected $crudService = [serviceName]::class;
+    protected $moduleService = [serviceName]::class;
 [configuration]
 
     protected $tableColumns = [

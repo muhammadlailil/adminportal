@@ -60,25 +60,25 @@ class CmsNotification extends Model
 
     public static function send(){
         /**
-         *  Notification(['98302bac-db67-4751-8335-3e5598bf0a57','98302bac-db67-4751-8335-3e5598bf0a57'])
+         *  CmsNotification::setReceivers(['98302bac-db67-4751-8335-3e5598bf0a57','98302bac-db67-4751-8335-3e5598bf0a57'])
          * ->setTitle('Pelanggan Baru')
          * ->setDescription('Pelanggan baru melakukan registrasi')
          * ->setUrlDetail('/admin/faq')
          * ->send();
          */
         if(self::$title && self::$description && count(self::$receivers) && self::$url_detail){
-            $insert = [];
-            foreach(self::$receivers as $admin_id){
-                $insert[] = [
+            $insert = collect(self::$receivers)->map(function($id){
+                return [
                     'id' => Str::uuid()->toString(),
                     'created_at' => date('Y-m-d H:i:s'),
                     'title' => self::$title,
                     'description' => self::$description,
-                    'admin_id' => $admin_id,
+                    'admin_id' => $id,
                     'url_detail' => self::$url_detail,
                     'is_read' => 0
                 ];
-            }
+            })->toArray();
+            
             CmsNotification::insert($insert);
         }
     }

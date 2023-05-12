@@ -1,4 +1,5 @@
 <?php
+
 namespace Laililmahfud\Adminportal\Middleware;
 
 use Closure;
@@ -15,9 +16,7 @@ class AdminPortalMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if (!admin()->user) {
-            return to_route('admin.auth.index')->with(['message' => 'Please login first !']);
-        }
+        if (!admin()->user) return to_route('admin.auth.index')->with(['message' => 'Please login first !']);
 
         return $next($request);
     }

@@ -21,20 +21,22 @@ class ApiPortalMiddleware
     public function handle(Request $request, Closure $next,$role=null)
     {
         $token = JwtToken::getToken();
-        if((portal_config('api.validate_blacklist') && JwtToken::isBlacklist()) || !$token){
+        
+        $isBlacklistToken = (portalconfig('api.validate_blacklist') && JwtToken::isBlacklist());
+        if($isBlacklistToken || !$token){
             return $this->unauthorized('Your token was not found !');
         }
+        
         try{
             $decodedToken = JwtToken::decode($token);
             $user = $decodedToken->data;
-            if($role && in_array(@$user->role,  explode('|',$role))){
-                return $this->forbidden("You don't have access to this endpoint");
-            }
+
+            if($role && in_array(@$user->role,  explode('|',$role)))  return $this->forbidden("You don't have access to this endpoint");
+
             return $next($request);
         }catch(\Exception $e){
-            if($e instanceof ExpiredException){
-                return $this->unauthorized("Your token was expired !",Error::EXPIRED_TOKEN);
-            }
+            if($e instanceof ExpiredException)  return $this->unauthorized("Your token was expired !",Error::EXPIRED_TOKEN);
+
             return $this->unauthorized('Your token was invalid',Error::INVALID_LOGIN);
         }
         return $next($request);

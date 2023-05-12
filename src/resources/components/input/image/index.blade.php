@@ -17,7 +17,7 @@
     @if(@$horizontal)
     <div class="col-sm-6">
         <div class="form-image-upload rounded"
-            style="background-image: url('{{($slot!='')?asset($slot):'https://ui-avatars.com/api/?name='.config('app.name').'&color=FFF&background='.portal_config('theme_color').''}}'); background-position: center; background-size: cover;">
+            style="background-image: url('{{($slot!='')?asset($slot):'https://ui-avatars.com/api/?name='.config('app.name').'&color=FFF&background='.portalconfig('theme_color').''}}'); background-position: center; background-size: cover;">
             <input type="file" name="{{$name}}" id="{{$name}}" class="form-control {{@$class}}"
                 {{$attributes}} accept="image/*">
         </div>

@@ -53,7 +53,7 @@ class AdminKeyGeneratorCommand extends Command{
     
                 // update existing entry
                 file_put_contents($path, str_replace(
-                    'JWT_SECRET_KEY='.portal_config('api.jwt_secret_key'),
+                    'JWT_SECRET_KEY='.portalconfig('api.jwt_secret_key'),
                     'JWT_SECRET_KEY='.$key, file_get_contents($path)
                 ));
             }
@@ -75,7 +75,7 @@ class AdminKeyGeneratorCommand extends Command{
     
                 // update existing entry
                 file_put_contents($path, str_replace(
-                    'API_SECRET_KEY='.portal_config('api.secret_key'),
+                    'API_SECRET_KEY='.portalconfig('api.secret_key'),
                     'API_SECRET_KEY='.$key, file_get_contents($path)
                 ));
             }

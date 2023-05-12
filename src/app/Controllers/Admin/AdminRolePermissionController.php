@@ -14,7 +14,7 @@ class AdminRolePermissionController extends AdminController
     protected $routePath = "admin.role-permission";
     protected $pageTitle = "Roles & Permission";
     protected $resourcePath = "portalmodule::role-permission";
-    protected $crudService = RolePermissionService::class;
+    protected $moduleService = RolePermissionService::class;
 
     protected $tableColumns = [
         ["label" => "Name", "name" => "name"], ["label" => "Super Admin?", "name" => "is_superadmin"],

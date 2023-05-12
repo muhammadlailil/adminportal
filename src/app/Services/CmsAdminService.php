@@ -46,8 +46,8 @@ class CmsAdminService extends AdminService
     public function update(Request $request, $id)
     {
         $data = $request->only(['name', 'email', 'role_permission_id', 'status',]);
-        if ($request->password)  $data['password'] = Hash::make($request->password);
-        if ($request->profile) $data['profile'] = AdminPortal::uploadFile($request->profile);
+        if ($request->filled('password'))  $data['password'] = Hash::make($request->password);
+        if ($request->hasFile("profile")) $data['profile'] = AdminPortal::uploadFile($request->profile);
 
         return $this->model::findOrFail($id)->update($data);
     }

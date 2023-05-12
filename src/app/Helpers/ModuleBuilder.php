@@ -193,7 +193,7 @@ class ModuleBuilder
                 $str .= "\r\n";
             }
 
-            $str .= '    protected $canAdd = false;';
+            $str .= '    protected $add = false;';
         }
         if (!request('bulk_action')) {
             if ($str != '') {
@@ -207,21 +207,21 @@ class ModuleBuilder
                 $str .= "\r\n";
             }
 
-            $str .= '    protected $canFilter = true;';
+            $str .= '    protected $filter = true;';
         }
         if (request('has_import')) {
             if ($str != '') {
                 $str .= "\r\n";
             }
 
-            $str .= '    protected $canImport = true;';
+            $str .= '    protected $import = true;';
         }
         if (request('has_export')) {
             if ($str != '') {
                 $str .= "\r\n";
             }
 
-            $str .= '    protected $canExport = true;';
+            $str .= '    protected $export = true;';
         }
         if (!request('has_edit') && !request('has_delete')) {
             if ($str != '') {
@@ -340,13 +340,13 @@ class ModuleBuilder
 
         $str = '';
         if ($bulk_action && $index) {
-            $str .= "    @canDo('delete admin.{$module_path}')\r\n";
+            $str .= "    @iscan('delete admin.{$module_path}')\r\n";
             $str .= "    <td>\r\n";
             $str .= '        <div class="form-checkbox">' . "\r\n";
             $str .= '            <input type="checkbox" class="table-checkbox" value="{{$row->id}}" name="selected_ids[]">' . "\r\n";
             $str .= '        </div>' . "\r\n";
             $str .= '    </td>' . "\r\n";
-            $str .= "    @endcanDo\r\n";
+            $str .= "    @endiscan\r\n";
         }
         foreach ($table_name as $i => $name) {
             $columnValue = ($table_join[$i]) ? "{$table_join[$i]}_{$table_join_relation[$i]}" : $name;
@@ -360,28 +360,28 @@ class ModuleBuilder
         }
         if (($has_edit || $has_delete) && $index) {
             $str .= '    <td class="text-end">' . "\r\n";
-            $str .= "        @if(canDo('edit admin.{$module_path}') || canDo('delete admin.{$module_path}'))\r\n";
+            $str .= "        @if(iscan('edit admin.{$module_path}') || iscan('delete admin.{$module_path}'))\r\n";
             $str .= '        <div class="btn-group">' . "\r\n";
             $str .= '            <button type="button" class="btn btn-secondary dropdown-toggle btn-action" data-bs-toggle="dropdown" aria-expanded="false">' . "\r\n";
             $str .= "                Action\r\n";
             $str .= "            </button>\r\n";
             $str .= '            <ul class="dropdown-menu dropdown-menu-end dropdown-action">' . "\r\n";
             if ($has_edit) {
-                $str .= "                @canDo('edit admin.{$module_path}')\r\n";
+                $str .= "                @iscan('edit admin.{$module_path}')\r\n";
                 $str .= "                <li>\r\n";
                 $str .= '                    <a href="{{adminroute(\'admin.' . $module_path . '.edit\',$row->id)}}" class="dropdown-item">Edit</a>' . "\r\n";
                 $str .= "                </li>\r\n";
-                $str .= "                @endcanDo\r\n";
+                $str .= "                @endiscan\r\n";
             }
             if ($has_delete) {
-                $str .= "                @canDo('delete admin.{$module_path}')\r\n";
+                $str .= "                @iscan('delete admin.{$module_path}')\r\n";
                 $str .= "                <li>\r\n";
                 $str .= '                    <a href="javascript:;" data-toggle="confirmation"' . "\r\n";
                 $str .= '                        data-message="{{__(\'adminportal.delete_confirmation\')}}"' . "\r\n";
                 $str .= '                        data-action="{{adminroute(\'admin.' . $module_path . '.destroy\',$row->id)}}" data-method="DELETE"' . "\r\n";
                 $str .= '                        class="dropdown-item">Delete</a>' . "\r\n";
                 $str .= "                </li>\r\n";
-                $str .= "                @endcanDo\r\n";
+                $str .= "                @endiscan\r\n";
             }
             $str .= "            </ul>\r\n";
             $str .= "        </div>\r\n";
@@ -482,7 +482,7 @@ class ModuleBuilder
             if (str_contains($type, 'password')) {
                 $str .= '        if ($request->' . $name . ')  $data["' . $name . '"] = \Hash::make($request->' . $name . ');' . "\r\n";
             } else if (in_array($type, ['file', 'foto'])) {
-                $str .= '        if ($request->' . $name . ') $data["' . $name . '"] = AdminPortal::uploadFile($request->' . $name . ');' . "\r\n";
+                $str .= '        if ($request->hasFile("' . $name . '")) $data["' . $name . '"] = AdminPortal::uploadFile($request->' . $name . ');' . "\r\n";
             }
         }
         return $str;

@@ -67,7 +67,7 @@ class AdminPortalServiceProvider extends ServiceProvider
     {
         Route::middleware('web')
             ->as('admin.')
-            ->prefix(portal_config('admin_path'))
+            ->prefix(portalconfig('admin_path'))
             ->group(function () {
                 $this->loadRoutesFrom(__DIR__ . '/../routes/admin.php');
             });
@@ -82,8 +82,8 @@ class AdminPortalServiceProvider extends ServiceProvider
 
 
     private function registeBladeDirective(){
-        Blade::if('canDo', function ($do) {
-            return canDo($do);
+        Blade::if('iscan', function ($do) {
+            return iscan($do);
         });
     }
 }

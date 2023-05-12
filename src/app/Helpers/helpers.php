@@ -3,8 +3,8 @@
 use Laililmahfud\Adminportal\Helpers\AdminPortal;
 use Laililmahfud\Adminportal\Models\CmsNotification;
 
-if (!function_exists('portal_config')) {
-    function portal_config($config,$default = "")
+if (!function_exists('portalconfig')) {
+    function portalconfig($config,$default = "")
     {
         return config("adminportal.{$config}") ?: $default;
     }
@@ -103,12 +103,12 @@ if (!function_exists('listIcons')) {
 }
 if(!function_exists('adminurl')){
     function adminurl($url){
-        return url(portal_config('admin_path')."/".$url);
+        return url(portalconfig('admin_path')."/".$url);
     }
 }
 
 if (!function_exists('canDo')) {
-    function canDo($action)
+    function iscan($action)
     {
         $role = admin()->role;
         if($role->is_superadmin){

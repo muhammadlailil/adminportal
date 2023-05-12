@@ -1,12 +1,12 @@
 <aside class="main-sidebar d-flex flex-column">
     <a href="" class="w-100 text-center p-2 d-block">
-        <img src="{{asset(portal_config('app_icon'))}}" alt="" width="130px">
+        <img src="{{asset(portalconfig('app_icon'))}}" alt="" width="130px">
     </a>
     <nav>
         <ul class="nav-profile ps-0 mb-2">
             <li class="nav-section">Profile</li>
             <li>
-                <a href="{{url(portal_config('profile_url'))}}" class="d-flex align-items-center text-decoration-none">
+                <a href="{{url(portalconfig('profile_url'))}}" class="d-flex align-items-center text-decoration-none">
                     <img src="{{asset(admin()->user->profile)}}" class="rounded-circle" width="40px"
                         alt="">
                     <div class="text-white ms-2 d-flex flex-column">
@@ -21,7 +21,7 @@
         <ul class="nav flex-column navbar-menu flex-grow-1 ps-0" id="nav_accordion">
             <li class="nav-section pb-1">Menu</li>
             <li class="nav-item">
-                <a class="nav-link {{(request()->is(portal_config('admin_path','/'))) ? 'active' : ''}}" href="{{route('admin.dashboard')}}">
+                <a class="nav-link {{(request()->is(portalconfig('admin_path','/'))) ? 'active' : ''}}" href="{{route('admin.dashboard')}}">
                     <i class="isax icon-home nav-icon"></i>
                     Dashboard
                 </a>

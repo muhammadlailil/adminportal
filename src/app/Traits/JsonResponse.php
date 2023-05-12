@@ -45,7 +45,7 @@ trait JsonResponse
         exit();
     }
 
-    public function forbidden($message, $err = Error::FORBIDEN)
+    public function forbidden($message, $err = Error::FORBIDDEN)
     {
         return response()->json([
             'status' => 403,

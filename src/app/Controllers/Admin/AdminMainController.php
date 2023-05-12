@@ -16,12 +16,12 @@ class AdminMainController extends Controller
         if (admin()->user) {
             return to_route('admin.dashboard');
         }
-        return view(portal_config('login.view_path'));
+        return view(portalconfig('login.view_path'));
     }
 
     public function postLogin(Request $request)
     {
-        if (portal_config('login.url') != 'admin/auth/login') abort(404);
+        if (portalconfig('login.url') != 'admin/auth/login') abort(404);
 
         $request->validate([
             'email' => 'required|email|exists:cms_admin,email|min:10|max:50',
@@ -49,7 +49,7 @@ class AdminMainController extends Controller
 
     public function profile(Request $request)
     {
-        if(portal_config('profile_url')!='admin/profile') abort(404);
+        if(portalconfig('profile_url')!='admin/profile') abort(404);
         return view('portalmodule::profile.index');
     }
 

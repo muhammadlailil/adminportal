@@ -17,7 +17,7 @@ class ApiTokenController extends ApiController
     
     public function __construct()
     {
-        $this->apiSecretKey = portal_config('api.secret_key');
+        $this->apiSecretKey = portalconfig('api.secret_key');
     }
 
     /**
@@ -41,7 +41,7 @@ class ApiTokenController extends ApiController
         $token = base64_decode($token);
         $tokens = explode('|', $token);
         if ($tokens[0] == date('Y-m-d') && $tokens[1] == $this->apiSecretKey) {
-            $token = JwtToken::setData(['scope' => 'auth'])->setExpired(portal_config('api.expired_duration_get_token'))->build();
+            $token = JwtToken::setData(['scope' => 'auth'])->setExpired(portalconfig('api.expired_duration_get_token'))->build();
             return $this->sendSuccess($token);
         }
         return $this->unauthorized("Token was invalid",Error::INVALID_TOKEN);
@@ -65,7 +65,7 @@ class ApiTokenController extends ApiController
     public function renewToken(Request $request)
     {
         $newToken = null;
-        if((portal_config('api.validate_blacklist') && JwtToken::isBlacklist())){
+        if((portalconfig('api.validate_blacklist') && JwtToken::isBlacklist())){
             return $this->unauthorized('Your token was not found !');
         }
         try {

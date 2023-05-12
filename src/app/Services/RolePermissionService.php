@@ -23,12 +23,18 @@ class RolePermissionService extends AdminService
     }
 
     public function store(Request $request){
-        $data = array_merge($request->only(['name','is_superadmin']),$this->getRequestPermission());
+        $data = [
+            ...$request->only(['name','is_superadmin']),
+            ...$this->getRequestPermission()
+        ];
         return $this->model::create($data);
     }
 
     public function update(Request $request,$id){
-        $data = array_merge($request->only(['name','is_superadmin']),$this->getRequestPermission());
+        $data = [
+            ...$request->only(['name','is_superadmin']),
+            ...$this->getRequestPermission()
+        ];
         return $this->model::findOrFail($id)->update($data);
     }
 

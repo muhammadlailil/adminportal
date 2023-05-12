@@ -14,8 +14,8 @@ class AdminNotificationController extends AdminController{
     protected $routePath = "admin.notification";
     protected $pageTitle = "Notification";
     protected $resourcePath = "portalmodule::notification";
-    protected $crudService = CmsNotificationService::class;
-    protected $canAdd = false;
+    protected $moduleService = CmsNotificationService::class;
+    protected $add = false;
     protected $bulkAction = false;
 
     protected $tableColumns = [

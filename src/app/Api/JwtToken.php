@@ -30,7 +30,7 @@ class JwtToken
     public static function build()
     {
         $iss = config('app.name');
-        $secretKey = portal_config('api.jwt_secret_key');
+        $secretKey = portalconfig('api.jwt_secret_key');
         $expired = new \DateTime(date('Y-m-d H:i:s', strtotime(date('Y-m-d H:i:s') . self::$expired)));
         $expired = $expired->getTimestamp();
 
@@ -50,7 +50,7 @@ class JwtToken
     }
 
     public static function decode($token = null){
-        $secretKey = portal_config('api.jwt_secret_key');
+        $secretKey = portalconfig('api.jwt_secret_key');
         $token = $token ?: self::getToken();
         return JWT::decode($token, new Key($secretKey, self::$algorithm));
     }

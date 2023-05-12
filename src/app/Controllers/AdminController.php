@@ -1,4 +1,5 @@
 <?php
+
 namespace Laililmahfud\Adminportal\Controllers;
 
 use Illuminate\Http\Request;
@@ -37,7 +38,7 @@ class AdminController extends Controller
      *
      * @var YourServiceClass
      */
-    protected $crudService;
+    protected $moduleService;
 
     /**
      * The import class for handling import excel function
@@ -82,28 +83,28 @@ class AdminController extends Controller
      *
      * @var bool
      */
-    protected $canAdd = true;
+    protected $add = true;
 
     /**
      * Indicates if the user can filter record, this will display filter button
      *
      * @var bool
      */
-    protected $canFilter = false;
+    protected $filter = false;
 
     /**
      * Indicates if the user can import record, this will display import button
      *
      * @var bool
      */
-    protected $canImport = false;
+    protected $import = false;
 
     /**
      * Indicates if the user can export record, this will display export button
      *
      * @var bool
      */
-    protected $canExport = false;
+    protected $export = false;
 
     /**
      * Indicates if the user can do bulk action of the record, this will display checkbox in the table
@@ -150,13 +151,13 @@ class AdminController extends Controller
      * ];
      */
     protected $message = [];
-    
+
     /**
      * The function to new class of crud service
      */
-    protected function crudService()
+    protected function moduleService()
     {
-        return (new $this->crudService);
+        return new $this->moduleService;
     }
 
     /**
@@ -164,40 +165,36 @@ class AdminController extends Controller
      */
     public function index(Request $request)
     {
-        redirect_if(
-            !canDo($this->moduleName("view ")),
-            function(){
-                return to_route('admin.dashboard')->with(['alert_error'=>__('adminportal.dont_have_access')]);
-            }
-        );
+        if (!iscan($this->accessmodule("view"))) return to_route('admin.dashboard')->with(['alert_error' => __('adminportal.dont_have_access')]);
 
-        $this->data = array_merge($this->data, [
+        $this->data = [
+            ...$this->data,
             "page_title" => $this->pageTitle,
             "datatable_views" => "{$this->resourcePath}.table",
             "table_columns" => $this->tableColumns,
             "route" => $this->routePath,
             'jstable' => $this->jstable,
             "button" => [
-                "add" => $this->canAdd && canDo($this->moduleName("add ")),
-                "filter" => $this->canFilter,
-                "bulkAction" => $this->bulkAction && canDo($this->moduleName("delete ")),
-                "tableAction" => $this->tableAction && canDo($this->moduleName("edit ")) || canDo($this->moduleName("delete ")),
-                "import" => $this->canImport && canDo($this->moduleName("add ")),
-                "export" => $this->canExport,
+                "add" => $this->add && iscan($this->accessmodule("add")),
+                "filter" => $this->filter,
+                "bulkAction" => $this->bulkAction && iscan($this->accessmodule("delete")),
+                "tableAction" => $this->tableAction && iscan($this->accessmodule("edit")) || iscan($this->accessmodule("delete")),
+                "import" => $this->import && iscan($this->accessmodule("add")),
+                "export" => $this->export,
             ],
-            "data" => (!$this->jstable)?$this->crudService()->datatable($request, $this->perPage):[],
-        ]);
-        if(!$this->jstable) return view("portal::default.datatable", $this->data);
+            "data" => (!$this->jstable) ? $this->moduleService()->datatable($request, $this->perPage) : [],
+        ];
 
-        return view("portal::default.jstable", $this->data);
+        return view($this->jstable ? "portal::default.jstable" : "portal::default.datatable", $this->data);
     }
 
 
     /**
      * The main function to generate json datatable for datatable 
      */
-    public function datatable(Request $request){
-        return $this->crudService()->datatable($request, $this->perPage);
+    public function datatable(Request $request)
+    {
+        return $this->moduleService()->datatable($request, $this->perPage);
     }
 
     /**
@@ -205,19 +202,16 @@ class AdminController extends Controller
      */
     public function create(Request $request)
     {
-        redirect_if(
-            !canDo($this->moduleName("add ")),
-            function(){
-                return to_route('admin.dashboard')->with(['alert_error'=>__('adminportal.dont_have_access')]);
-            }
-        );
-        $this->data = array_merge($this->data, [
+        if (!iscan($this->accessmodule("add"))) return to_route('admin.dashboard')->with(['alert_error' => __('adminportal.dont_have_access')]);
+
+        $this->data = [
+            ...$this->data,
             "page_title" => $this->pageTitle,
             "route" => $this->routePath,
             "action" => route("{$this->routePath}.store"),
             "form_views" => "{$this->resourcePath}.create",
             "type" => "create",
-        ]);
+        ];
 
         return view("portal::default.form", $this->data);
     }
@@ -227,20 +221,17 @@ class AdminController extends Controller
      */
     public function edit(Request $request, $id)
     {
-        redirect_if(
-            !canDo($this->moduleName("edit ")),
-            function(){
-                return to_route('admin.dashboard')->with(['alert_error'=>__('adminportal.dont_have_access')]);
-            }
-        );
-        $this->data = array_merge($this->data, [
+        if (!iscan($this->accessmodule("edit"))) return to_route('admin.dashboard')->with(['alert_error' => __('adminportal.dont_have_access')]);
+
+        $this->data =  [
+            ...$this->data,
             "page_title" => $this->pageTitle,
             "route" => $this->routePath,
             "action" => route("{$this->routePath}.update", $id),
             "form_views" => "{$this->resourcePath}.edit",
             "type" => "update",
-            "row" => $this->crudService()->findById($id),
-        ]);
+            "row" => $this->moduleService()->findById($id),
+        ];
 
         return view("portal::default.form", $this->data);
     }
@@ -250,24 +241,18 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
-        redirect_if(
-            !canDo($this->moduleName("add ")),
-            function(){
-                return redirect()->back()->with(['alert_error'=>__('adminportal.dont_have_access')]);
-            }
-        );
+        if (!iscan($this->accessmodule("add"))) return redirect()->back()->with(['alert_error' => __('adminportal.dont_have_access')]);
+
         $request->validate($this->validationRules('create'));
         try {
-            $this->crudService()->store($request);
-            return redirect(return_url() ?: route("{$this->routePath}.index"))->with([
-                'success' => @$this->message['store'] ?? __('adminportal.data_success_add'),
-            ]);
-        } catch (\Exception$e) {
-            return redirect()->back()->with([
-                'error' =>  @$this->message['failed_store'] ?? __('adminportal.data_failed_add', [
-                    'reason' => $e->getMessage(),
-                ]),
-            ]);
+            $this->moduleService()->store($request);
+
+            $successMessage = @$this->message['store'] ?? __('adminportal.data_success_add');
+            return redirect(return_url() ?: route("{$this->routePath}.index"))->with(['success' => $successMessage]);
+        } catch (\Exception $e) {
+
+            $errorMessage = @$this->message['failed_store'] ?? __('adminportal.data_failed_add', ['reason' => $e->getMessage()]);
+            return redirect()->back()->with(['error' =>  $errorMessage]);
         }
     }
 
@@ -276,65 +261,46 @@ class AdminController extends Controller
      */
     public function update(Request $request, $id)
     {
-        redirect_if(
-            !canDo($this->moduleName("edit ")),
-            function(){
-                return redirect()->back()->with(['alert_error'=>__('adminportal.dont_have_access')]);
-            }
-        );
+        if (!iscan($this->accessmodule("edit"))) return redirect()->back()->with(['alert_error' => __('adminportal.dont_have_access')]);
+
 
         $request->validate($this->validationRules('update', $id));
 
         try {
-            $this->crudService()->update($request, $id);
+            $this->moduleService()->update($request, $id);
 
-            return redirect(return_url() ?: route("{$this->routePath}.index"))->with([
-                'success' =>  @$this->message['update'] ?? __('adminportal.data_success_update'),
-            ]);
-        } catch (\Exception$e) {
-            return redirect()->back()->with([
-                'error' => @$this->message['failed_update'] ?? __('adminportal.data_failed_update', [
-                    'reason' => $e->getMessage(),
-                ]),
-            ]);
+            $successMessage = @$this->message['update'] ?? __('adminportal.data_success_update');
+            return redirect(return_url() ?: route("{$this->routePath}.index"))->with(['success' => $successMessage]);
+        } catch (\Exception $e) {
+
+            $errorMessage = @$this->message['failed_update'] ?? __('adminportal.data_failed_update', ['reason' => $e->getMessage()]);
+            return redirect()->back()->with(['error' => $errorMessage]);
         }
     }
 
     public function destroy(Request $request, $id)
     {
-        redirect_if(
-            !canDo($this->moduleName("delete ")),
-            function(){
-                return redirect()->back()->with(['alert_error'=>__('adminportal.dont_have_access')]);
-            }
-        );
-
+        if(!iscan($this->accessmodule("delete"))) return redirect()->back()->with(['alert_error' => __('adminportal.dont_have_access')]);
+     
         try {
-            $this->crudService()->delete($id);
+            $this->moduleService()->delete($id);
 
-            return redirect(return_url() ?: route("{$this->routePath}.index"))->with([
-                'success' =>  @$this->message['delete'] ?? __('adminportal.data_success_delete'),
-            ]);
-        } catch (\Exception$e) {
-            return redirect()->back()->with([
-                'error' =>  @$this->message['failed_delete'] ?? __('adminportal.data_failed_delete', [
-                    'reason' => $e->getMessage(),
-                ]),
-            ]);
+            $successMessage = @$this->message['delete'] ?? __('adminportal.data_success_delete');
+            return redirect(return_url() ?: route("{$this->routePath}.index"))->with(['success' =>  $successMessage]);
+        } catch (\Exception $e) {
+
+            $errorMessage = @$this->message['failed_delete'] ?? __('adminportal.data_failed_delete', ['reason' => $e->getMessage()]);
+            return redirect()->back()->with(['error' =>  $errorMessage]);
         }
     }
 
     public function export(Request $request)
     {
-        redirect_if(
-            !canDo($this->moduleName("view ")),
-            function(){
-                return redirect()->back()->with(['alert_error'=>__('adminportal.dont_have_access')]);
-            }
-        );
+        if(!iscan($this->accessmodule("view"))) return redirect()->back()->with(['alert_error' => __('adminportal.dont_have_access')]);
+       
 
         $file_format = $request->file_format;
-        $data = $this->crudService()->datatable($request, null);
+        $data = $this->moduleService()->datatable($request, null);
         switch ($file_format) {
             case 'pdf':
                 return ExportPdf::paperSize($request->papersize)
@@ -342,7 +308,7 @@ class AdminController extends Controller
                     ->view("{$this->resourcePath}.export")
                     ->data($data)
                     ->download($request->file_name);
-                    
+
             case 'csv':
                 $format = \Maatwebsite\Excel\Excel::CSV;
                 break;
@@ -364,16 +330,10 @@ class AdminController extends Controller
      */
     public function import(Request $request)
     {
-        redirect_if(
-            !canDo($this->moduleName("add ")),
-            function(){
-                return redirect()->back()->with(['alert_error'=>__('adminportal.dont_have_access')]);
-            }
-        );
+        if(!iscan($this->accessmodule("add"))) return redirect()->back()->with(['alert_error' => __('adminportal.dont_have_access')]);
 
-        if(!$this->importExcel){
-            return redirect()->back()->with(['error' => "Please define importExcel class first"]);
-        }
+        if (!$this->importExcel)  return redirect()->back()->with(['error' => "Please define importExcel class first"]);
+
         $importFile = $request->file('import_file');
         $logs = CmsImportLog::create([
             'filename' => $importFile->getClientOriginalName(),
@@ -381,61 +341,56 @@ class AdminController extends Controller
             'row_count' => 0,
             'progres' => 0,
         ]);
-        
-        $importClass = (new $this->importExcel($logs->id));
-        $message = __('adminportal.import_data_in_progres');
+
+        $importClass = new $this->importExcel($logs->id);
         if ($importClass instanceof ShouldQueue) {
+            $message = __('adminportal.import_data_in_progres');
             Excel::queueImport($importClass, $importFile);
-        }else{
+        } else {
             $message = __('adminportal.import_data_success');
             Excel::import($importClass, $importFile);
-        }        
+        }
         return redirect()->back()->with(['success' => $message]);
     }
 
 
-    public function bulkAction (Request $request){
+    public function bulkAction(Request $request)
+    {
         $bulk_action = $request->bulk_action;
         $selected_ids = $request->selected_ids;
-        if($bulk_action=='delete'){
-            redirect_if(
-                !canDo($this->moduleName("delete ")),
-                function(){
-                    return to_route('admin.dashboard')->with(['alert_error'=>__('adminportal.dont_have_access')]);
-                }
-            );
-            $this->crudService()->bulkDelete($selected_ids);
-            return redirect(return_url() ?: route("{$this->routePath}.index"))->with([
-                'success' =>  @$this->message['bulk_delete'] ??__('adminportal.data_success_delete'),
-            ]);
+        if ($bulk_action == 'delete') {
+            if(!iscan($this->accessmodule("delete"))) return to_route('admin.dashboard')->with(['alert_error' => __('adminportal.dont_have_access')]);
+            $this->moduleService()->bulkDelete($selected_ids);
+
+            $successMessage = @$this->message['bulk_delete'] ?? __('adminportal.data_success_delete');
+            return redirect(return_url() ?: route("{$this->routePath}.index"))->with(['success' =>  $successMessage]);
         }
-        return $this->actionSelected($bulk_action,$selected_ids);
+        return $this->actionSelected($bulk_action, $selected_ids);
     }
 
-    public function actionSelected($type,$selectedIds){
-        return redirect(return_url() ?: route("{$this->routePath}.index"))->with([
-            'success' => "Not implement",
-        ]);
+    public function actionSelected($type, $selectedIds)
+    {
+        return redirect(return_url() ?: route("{$this->routePath}.index"))->with(['success' => "Not implement",]);
     }
 
     protected function validationRules($type, $id = null)
     {
         $rules = ($type == 'create')
-        ? $this->createRules
-        : $this->updateRules;
+            ? $this->createRules
+            : $this->updateRules;
 
         foreach ($rules as $input => $rule) {
-            $sparator = (@$this->rules[$input]) ? "|" : "";
-            $this->rules[$input] = @$this->rules[$input] . $sparator . $rule;
+            $separator = (@$this->rules[$input]) ? "|" : "";
+            $this->rules[$input] = @$this->rules[$input] . $separator . $rule;
         }
 
         return collect($this->rules)->map(function ($item) use ($id) {
-            $item = str_replace('{id}', $id, $item);
-            return $item;
+            return str_replace('{id}', $id, $item);
         })->toArray();
     }
 
-    protected function moduleName($str = ""){
-        return $str.$this->routePath;
+    protected function accessmodule($str = "")
+    {
+        return $str . " " . $this->routePath;
     }
 }

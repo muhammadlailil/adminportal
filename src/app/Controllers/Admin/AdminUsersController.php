@@ -11,7 +11,7 @@ class AdminUsersController extends AdminController
     protected $routePath = "admin.user-admin";
     protected $pageTitle = "Users Admin";
     protected $resourcePath = "portalmodule::user-admin";
-    protected $crudService = CmsAdminService::class;
+    protected $moduleService = CmsAdminService::class;
     protected $jstable = true;
 
     protected $tableColumns = [

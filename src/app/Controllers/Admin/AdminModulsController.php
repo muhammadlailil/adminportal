@@ -102,7 +102,7 @@ class AdminModulsController extends Controller
 
 
     private function syncModulsSession(){
-        $prefix = portal_config('auth.session_name_prefix');
+        $prefix = portalconfig('auth.session_name_prefix');
         $roles = admin()->role;
         session()->put("{$prefix}.modules",AdminPortal::userModuls($roles->is_superadmin,$roles->permission_modules));
     }

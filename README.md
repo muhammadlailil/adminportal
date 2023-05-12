@@ -115,7 +115,7 @@ class UserController extends AdminController
      *
      * @var YourServiceClass
      */
-    protected $crudService;
+    protected $moduleService;
 
     /**
      * The import class for handling import excel function
@@ -160,28 +160,28 @@ class UserController extends AdminController
      *
      * @var bool
      */
-    protected $canAdd = true;
+    protected $add = true;
 
     /**
      * Indicates if the user can filter record, this will display filter button
      *
      * @var bool
      */
-    protected $canFilter = false;
+    protected $filter = false;
 
     /**
      * Indicates if the user can import record, this will display import button
      *
      * @var bool
      */
-    protected $canImport = false;
+    protected $import = false;
 
     /**
      * Indicates if the user can export record, this will display export button
      *
      * @var bool
      */
-    protected $canExport = false;
+    protected $export = false;
 
     /**
      * Indicates if the user can do bulk action of the record, this will display checkbox in the table

@@ -13,7 +13,10 @@ class UserJsTableResources extends JsTableResources{
                $row->email,
                $row->role_name,
                TableHtml::labelBadge($row->status),
-               TableHtml::actions()
+               TableHtml::editDelete([
+                    'edit' => route('admin.user-admin.edit',$row->id),
+                    'delete' => route('admin.user-admin.destroy',$row->id)
+                ])
           ];
      }
 
