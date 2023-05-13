@@ -25,7 +25,7 @@ return [
     "back" => "Back",
     "back_to_list" => "Back To List",
     "next" => "Next",
-    "subnit" => "Submit",
+    "submit" => "Submit",
     "cancel" => "Cancel",
     "no_data_available" => "No Data Available",
     "detail" => "Detail",
@@ -59,7 +59,7 @@ return [
     "confirm_new_password" => "Confirm New Password",
     "password_validation_message" => "The password must be at least 8 characters combined with numbers and letters",
 
-    "import_data_in_progres" => "Import data in progess, waiting for the result in Import Data Log's Module.",
+    "import_data_in_progres" => "Import data in progress, waiting for the result in Import Data Log's Module.",
 
     "delete_selected" => "Delete Selected",
     "dont_have_access" => "You don't have access to this resource",
