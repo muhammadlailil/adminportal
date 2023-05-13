@@ -32,7 +32,7 @@
                 <a class="nav-link 
                     {{(count($modul->sub))?'nav-parent':''}} 
                     {{activeMenu($modul->path)}}"
-                    href="{{adminurl($modul->path)}}"
+                    href="{{adminUrl($modul->path)}}"
                 >
                     <i class="{{$modul->icon}} nav-icon"></i>
                     {{$modul->name}}
@@ -41,7 +41,7 @@
                 <ul class="submenu collapse">
                     @foreach ($modul->sub as $sub)
                         <li>
-                            <a href="{{adminurl($sub->path)}}" class="nav-link {{activeMenu($sub->path)}}">
+                            <a href="{{adminUrl($sub->path)}}" class="nav-link {{activeMenu($sub->path)}}">
                                 {{$sub->name}}
                             </a>
                         </li>

@@ -20,12 +20,12 @@
             </button>
             <ul class="dropdown-menu dropdown-menu-end dropdown-action">
                 <li>
-                    <a href="{{adminroute('admin.role-permission.edit',$row->id)}}" class="dropdown-item">Edit</a>
+                    <a href="{{adminRoute('admin.role-permission.edit',$row->id)}}" class="dropdown-item">Edit</a>
                 </li>
                 <li>
                     <a href="javascript:;" data-toggle="confirmation"
                         data-message="{{__('adminportal.delete_confirmation')}}"
-                        data-action="{{adminroute('admin.role-permission.destroy',$row->id)}}" data-method="DELETE"
+                        data-action="{{adminRoute('admin.role-permission.destroy',$row->id)}}" data-method="DELETE"
                         class="dropdown-item">Delete</a>
                 </li>
             </ul>

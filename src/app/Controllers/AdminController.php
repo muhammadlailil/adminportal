@@ -165,7 +165,7 @@ class AdminController extends Controller
      */
     public function index(Request $request)
     {
-        if (!iscan($this->accessmodule("view"))) return to_route('admin.dashboard')->with(['alert_error' => __('adminportal.dont_have_access')]);
+        if (!itcan($this->accessmodule("view"))) return to_route('admin.dashboard')->with(['alert_error' => __('adminportal.dont_have_access')]);
 
         $this->data = [
             ...$this->data,
@@ -175,11 +175,11 @@ class AdminController extends Controller
             "route" => $this->routePath,
             'jstable' => $this->jstable,
             "button" => [
-                "add" => $this->add && iscan($this->accessmodule("add")),
+                "add" => $this->add && itcan($this->accessmodule("add")),
                 "filter" => $this->filter,
-                "bulkAction" => $this->bulkAction && iscan($this->accessmodule("delete")),
-                "tableAction" => $this->tableAction && iscan($this->accessmodule("edit")) || iscan($this->accessmodule("delete")),
-                "import" => $this->import && iscan($this->accessmodule("add")),
+                "bulkAction" => $this->bulkAction && itcan($this->accessmodule("delete")),
+                "tableAction" => $this->tableAction && itcan($this->accessmodule("edit")) || itcan($this->accessmodule("delete")),
+                "import" => $this->import && itcan($this->accessmodule("add")),
                 "export" => $this->export,
             ],
             "data" => (!$this->jstable) ? $this->moduleService()->datatable($request, $this->perPage) : [],
@@ -202,7 +202,7 @@ class AdminController extends Controller
      */
     public function create(Request $request)
     {
-        if (!iscan($this->accessmodule("add"))) return to_route('admin.dashboard')->with(['alert_error' => __('adminportal.dont_have_access')]);
+        if (!itcan($this->accessmodule("add"))) return to_route('admin.dashboard')->with(['alert_error' => __('adminportal.dont_have_access')]);
 
         $this->data = [
             ...$this->data,
@@ -221,7 +221,7 @@ class AdminController extends Controller
      */
     public function edit(Request $request, $id)
     {
-        if (!iscan($this->accessmodule("edit"))) return to_route('admin.dashboard')->with(['alert_error' => __('adminportal.dont_have_access')]);
+        if (!itcan($this->accessmodule("edit"))) return to_route('admin.dashboard')->with(['alert_error' => __('adminportal.dont_have_access')]);
 
         $this->data =  [
             ...$this->data,
@@ -241,7 +241,7 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
-        if (!iscan($this->accessmodule("add"))) return redirect()->back()->with(['alert_error' => __('adminportal.dont_have_access')]);
+        if (!itcan($this->accessmodule("add"))) return redirect()->back()->with(['alert_error' => __('adminportal.dont_have_access')]);
 
         $request->validate($this->validationRules('create'));
         try {
@@ -261,7 +261,7 @@ class AdminController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if (!iscan($this->accessmodule("edit"))) return redirect()->back()->with(['alert_error' => __('adminportal.dont_have_access')]);
+        if (!itcan($this->accessmodule("edit"))) return redirect()->back()->with(['alert_error' => __('adminportal.dont_have_access')]);
 
 
         $request->validate($this->validationRules('update', $id));
@@ -280,7 +280,7 @@ class AdminController extends Controller
 
     public function destroy(Request $request, $id)
     {
-        if(!iscan($this->accessmodule("delete"))) return redirect()->back()->with(['alert_error' => __('adminportal.dont_have_access')]);
+        if(!itcan($this->accessmodule("delete"))) return redirect()->back()->with(['alert_error' => __('adminportal.dont_have_access')]);
      
         try {
             $this->moduleService()->delete($id);
@@ -296,7 +296,7 @@ class AdminController extends Controller
 
     public function export(Request $request)
     {
-        if(!iscan($this->accessmodule("view"))) return redirect()->back()->with(['alert_error' => __('adminportal.dont_have_access')]);
+        if(!itcan($this->accessmodule("view"))) return redirect()->back()->with(['alert_error' => __('adminportal.dont_have_access')]);
        
 
         $file_format = $request->file_format;
@@ -330,7 +330,7 @@ class AdminController extends Controller
      */
     public function import(Request $request)
     {
-        if(!iscan($this->accessmodule("add"))) return redirect()->back()->with(['alert_error' => __('adminportal.dont_have_access')]);
+        if(!itcan($this->accessmodule("add"))) return redirect()->back()->with(['alert_error' => __('adminportal.dont_have_access')]);
 
         if (!$this->importExcel)  return redirect()->back()->with(['error' => "Please define importExcel class first"]);
 
@@ -359,7 +359,7 @@ class AdminController extends Controller
         $bulk_action = $request->bulk_action;
         $selected_ids = $request->selected_ids;
         if ($bulk_action == 'delete') {
-            if(!iscan($this->accessmodule("delete"))) return to_route('admin.dashboard')->with(['alert_error' => __('adminportal.dont_have_access')]);
+            if(!itcan($this->accessmodule("delete"))) return to_route('admin.dashboard')->with(['alert_error' => __('adminportal.dont_have_access')]);
             $this->moduleService()->bulkDelete($selected_ids);
 
             $successMessage = @$this->message['bulk_delete'] ?? __('adminportal.data_success_delete');

@@ -6,7 +6,7 @@ use Barryvdh\DomPDF\Facade\Pdf;
 class ExportPdf
 {
     private static $papersize = 'Letter';
-    private static $paperorientation = 'potrait';
+    private static $paperOrientation = 'portrait';
     private static $viewFile;
     private static $dataView;
 
@@ -15,8 +15,8 @@ class ExportPdf
         return new static();
     }
     
-    public static function paperOrientation($orientation='potrait'){
-        self::$paperorientation = $orientation;
+    public static function paperOrientation($orientation='portrait'){
+        self::$paperOrientation = $orientation;
         return new static();
     }
 
@@ -36,7 +36,7 @@ class ExportPdf
             'data' => self::$dataView,
             'type' => 'pdf'
         ]);
-        $pdf->setPaper(self::$papersize, self::$paperorientation);
+        $pdf->setPaper(self::$papersize, self::$paperOrientation);
         return $pdf->download("{$filename}.pdf");
     }
 }

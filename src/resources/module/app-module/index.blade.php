@@ -132,7 +132,7 @@
                                         data-icon="{{ $modul->icon }}">Edit</a>
                                     <a href="javascript:;" data-toggle="confirmation"
                                         data-message="{{ __('adminportal.delete_confirmation') }}"
-                                        data-action="{{ adminroute('admin.cms-moduls.delete', $modul->id) }}"
+                                        data-action="{{ adminRoute('admin.cms-moduls.delete', $modul->id) }}"
                                         data-method="DELETE">Delete</a>
                                 </div>
                             </div>
@@ -152,7 +152,7 @@
                                                         data-icon="{{ $sub->icon }}">Edit</a>
                                                     <a href="javascript:;" data-toggle="confirmation"
                                                         data-message="{{ __('adminportal.delete_confirmation') }}"
-                                                        data-action="{{ adminroute('admin.cms-moduls.delete', $sub->id) }}"
+                                                        data-action="{{ adminRoute('admin.cms-moduls.delete', $sub->id) }}"
                                                         data-method="DELETE">Delete</a>
                                                 </div>
                                             </div>

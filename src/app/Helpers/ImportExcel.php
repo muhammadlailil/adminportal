@@ -36,7 +36,7 @@ class ImportExcel implements OnEachRow, WithHeadingRow, WithChunkReading, WithEv
         $this->handle($row);
         $row['import_status'] = $this->importStatus;
 
-        $this->putColection($row);
+        $this->putCollection($row);
         $this->progres($index);
     }
 
@@ -51,7 +51,7 @@ class ImportExcel implements OnEachRow, WithHeadingRow, WithChunkReading, WithEv
     }
 
     /**
-     * Import excel with progresbar : https://stackoverflow.com/questions/57927757/laravel-excel-upload-and-progressbar
+     * Import excel with progressbar : https://stackoverflow.com/questions/57927757/laravel-excel-upload-and-progressbar
      */
     public function registerEvents(): array
     {
@@ -69,12 +69,12 @@ class ImportExcel implements OnEachRow, WithHeadingRow, WithChunkReading, WithEv
             },
             AfterImport::class => function (AfterImport $event) {
                 $this->afterImport();
-                $colection = cache("import_rows_{$this->sessionId}");
+                $collection = cache("import_rows_{$this->sessionId}");
 
                 CmsImportLog::whereId($this->sessionId)->update([
                     'complete_at' => date('Y-m-d H:i:s'),
                     'progres' => 100,
-                    'data' => $colection
+                    'data' => $collection
                 ]);
                 cache()->forget("import_rows_{$this->sessionId}");
                 cache()->forget("total_data_{$this->sessionId}");
@@ -86,11 +86,11 @@ class ImportExcel implements OnEachRow, WithHeadingRow, WithChunkReading, WithEv
     }
     public function afterImport(){
     }
-    protected function putColection($row)
+    protected function putCollection($row)
     {
-        $lastColection = cache("import_rows_{$this->sessionId}") ?? [];
-        $lastColection[] = (object) $row;
-        cache()->forever("import_rows_{$this->sessionId}", $lastColection);
+        $lastCollection = cache("import_rows_{$this->sessionId}") ?? [];
+        $lastCollection[] = (object) $row;
+        cache()->forever("import_rows_{$this->sessionId}", $lastCollection);
     }
 
     protected function progres($index){

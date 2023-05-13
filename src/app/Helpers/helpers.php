@@ -37,7 +37,7 @@ if (!function_exists('urlFilterColumn')) {
     function urlFilterColumn($key,$value)
     {
         $params = request()->all();
-        $mainpath = request()->url();
+        $mainPath = request()->url();
 
         if (@$params['filter_column']) {
             unset($params['filter_column']);
@@ -46,9 +46,9 @@ if (!function_exists('urlFilterColumn')) {
         $params['filter_column'][$key] = $value;
 
         if (isset($params)) {
-            return $mainpath.'?'.http_build_query($params);
+            return $mainPath.'?'.http_build_query($params);
         } else {
-            return $mainpath.'?filter_column['.$key.']='.$value;
+            return $mainPath.'?filter_column['.$key.']='.$value;
         }
     }
 }
@@ -57,7 +57,7 @@ if (!function_exists('input_query')) {
     function input_query($exclude = [])
     {
         @$get = $_GET;
-        $inputhtml = '';
+        $inputHtml = '';
         if ($get) {
             if (is_array($exclude)) {
                 foreach ($exclude as $e) {
@@ -71,16 +71,16 @@ if (!function_exists('input_query')) {
                 $name = urldecode($part[0]);
                 if ($name) {
                     $value = urldecode($part[1]);
-                    $inputhtml .= "<input type='hidden' name='$name' value='$value'/>\n";
+                    $inputHtml .= "<input type='hidden' name='$name' value='$value'/>\n";
                 }
             }
         }
-        return $inputhtml;
+        return $inputHtml;
     }
 }
 
-if(!function_exists('adminroute')){
-    function adminroute($route,$id){
+if(!function_exists('adminRoute')){
+    function adminRoute($route,$id){
         return route($route,[$id,'return_url'=>urlencode(request()->fullUrl())]);
     }
 }
@@ -101,14 +101,14 @@ if (!function_exists('listIcons')) {
         return json_decode($file, true);
     }
 }
-if(!function_exists('adminurl')){
-    function adminurl($url){
+if(!function_exists('adminUrl')){
+    function adminUrl($url){
         return url(portalconfig('admin_path')."/".$url);
     }
 }
 
 if (!function_exists('canDo')) {
-    function iscan($action)
+    function itcan($action)
     {
         $role = admin()->role;
         if($role->is_superadmin){

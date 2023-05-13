@@ -8,7 +8,7 @@ class FCM
 {
     protected static $firebaseUrl = "https://fcm.googleapis.com/fcm/send";
     protected static $firebaseKey;
-    protected static $regids = [];
+    protected static $regIds = [];
     protected static $platform;
 
     public function __construct()
@@ -16,17 +16,17 @@ class FCM
         self::$firebaseKey  =  config('app.fcm_key');
     }
 
-    public static function ios($regids = [])
+    public static function ios($regIds = [])
     {
         self::$platform = "ios";
-        self::$regids = $regids;
+        self::$regIds = $regIds;
         return new static();
     }
 
-    public static function android($regids = [])
+    public static function android($regIds = [])
     {
         self::$platform = "android";
-        self::$regids = $regids;
+        self::$regIds = $regIds;
         return new static();
     }
 
@@ -45,11 +45,11 @@ class FCM
      */
     public static function send($data)
     {
-        if (count(self::$regids)) {
-            $regids = array_values(array_unique(self::$regids));
+        if (count(self::$regIds)) {
+            $regIds = array_values(array_unique(self::$regIds));
 
             $postData = [
-                'registration_ids' => $regids,
+                'registration_ids' => $regIds,
                 'data' => $data,
                 'content_available' => true,
                 'priority' => 'high',

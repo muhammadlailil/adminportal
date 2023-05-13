@@ -37,7 +37,7 @@
                         </div>
                         <div class="col-sm-6">
                             <x-portal::input.select name="page_orientation" label="Orientation" required="false">
-                                <option selected value="potrait">Potrait</option>
+                                <option selected value="portrait">Portrait </option>
                                 <option value="landscape">Landscape</option>
                             </x-portal::input.select>
                         </div>

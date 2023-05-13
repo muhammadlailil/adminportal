@@ -86,8 +86,8 @@ class AdminPortalServiceProvider extends ServiceProvider
 
 
     private function registerBladeDirective(){
-        Blade::if('iscan', function ($do) {
-            return iscan($do);
+        Blade::if('itcan', function ($do) {
+            return itcan($do);
         });
     }
 

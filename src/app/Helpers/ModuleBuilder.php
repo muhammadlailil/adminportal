@@ -340,13 +340,13 @@ class ModuleBuilder
 
         $str = '';
         if ($bulk_action && $index) {
-            $str .= "    @iscan('delete admin.{$module_path}')\r\n";
+            $str .= "    @itcan('delete admin.{$module_path}')\r\n";
             $str .= "    <td>\r\n";
             $str .= '        <div class="form-checkbox">' . "\r\n";
             $str .= '            <input type="checkbox" class="table-checkbox" value="{{$row->id}}" name="selected_ids[]">' . "\r\n";
             $str .= '        </div>' . "\r\n";
             $str .= '    </td>' . "\r\n";
-            $str .= "    @endiscan\r\n";
+            $str .= "    @enditcan\r\n";
         }
         foreach ($table_name as $i => $name) {
             $columnValue = ($table_join[$i]) ? "{$table_join[$i]}_{$table_join_relation[$i]}" : $name;
@@ -360,28 +360,28 @@ class ModuleBuilder
         }
         if (($has_edit || $has_delete) && $index) {
             $str .= '    <td class="text-end">' . "\r\n";
-            $str .= "        @if(iscan('edit admin.{$module_path}') || iscan('delete admin.{$module_path}'))\r\n";
+            $str .= "        @if(itcan('edit admin.{$module_path}') || itcan('delete admin.{$module_path}'))\r\n";
             $str .= '        <div class="btn-group">' . "\r\n";
             $str .= '            <button type="button" class="btn btn-secondary dropdown-toggle btn-action" data-bs-toggle="dropdown" aria-expanded="false">' . "\r\n";
             $str .= "                Action\r\n";
             $str .= "            </button>\r\n";
             $str .= '            <ul class="dropdown-menu dropdown-menu-end dropdown-action">' . "\r\n";
             if ($has_edit) {
-                $str .= "                @iscan('edit admin.{$module_path}')\r\n";
+                $str .= "                @itcan('edit admin.{$module_path}')\r\n";
                 $str .= "                <li>\r\n";
-                $str .= '                    <a href="{{adminroute(\'admin.' . $module_path . '.edit\',$row->id)}}" class="dropdown-item">Edit</a>' . "\r\n";
+                $str .= '                    <a href="{{adminRoute(\'admin.' . $module_path . '.edit\',$row->id)}}" class="dropdown-item">Edit</a>' . "\r\n";
                 $str .= "                </li>\r\n";
-                $str .= "                @endiscan\r\n";
+                $str .= "                @enditcan\r\n";
             }
             if ($has_delete) {
-                $str .= "                @iscan('delete admin.{$module_path}')\r\n";
+                $str .= "                @itcan('delete admin.{$module_path}')\r\n";
                 $str .= "                <li>\r\n";
                 $str .= '                    <a href="javascript:;" data-toggle="confirmation"' . "\r\n";
                 $str .= '                        data-message="{{__(\'adminportal.delete_confirmation\')}}"' . "\r\n";
-                $str .= '                        data-action="{{adminroute(\'admin.' . $module_path . '.destroy\',$row->id)}}" data-method="DELETE"' . "\r\n";
+                $str .= '                        data-action="{{adminRoute(\'admin.' . $module_path . '.destroy\',$row->id)}}" data-method="DELETE"' . "\r\n";
                 $str .= '                        class="dropdown-item">Delete</a>' . "\r\n";
                 $str .= "                </li>\r\n";
-                $str .= "                @endiscan\r\n";
+                $str .= "                @enditcan\r\n";
             }
             $str .= "            </ul>\r\n";
             $str .= "        </div>\r\n";
