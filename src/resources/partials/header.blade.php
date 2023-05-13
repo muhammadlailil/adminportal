@@ -24,7 +24,7 @@
         </div>
     </div>
     <ul class="header-navigation">
-        @if(portalconfig('nofitication'))
+        @if(portalconfig('notification'))
         <li class="notification">
             <a href="javascript:;" data-bs-toggle="dropdown" aria-expanded="false" class="dropdown-notification">
                 <span class="new"></span>
@@ -38,7 +38,7 @@
                 </li>
                 <li id="notification-list-items"></li>
                 <li class="all p-2 text-center">
-                    <a href="{{route(portalconfig('nofitication_path'))}}" class="btn btn-light d-inline-block text-upper fw-bold">@lang('adminportal.see_all')</a>
+                    <a href="{{route(portalconfig('notification_path'))}}" class="btn btn-light d-inline-block text-upper fw-bold">@lang('adminportal.see_all')</a>
                 </li>
             </ul>
         </li>
