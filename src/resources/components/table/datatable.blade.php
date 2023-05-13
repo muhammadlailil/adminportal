@@ -13,7 +13,7 @@ $limit = request('limit');
             </div>
         </form>
         @if(@$button['filter'])
-        <a href="" class="btn btn-light btn-icon me-2">
+        <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#modal-filter-data" class="btn btn-light btn-icon me-2">
             <i class="isax icon-setting-4 icon"></i>
             @lang('adminportal.filter')
         </a>
