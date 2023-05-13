@@ -10,21 +10,21 @@ return [
 
     /*
      | --------------------------------------------
-     | Your aplication icon
+     | Your application icon
      | --------------------------------------------
      */
     'app_icon' => 'adminportal/img/app-logo.png',
 
     /*
      | --------------------------------------------
-     | Your aplication favicon
+     | Your application favicon
      | --------------------------------------------
      */
     'app_favicon' => 'adminportal/img/favicon.svg',
 
     /*
      | --------------------------------------------
-     | Your aplication default avatar image
+     | Your application default avatar image
      | --------------------------------------------
      */
     'default_avatar' => 'adminportal/img/avatar.jpg',
@@ -44,6 +44,7 @@ return [
         'banner_title' => 'Welcome Back !',
         'banner_description' => "Use your access in the ".config('app.name')." application and login to your dashboard account.",
         
+        'limiter' => ['throttle:60perMinute'],
         'url' => 'admin/auth/login',
         'forgot_password_url' => 'admin/auth/forgot-password',
         'register_url' => 'admin/auth/register',

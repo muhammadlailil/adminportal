@@ -1,16 +1,19 @@
 <?php
 namespace Laililmahfud\Adminportal;
 
+use Illuminate\Http\Request;
 use Illuminate\Routing\Router;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Cache\RateLimiting\Limit;
+use Illuminate\Support\Facades\RateLimiter;
 use Laililmahfud\Adminportal\Middleware\ApiPortalMiddleware;
 use Laililmahfud\Adminportal\Middleware\AdminPortalMiddleware;
 use Laililmahfud\Adminportal\Commands\AdminKeyGeneratorCommand;
-use Laililmahfud\Adminportal\Commands\AdminPortalInstalationCommand;
 use Laililmahfud\Adminportal\Commands\AdminPortalMigrationCommand;
+use Laililmahfud\Adminportal\Commands\AdminPortalInstallationCommand;
 
 class AdminPortalServiceProvider extends ServiceProvider
 {
@@ -41,7 +44,8 @@ class AdminPortalServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__ . '/../resources', 'portal');
         $this->loadViewsFrom(__DIR__ . '/../resources/module', 'portalmodule');
         $this->registerRoutes();
-        $this->registeBladeDirective();
+        $this->registerBladeDirective();
+        $this->configureRateLimiting();
 
 
         $this->publishes([__DIR__.'/../lang' => base_path('lang')], 'portal-lang');
@@ -51,7 +55,7 @@ class AdminPortalServiceProvider extends ServiceProvider
         ], 'portal-asset');
 
         $this->commands([
-            AdminPortalInstalationCommand::class,
+            AdminPortalInstallationCommand::class,
             AdminKeyGeneratorCommand::class,
             AdminPortalMigrationCommand::class
         ]);
@@ -81,9 +85,15 @@ class AdminPortalServiceProvider extends ServiceProvider
     }
 
 
-    private function registeBladeDirective(){
+    private function registerBladeDirective(){
         Blade::if('iscan', function ($do) {
             return iscan($do);
+        });
+    }
+
+    private function configureRateLimiting(){
+        RateLimiter::for('60perMinute', function (Request $request) {
+            return Limit::perMinute(60)->by($request->ip());
         });
     }
 }

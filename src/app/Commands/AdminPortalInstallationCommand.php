@@ -4,7 +4,7 @@ namespace Laililmahfud\Adminportal\Commands;
 
 use Illuminate\Console\Command;
 
-class AdminPortalInstalationCommand extends Command
+class AdminPortalInstallationCommand extends Command
 {
     /**
      * The name and signature of the console command.
@@ -18,7 +18,7 @@ class AdminPortalInstalationCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Admin Portal instalation command';
+    protected $description = 'Admin Portal installation command';
 
     /**
      * Create a new command instance.

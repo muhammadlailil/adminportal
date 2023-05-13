@@ -11,7 +11,7 @@ use Laililmahfud\Adminportal\Controllers\Admin\AdminRolePermissionController;
 
 Route::group(['prefix' => 'auth', 'as' => 'auth.', 'controller' => AdminMainController::class], function () {
     Route::get('login', 'getLogin')->name('index');
-    Route::post('login', 'postLogin')->name('login');
+    Route::post('login', 'postLogin')->name('login')->middleware(portalconfig('login.limiter'));
 });
 
 Route::middleware(['portal-admin'])->group(function () {
