@@ -27,8 +27,8 @@
         @if(portalconfig('notification'))
         <li class="notification">
             <a href="javascript:;" data-bs-toggle="dropdown" aria-expanded="false" class="dropdown-notification">
-                <span class="new"></span>
-                <i class="isax icon-notification icon"></i>
+                <span class="new d-none"></span>
+                <i class="isax icon-notification icon d-none"></i>
                 <span class="text">@lang('adminportal.notification')</span>
                 <span class="count">0</span>
             </a>
