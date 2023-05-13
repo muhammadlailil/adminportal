@@ -6,7 +6,7 @@ return [
      | Route prefix url for admin panel
      | --------------------------------------------
      */
-    'admin_path' => 'my-admin',
+    'admin_path' => 'admin',
 
     /*
      | --------------------------------------------
