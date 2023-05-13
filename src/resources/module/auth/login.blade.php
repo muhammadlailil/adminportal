@@ -26,10 +26,10 @@
                 @endif
                 <button type="submit"
                     class="btn btn-dark w-100 btn-block justify-content-center text-upper mb-3 mt-5">@lang('adminportal.login')</button>
-                @if (portalconfig('login.forgot_password_url'))
+                @if (portalconfig('login.register_url'))
                     <div class="text-center">
                         <p class="fs-14">@lang('adminportal.dont_have_account_yet')
-                            <a href="{{ url(portalconfig('login.forgot_password_url')) }}"
+                            <a href="{{ url(portalconfig('login.register_url')) }}"
                                 class="text-decoration-none text-primary">@lang('adminportal.register')</a>
                         </p>
                     </div>
