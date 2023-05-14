@@ -6,21 +6,20 @@
         @endif
     </label>
     @if(@$horizontal)
-    <div class="col-sm-6">
+        <div class="col-sm-6">
+            <select name="{{$name}}" id="{{$name}}" class="form-control wide nice-select2 {{@$class}}" {{(@$required)?'':'required'}}>
+                {{$slot}}
+            </select>
+            @if($errors->has($name))
+            <span class="error-text">{{$errors->first($name)}}</span>
+            @endif
+        </div>
+    @else
         <select name="{{$name}}" id="{{$name}}" class="form-control wide nice-select2 {{@$class}}" {{(@$required)?'':'required'}}>
             {{$slot}}
         </select>
         @if($errors->has($name))
         <span class="error-text">{{$errors->first($name)}}</span>
         @endif
-    </div>
-    @else
-    <select name="{{$name}}" id="{{$name}}" class="form-control wide nice-select2 {{@$class}}" {{(@$required)?'':'required'}}>
-        {{$slot}}
-    </select>
-    @if($errors->has($name))
-    <span class="error-text">{{$errors->first($name)}}</span>
-    @endif
-    <br><br>
     @endif
 </div>
