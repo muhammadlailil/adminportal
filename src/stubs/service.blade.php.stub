@@ -8,7 +8,7 @@ use Laililmahfud\Adminportal\Services\AdminService;
 class [serviceName] extends AdminService
 {
     public function __construct(
-        private $model = [modelName]::class,
+        public $model = [modelName]::class,
     ) {}
 
     public function datatable(Request $request, $perPage = 10)
