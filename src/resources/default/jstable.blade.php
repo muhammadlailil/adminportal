@@ -18,4 +18,7 @@
         <x-slot name="sample_file">{{url('import-excel/sample-import-'.str()->slug($page_title).".xlsx")}}</x-slot>
     </x-portal::popup.import-data>
     @endif
+
+    
+    @stack('html')
 </x-portal::layout.admin>

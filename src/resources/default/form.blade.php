@@ -26,4 +26,5 @@
             </div>
         </form>
     </section>
+    @stack('html')
 </x-portal::layout.admin>
