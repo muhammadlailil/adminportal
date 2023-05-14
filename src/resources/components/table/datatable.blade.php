@@ -62,7 +62,7 @@ $limit = request('limit');
 
 
 @php
-    $tableClass = ($result->count()>=5 || count($columns)>=10)?'table-responsive':'';
+    $tableClass = ($result->count()>=2 || count($columns)>=7)?'table-responsive':'';
     $bulkAction = '';
     if(@$button['bulkAction']){
         $bulkAction = route("{$route}.bulk-action");

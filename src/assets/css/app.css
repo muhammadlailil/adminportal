@@ -661,7 +661,9 @@ table .th-checkbox {
 table .th-checkbox .form-checkbox {
     width: 20px;
 }
-
+.dropdown-action{
+    padding: 0px;
+}
 .dropdown-action .dropdown-item {
     font-size: 12px;
     font-family: "Krub-SemiBold";
