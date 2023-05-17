@@ -8,6 +8,7 @@
     {{$slot}}
 
     @include('portal::partials.js')
+    @stack('js')
 </body>
 
 </html>

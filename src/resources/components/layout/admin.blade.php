@@ -45,6 +45,7 @@
     @include('portal::components.alert.confirm')
     @include('portal::partials.js')
     @include('admin.partials.js')
+    @stack('js')
     <script src="{{asset('adminportal/js/notification.js?')}}"></script>
 
     @if(session('success') && portalconfig('alert_message_type')=='popup')
