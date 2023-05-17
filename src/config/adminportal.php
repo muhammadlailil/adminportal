@@ -79,23 +79,12 @@ return [
      | For display dropdown notification on header
      | --------------------------------------------
      */
-    'notification' => true,
-
-     /*
-     | --------------------------------------------
-     | For display interval notification request
-     | set null or 0 to disable interval request
-     | value in seconds
-     | --------------------------------------------
-     */
-    'notification_interval' => 120,
-
-    /*
-     | --------------------------------------------
-     | Route name for display all notification list
-     | --------------------------------------------
-     */
-    'notification_path' => 'admin.notification.index',
+    'notification' => [
+        'display' => true,
+        'interval' => 120,
+        'path' => 'admin.notification.index',
+        'ajax_path' => 'notification-admin/list'
+    ],
 
     /*
      | --------------------------------------------
