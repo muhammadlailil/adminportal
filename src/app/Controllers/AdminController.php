@@ -231,6 +231,7 @@ class AdminController extends Controller
             "form_views" => "{$this->resourcePath}.edit",
             "type" => "update",
             "row" => $this->moduleService()->findById($id),
+            "id" => $id
         ];
 
         return view("portal::default.form", $this->data);
