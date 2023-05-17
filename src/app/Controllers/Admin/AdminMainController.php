@@ -21,7 +21,7 @@ class AdminMainController extends Controller
 
     public function postLogin(Request $request)
     {
-        if (portalconfig('login.url') != 'admin/auth/login') abort(404);
+        if (portalconfig('login.url') !=  portalconfig('admin_path').'/auth/login') abort(404);
 
         $request->validate([
             'email' => 'required|email|exists:cms_admin,email|min:10|max:50',
@@ -49,7 +49,7 @@ class AdminMainController extends Controller
 
     public function profile(Request $request)
     {
-        if (portalconfig('profile_url') != 'admin/profile') abort(404);
+        if (portalconfig('profile_url') != portalconfig('admin_path').'/profile') abort(404);
         return view('portalmodule::profile.index');
     }
 
