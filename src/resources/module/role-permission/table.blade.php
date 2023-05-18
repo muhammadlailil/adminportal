@@ -2,7 +2,7 @@
 <tr>
     <td>
         <div class="form-checkbox">
-            <input type="checkbox" class="table-checkbox" value="{{$row->id}}" name="selected_ids[]">
+            <input type="checkbox" class="table-checkbox" value="{{$row->uuid}}" name="selected_ids[]">
         </div>
     </td>
     <td>{{$row->name}}</td>
@@ -20,12 +20,12 @@
             </button>
             <ul class="dropdown-menu dropdown-menu-end dropdown-action">
                 <li>
-                    <a href="{{adminRoute('admin.role-permission.edit',$row->id)}}" class="dropdown-item">Edit</a>
+                    <a href="{{adminRoute('admin.role-permission.edit',$row->uuid)}}" class="dropdown-item">Edit</a>
                 </li>
                 <li>
                     <a href="javascript:;" data-toggle="confirmation"
                         data-message="{{__('adminportal.delete_confirmation')}}"
-                        data-action="{{adminRoute('admin.role-permission.destroy',$row->id)}}" data-method="DELETE"
+                        data-action="{{adminRoute('admin.role-permission.destroy',$row->uuid)}}" data-method="DELETE"
                         class="dropdown-item">Delete</a>
                 </li>
             </ul>

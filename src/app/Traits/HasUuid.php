@@ -1,8 +1,6 @@
 <?php
 namespace Laililmahfud\Adminportal\Traits;
 
-
-
 use Illuminate\Support\Str;
 trait HasUuid
 {

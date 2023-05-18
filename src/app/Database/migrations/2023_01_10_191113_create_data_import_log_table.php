@@ -14,10 +14,11 @@ return new class extends Migration
     public function up()
     {
         Schema::create('cms_import_log', function (Blueprint $table) {
-            $table->uuid('id')->primary();
+            $table->id();
+            $table->uuid('uuid')->unique();
             $table->timestamps();
             $table->string('filename');
-            $table->foreignUuid('import_by')->constrained('cms_admin')->onDelete('cascade');
+            $table->foreignId('import_by')->constrained('cms_admin')->onDelete('cascade');
             $table->integer('row_count');
             $table->integer('progres');
             $table->dateTime('complete_at')->nullable();

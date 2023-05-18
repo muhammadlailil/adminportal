@@ -32,7 +32,7 @@ class AdminUsersController extends AdminController
     ];
 
     protected $updateRules = [
-        "email" => "unique:cms_admin,email,{id}",
+        "email" => "unique:cms_admin,email,{id},uuid",
         'password' => 'nullable',
     ];
 

@@ -26,9 +26,8 @@ class CmsAdminService extends AdminService
                 $q->orWhere('cms_admin.email', 'like', "%{$search}%");
                 $q->orWhere('roles_permission.name', 'like', "%{$search}%");
             })
-            ->select(['cms_admin.id', 'cms_admin.name', 'cms_admin.profile', 'cms_admin.email', 'cms_admin.status', 'roles_permission.name as role_name'])
+            ->select(['cms_admin.uuid', 'cms_admin.name', 'cms_admin.profile', 'cms_admin.email', 'cms_admin.status', 'roles_permission.name as role_name'])
             ->datatable($perPage, "cms_admin.created_at");
-        // return $this->userJsTableResources->send($data);
     }
 
     public function store(Request $request)
@@ -43,12 +42,12 @@ class CmsAdminService extends AdminService
         ]);
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, $uuid)
     {
         $data = $request->only(['name', 'email', 'role_permission_id', 'status',]);
         if ($request->filled('password'))  $data['password'] = Hash::make($request->password);
         if ($request->hasFile("profile")) $data['profile'] = AdminPortal::uploadFile($request->profile);
 
-        return $this->model::findOrFail($id)->update($data);
+        return $this->model::whereUuid($uuid)->update($data);
     }
 }

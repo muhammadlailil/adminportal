@@ -3,13 +3,13 @@ namespace Laililmahfud\Adminportal\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Laililmahfud\Adminportal\Traits\HasDatatable;
-use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Laililmahfud\Adminportal\Models\RolesPermission;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Laililmahfud\Adminportal\Traits\HasUuid;
 
 class CmsAdmin extends Model
 {
-    use HasFactory,HasUuids,HasDatatable;
+    use HasFactory,HasUuid,HasDatatable;
 
     protected $table = 'cms_admin';
     protected $fillable = ['name', 'email','password','profile','role_permission_id','status'];

@@ -24,8 +24,8 @@ class AdminNotificationController extends AdminController{
     ];
 
 
-    public function read(Request $request,$id){
-        $notification = $this->cmsNotificationService->findById($id);
+    public function read(Request $request,$uuid){
+        $notification = $this->cmsNotificationService->findByUuId($uuid);
         $notification->is_read = 1;
         $notification->save();
         return redirect($notification->url_detail);

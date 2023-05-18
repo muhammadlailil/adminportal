@@ -10,7 +10,6 @@ class ModuleBuilder
      * 2. Generate Service ✅
      * 3. Generate Controller ✅
      * 4. Generate Resource View ✅
-     * 5. Generate Route
      */
 
     public function generate()
@@ -343,7 +342,7 @@ class ModuleBuilder
             $str .= "    @itcan('delete admin.{$module_path}')\r\n";
             $str .= "    <td>\r\n";
             $str .= '        <div class="form-checkbox">' . "\r\n";
-            $str .= '            <input type="checkbox" class="table-checkbox" value="{{$row->id}}" name="selected_ids[]">' . "\r\n";
+            $str .= '            <input type="checkbox" class="table-checkbox" value="{{$row->uuid}}" name="selected_ids[]">' . "\r\n";
             $str .= '        </div>' . "\r\n";
             $str .= '    </td>' . "\r\n";
             $str .= "    @enditcan\r\n";
@@ -369,7 +368,7 @@ class ModuleBuilder
             if ($has_edit) {
                 $str .= "                @itcan('edit admin.{$module_path}')\r\n";
                 $str .= "                <li>\r\n";
-                $str .= '                    <a href="{{adminRoute(\'admin.' . $module_path . '.edit\',$row->id)}}" class="dropdown-item">Edit</a>' . "\r\n";
+                $str .= '                    <a href="{{adminRoute(\'admin.' . $module_path . '.edit\',$row->uuid)}}" class="dropdown-item">Edit</a>' . "\r\n";
                 $str .= "                </li>\r\n";
                 $str .= "                @enditcan\r\n";
             }
@@ -378,7 +377,7 @@ class ModuleBuilder
                 $str .= "                <li>\r\n";
                 $str .= '                    <a href="javascript:;" data-toggle="confirmation"' . "\r\n";
                 $str .= '                        data-message="{{__(\'adminportal.delete_confirmation\')}}"' . "\r\n";
-                $str .= '                        data-action="{{adminRoute(\'admin.' . $module_path . '.destroy\',$row->id)}}" data-method="DELETE"' . "\r\n";
+                $str .= '                        data-action="{{adminRoute(\'admin.' . $module_path . '.destroy\',$row->uuid)}}" data-method="DELETE"' . "\r\n";
                 $str .= '                        class="dropdown-item">Delete</a>' . "\r\n";
                 $str .= "                </li>\r\n";
                 $str .= "                @enditcan\r\n";

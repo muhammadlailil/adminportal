@@ -219,7 +219,7 @@ class AdminController extends Controller
     /**
      * The main function to showing edit view
      */
-    public function edit(Request $request, $id)
+    public function edit(Request $request, $uuid)
     {
         if (!itcan($this->accessmodule("edit"))) return to_route('admin.dashboard')->with(['alert_error' => __('adminportal.dont_have_access')]);
 
@@ -227,11 +227,11 @@ class AdminController extends Controller
             ...$this->data,
             "page_title" => $this->pageTitle,
             "route" => $this->routePath,
-            "action" => route("{$this->routePath}.update", $id),
+            "action" => route("{$this->routePath}.update", $uuid),
             "form_views" => "{$this->resourcePath}.edit",
             "type" => "update",
-            "row" => $this->moduleService()->findById($id),
-            "id" => $id
+            "row" => $this->moduleService()->findByUuId($uuid),
+            "id" => $uuid
         ];
 
         return view("portal::default.form", $this->data);
@@ -284,7 +284,7 @@ class AdminController extends Controller
         if(!itcan($this->accessmodule("delete"))) return redirect()->back()->with(['alert_error' => __('adminportal.dont_have_access')]);
      
         try {
-            $this->moduleService()->delete($id);
+            $this->moduleService()->deleteByUuid($id);
 
             $successMessage = @$this->message['delete'] ?? __('adminportal.data_success_delete');
             return redirect(return_url() ?: route("{$this->routePath}.index"))->with(['success' =>  $successMessage]);
@@ -361,7 +361,7 @@ class AdminController extends Controller
         $selected_ids = $request->selected_ids;
         if ($bulk_action == 'delete') {
             if(!itcan($this->accessmodule("delete"))) return to_route('admin.dashboard')->with(['alert_error' => __('adminportal.dont_have_access')]);
-            $this->moduleService()->bulkDelete($selected_ids);
+            $this->moduleService()->bulkDeleteByUuid($selected_ids);
 
             $successMessage = @$this->message['bulk_delete'] ?? __('adminportal.data_success_delete');
             return redirect(return_url() ?: route("{$this->routePath}.index"))->with(['success' =>  $successMessage]);

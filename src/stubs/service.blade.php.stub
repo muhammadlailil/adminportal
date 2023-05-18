@@ -27,9 +27,9 @@ class [serviceName] extends AdminService
         ]);
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, $uuid)
     {
         [updateData]
-        return $this->model::findOrFail($id)->update($data);
+        return $this->model::whereUuid($uuid)->update($data);
     }
 }

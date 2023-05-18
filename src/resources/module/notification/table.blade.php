@@ -16,7 +16,7 @@
         @endif
     </td>
     <td class="text-end">
-        <a  href="{{route('admin.notification.read',$row->id)}}" class="btn btn-secondary btn-action d-inline">
+        <a  href="{{route('admin.notification.read',$row->uuid)}}" class="btn btn-secondary btn-action d-inline">
             @lang('adminportal.detail')
         </a>
     </td>

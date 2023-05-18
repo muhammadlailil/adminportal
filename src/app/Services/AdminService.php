@@ -1,8 +1,6 @@
 <?php
 namespace Laililmahfud\Adminportal\Services;
 
-use Illuminate\Http\Request;
-use Laililmahfud\Adminportal\Helpers\AdminPortal;
 
 class AdminService
 {
@@ -23,9 +21,24 @@ class AdminService
         return $this->model::findOrFail($id);
     }
 
+    public function findByUuId($uuid)
+    {
+        return $this->model::whereUuid($uuid)->firstOrFail();
+    }
+
+    public function deleteByUuid($uuid)
+    {
+        return $this->model::whereUuid($uuid)->delete();
+    }
+
     public function bulkDelete($ids)
     {
         return $this->model::whereIn('id',$ids)->delete();
+    }
+
+    public function bulkDeleteByUuid($uuids)
+    {
+        return $this->model::whereIn('uuid',$uuids)->delete();
     }
 
 }

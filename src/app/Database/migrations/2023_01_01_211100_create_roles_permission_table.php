@@ -14,7 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('roles_permission', function (Blueprint $table) {
-            $table->uuid('id')->primary();
+            $table->id();
+            $table->uuid('uuid')->unique();
             $table->timestamps();
             $table->string('name',150);
             $table->boolean('is_superadmin');

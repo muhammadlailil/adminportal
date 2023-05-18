@@ -59,7 +59,7 @@ class AdminPortal
     }
 
 
-    public static function getAllColumTable($table_name, $exclude = ['id', 'created_at', 'updated_at'])
+    public static function getAllColumTable($table_name, $exclude = ['id','uuid', 'created_at', 'updated_at'])
     {
         $columns = DB::getSchemaBuilder()->getColumnListing($table_name);
         return collect($columns)->filter(function($name) use($exclude){

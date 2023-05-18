@@ -14,7 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('cms_moduls', function (Blueprint $table) {
-            $table->uuid('id')->primary();
+            $table->id();
+            $table->uuid('uuid')->unique();
             $table->timestamps();
             $table->string('name');
             $table->string('path')->index('cms_module_path');

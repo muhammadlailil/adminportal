@@ -18,7 +18,7 @@ class RolePermissionService extends AdminService
         $search = $request->search ?? '';
 
         return $this->model::where('name', 'like', "%{$search}%")
-            ->select(['id','name','is_superadmin'])
+            ->select(['uuid','name','is_superadmin'])
             ->datatable($perPage, "created_at");
     }
 
@@ -30,12 +30,12 @@ class RolePermissionService extends AdminService
         return $this->model::create($data);
     }
 
-    public function update(Request $request,$id){
+    public function update(Request $request,$uuid){
         $data = [
             ...$request->only(['name','is_superadmin']),
             ...$this->getRequestPermission()
         ];
-        return $this->model::findOrFail($id)->update($data);
+        return $this->model::whereUuid($uuid)->update($data);
     }
 
     public function listModuls(){

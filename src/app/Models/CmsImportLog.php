@@ -3,13 +3,13 @@ namespace Laililmahfud\Adminportal\Models;
 
 
 use Illuminate\Database\Eloquent\Model;
+use Laililmahfud\Adminportal\Traits\HasUuid;
 use Laililmahfud\Adminportal\Models\CmsAdmin;
-use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class CmsImportLog extends Model
 {
-    use HasFactory,HasUuids;
+    use HasFactory,HasUuid;
 
     protected $table = 'cms_import_log';
     protected $fillable = ['filename', 'import_by','data','row_count','progres','complete_at'];

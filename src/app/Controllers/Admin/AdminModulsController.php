@@ -41,7 +41,7 @@ class AdminModulsController extends Controller
             'path' => $request->menu_path,
             'icon' => "isax {$request->menu_icon}",
         ],$request->id);
-        $this->syncModulsSession();
+        $this->syncModulesSession();
         return to_route('admin.cms-moduls.index')->with([
             'success' => __('adminportal.data_success_add'),
         ]);
@@ -53,7 +53,7 @@ class AdminModulsController extends Controller
         ])->update(['parent_id'=>null]);
 
         $this->cmsModuleService->delete($id);
-        $this->syncModulsSession();
+        $this->syncModulesSession();
         return to_route('admin.cms-moduls.index')->with([
             'success' => __('adminportal.data_success_delete'),
         ]);
@@ -68,7 +68,7 @@ class AdminModulsController extends Controller
                 'parent_id' => @$row->parent
             ],$row->id);
         }
-        $this->syncModulsSession();
+        $this->syncModulesSession();
         return response()->json([
             'message' => 'success'
         ]);
@@ -94,14 +94,14 @@ class AdminModulsController extends Controller
             'except_route' => $except,
             'actions' => $actions
         ]);
-        $this->syncModulsSession();
+        $this->syncModulesSession();
         return to_route('admin.cms-moduls.index')->with([
             'success' => __('adminportal.generate_module_success'),
         ]);
     }
 
 
-    private function syncModulsSession(){
+    private function syncModulesSession(){
         $prefix = portalconfig('auth.session_name_prefix');
         $roles = admin()->role;
         session()->put("{$prefix}.modules",AdminPortal::userModuls($roles->is_superadmin,$roles->permission_modules));

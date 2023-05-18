@@ -4,12 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Laililmahfud\Adminportal\Traits\HasDatatable;
-use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Laililmahfud\Adminportal\Traits\HasUuid;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class [modelName] extends Model
 {
-    use HasFactory,HasUuids,HasDatatable;
+    use HasFactory,HasUuid,HasDatatable;
 
     protected $table = "[tableName]";
     protected $fillable = [columTable];

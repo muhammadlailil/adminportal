@@ -14,13 +14,14 @@ return new class extends Migration
     public function up()
     {
         Schema::create('cms_admin', function (Blueprint $table) {
-            $table->uuid('id')->primary();
+            $table->id();
+            $table->uuid('uuid')->unique();
             $table->timestamps();
             $table->string('name',150);
             $table->string('email')->unique();
             $table->string('password');
             $table->string('profile',250);
-            $table->foreignUuid('role_permission_id')->constrained('roles_permission')->onDelete('cascade');
+            $table->foreignId('role_permission_id')->constrained('roles_permission')->onDelete('cascade');
             $table->boolean('status')->default(true);
         });
     }

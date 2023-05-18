@@ -14,9 +14,10 @@ return new class extends Migration
     public function up()
     {
         Schema::create('cms_notifications', function (Blueprint $table) {
-            $table->uuid('id')->primary();
+            $table->id();
+            $table->uuid('uuid')->unique();
             $table->timestamps();
-            $table->foreignUuid('admin_id')->constrained('cms_admin')->onDelete('cascade');
+            $table->foreignId('admin_id')->constrained('cms_admin')->onDelete('cascade');
             $table->string('title');
             $table->text('description');
             $table->string('url_detail');
