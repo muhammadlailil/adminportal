@@ -1,11 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Laililmahfud\Adminportal\Models\CmsModuls;
+use Laililmahfud\Adminportal\Models\CmsModules;
 use App\Http\Controllers\Admin\AdminIndexController;
 use Laililmahfud\Adminportal\Controllers\Admin\AdminMainController;
 use Laililmahfud\Adminportal\Controllers\Admin\AdminUsersController;
-use Laililmahfud\Adminportal\Controllers\Admin\AdminModulsController;
+use Laililmahfud\Adminportal\Controllers\Admin\AdminModulesController;
 use Laililmahfud\Adminportal\Controllers\Admin\AdminNotificationController;
 use Laililmahfud\Adminportal\Controllers\Admin\AdminRolePermissionController;
 
@@ -34,7 +34,7 @@ Route::middleware(['portal-admin'])->group(function () {
         Route::get('/list','list')->name('list');
     });
 
-    Route::group(['as' => 'cms-moduls.', 'prefix' => 'app-moduls', 'controller' => AdminModulsController::class], function () {
+    Route::group(['as' => 'cms-modules.', 'prefix' => 'app-modules', 'controller' => AdminModulesController::class], function () {
         Route::get('/', 'index')->name('index');
         Route::get('/builder', 'builder')->name('builder');
         Route::get('/load-columns/{table}', 'loadColumns')->name('load-columns');
@@ -45,9 +45,9 @@ Route::middleware(['portal-admin'])->group(function () {
     });
 
     try {
-        //loop cms modul
-        $moduls = CmsModuls::whereType('module')->whereNotNull('path')->whereNotIn('path', ['#', 'javascript:;'])->get();
-        foreach ($moduls as $row) {
+        //loop cms module
+        $modules = CmsModules::whereType('module')->whereNotNull('path')->whereNotIn('path', ['#', 'javascript:;'])->get();
+        foreach ($modules as $row) {
             $actions = $row->actions ?: [];
 
             Route::resource($row->path, "\App\Http\Controllers\Admin\\$row->controller")->except($row->except_route);

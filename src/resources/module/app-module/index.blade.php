@@ -57,7 +57,7 @@
                     let formData = new FormData();
                     formData.set('_token', "{{ csrf_token() }}")
                     formData.set('data', JSON.stringify(data))
-                    fetch("{{ route('admin.cms-moduls.sort-menu') }}", {
+                    fetch("{{ route('admin.cms-modules.sort-menu') }}", {
                         method: "POST",
                         body: formData,
                     }).then(async (res) => {
@@ -113,13 +113,13 @@
                         <h5 class="form-title">@lang('adminportal.order_application_module')</h5>
                     </div>
                     <div class="right-side d-flex">
-                        <a href="{{ route('admin.cms-moduls.builder') }}" class="btn btn-dark text-upper ms-3">
+                        <a href="{{ route('admin.cms-modules.builder') }}" class="btn btn-dark text-upper ms-3">
                             @lang('adminportal.generate_new_module')
                         </a>
                     </div>
                 </div>
                 <ul id="application-module">
-                    @foreach ($moduls as $modul)
+                    @foreach ($modules as $modul)
                         <li data-id="{{ $modul->id }}">
                             <div class="d-flex justify-content-between">
                                 <div class="d-flex align-items-center">
@@ -132,7 +132,7 @@
                                         data-icon="{{ $modul->icon }}">Edit</a>
                                     <a href="javascript:;" data-toggle="confirmation"
                                         data-message="{{ __('adminportal.delete_confirmation') }}"
-                                        data-action="{{ adminRoute('admin.cms-moduls.delete', $modul->id) }}"
+                                        data-action="{{ adminRoute('admin.cms-modules.delete', $modul->id) }}"
                                         data-method="DELETE">Delete</a>
                                 </div>
                             </div>
@@ -152,7 +152,7 @@
                                                         data-icon="{{ $sub->icon }}">Edit</a>
                                                     <a href="javascript:;" data-toggle="confirmation"
                                                         data-message="{{ __('adminportal.delete_confirmation') }}"
-                                                        data-action="{{ adminRoute('admin.cms-moduls.delete', $sub->id) }}"
+                                                        data-action="{{ adminRoute('admin.cms-modules.delete', $sub->id) }}"
                                                         data-method="DELETE">Delete</a>
                                                 </div>
                                             </div>
@@ -167,7 +167,7 @@
         </div>
         <div class="col-sm-5">
             <section class="app-content shadow-sm">
-                <form action="{{ route('admin.cms-moduls.create') }}" method="post" id="form-menu">
+                <form action="{{ route('admin.cms-modules.create') }}" method="post" id="form-menu">
                     @csrf
                     <div class="header-form d-flex justify-content-between">
                         <div class="left-side d-flex align-items-center">

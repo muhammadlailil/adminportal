@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('cms_moduls', function (Blueprint $table) {
+        Schema::create('cms_modules', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid')->unique();
             $table->timestamps();
@@ -36,6 +36,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cms_moduls');
+        Schema::dropIfExists('cms_modules');
     }
 };

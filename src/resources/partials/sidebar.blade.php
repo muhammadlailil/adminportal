@@ -71,7 +71,7 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('admin.cms-moduls.index')}}" class="nav-link {{activeMenu('app-moduls')}}">
+                    <a href="{{route('admin.cms-modules.index')}}" class="nav-link {{activeMenu('app-moduls')}}">
                         <i class="isax icon-book nav-icon"></i>
                         Module Management
                     </a>

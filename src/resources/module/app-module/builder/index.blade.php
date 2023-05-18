@@ -2,7 +2,7 @@
 <script>
     const listTable = @json($tables);
     function loadTableColumns(table_name) {
-        return fetch( "{{route('admin.cms-moduls.load-columns', ':table_name')}}".replace(':table_name', table_name), {
+        return fetch( "{{route('admin.cms-modules.load-columns', ':table_name')}}".replace(':table_name', table_name), {
             method: "GET",
         })
     }
@@ -22,14 +22,14 @@
 
 <x-portal::layout.admin page="Application Module Builder" type="List">
     <section class="app-content shadow-sm">
-        <form action="{{route('admin.cms-moduls.build-module')}}" method="post" class="formModules">
+        <form action="{{route('admin.cms-modules.build-module')}}" method="post" class="formModules">
             @csrf
             <div class="header-form d-flex justify-content-between border-0 mb-1">
                 <div class="left-side d-flex align-items-center">
                     <h5 class="form-title">Create your CRUD application moduls</h5>
                 </div>
                 <div class="right-side d-flex">
-                    <a href="{{route("admin.cms-moduls.index")}}" class="btn btn-light text-upper">
+                    <a href="{{route("admin.cms-modules.index")}}" class="btn btn-light text-upper">
                         @lang('adminportal.back_to_list')
                     </a>
                     <button type="button" onclick="next()" class="btn btn-dark btn-next text-upper ms-3">

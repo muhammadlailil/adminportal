@@ -1,12 +1,12 @@
 <?php
 namespace Laililmahfud\Adminportal\Services;
 
-use Laililmahfud\Adminportal\Models\CmsModuls;
+use Laililmahfud\Adminportal\Models\CmsModules;
 
 class CmsModuleService
 {
     public function __construct(
-        public $model = CmsModuls::class,
+        public $model = CmsModules::class,
     ) {}
 
     public function updateOrCreate($attributes = [], $id)
@@ -43,12 +43,12 @@ class CmsModuleService
         return $this->model::oldest('sorting')->get();
     }
 
-    public function treeModuls($issuperadmin = true,$modulesId=[])
+    public function treeModules($isSuperadmin = true,$modulesId=[])
     {
         
-        $subModuls = $this->model::whereNotNull('parent_id')
+        $subModules = $this->model::whereNotNull('parent_id')
             ->select(['name', 'path', 'icon', 'id', 'parent_id', 'type'])
-            ->when(!$issuperadmin,function($q) use($modulesId) {
+            ->when(!$isSuperadmin,function($q) use($modulesId) {
                 $q->whereIn('id',$modulesId);
             })
             ->oldest('sorting')
@@ -56,13 +56,13 @@ class CmsModuleService
 
         return json_decode($this->model::whereNull('parent_id')
                 ->select(['name', 'path', 'icon', 'id', 'type'])
-                ->when(!$issuperadmin,function($q) use($modulesId) {
+                ->when(!$isSuperadmin,function($q) use($modulesId) {
                     $q->whereIn('id',$modulesId);
                 })
                 ->oldest('sorting')
                 ->get()
-                ->map(function ($row) use ($subModuls) {
-                    $row->sub = json_decode($subModuls->filter(function ($item) use ($row) {
+                ->map(function ($row) use ($subModules) {
+                    $row->sub = json_decode($subModules->filter(function ($item) use ($row) {
                         return $item->parent_id == $row->id;
                     })
                             ->values()

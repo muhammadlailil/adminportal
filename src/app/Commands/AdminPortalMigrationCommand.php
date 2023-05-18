@@ -45,15 +45,15 @@ class AdminPortalMigrationCommand extends Command
                 str_replace($rootProject, '', __DIR__ . '/../Database/migrations/2023_01_01_211243_create_cms_admin_table.php'),
                 str_replace($rootProject, '', __DIR__ . '/../Database/migrations/2023_01_10_114353_create_jobs_table.php'),
                 str_replace($rootProject, '', __DIR__ . '/../Database/migrations/2023_01_10_191113_create_data_import_log_table.php'),
-                str_replace($rootProject, '', __DIR__ . '/../Database/migrations/2023_01_16_083455_create_cms_moduls_table.php'),
+                str_replace($rootProject, '', __DIR__ . '/../Database/migrations/2023_01_16_083455_create_cms_modules_table.php'),
                 str_replace($rootProject, '', __DIR__ . '/../Database/migrations/2023_02_10_020201_create_cms_notifications_table.php'),
             ],
         ]);
 
         $this->call('db:seed', ['--class' => 'Laililmahfud\Adminportal\Database\seeders\AdminPortalSeeder']);
-        $this->info('Login infromation');
+        $this->info('Login information');
         $this->info('username : portal@admin.com');
         $this->info('password : P@ssw0rd');
-        $this->info('Instalation success...');
+        $this->info('Installation success...');
     }
 }

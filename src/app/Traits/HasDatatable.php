@@ -4,21 +4,21 @@ namespace Laililmahfud\Adminportal\Traits;
 
 trait HasDatatable
 {
-    public function scopeDatatable($query, $perpage = 10, $defaultSortField = "created_at")
+    public function scopeDatatable($query, $perPage = 10, $defaultSortField = "created_at")
     {
         $filter_column = request('filter_column') ?: [];
         $sortField = array_keys($filter_column)[0] ?? $defaultSortField;
         $sortDirection = array_values($filter_column)[0] ?? 'desc';
 
         $query->orderBy($sortField, $sortDirection);
-        if ($perpage) {
+        if ($perPage) {
             $start = request('start') ?: null;
             $length = request('length') ?: null;
             if ($start && $length) {
                 $page = ($start / $length) + 1;
-                return $query->paginate($perpage, ["*"], "page", $page);
+                return $query->paginate($perPage, ["*"], "page", $page);
             }
-            return $query->paginate($perpage);
+            return $query->paginate($perPage);
         } else {
             return $query->get();
         }

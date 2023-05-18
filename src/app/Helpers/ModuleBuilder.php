@@ -276,7 +276,7 @@ class ModuleBuilder
                     $str .= '<x-portal::input type="date" name="' . $name . '" label="' . $label . '" placeholder="' . $label . '" horizontal>' . $value . '</x-portal::input>';
                     break;
                 case 'datetime':
-                    $str .= '<x-portal::input type="tidatetime-localme" name="' . $name . '" label="' . $label . '" placeholder="' . $label . '" horizontal>' . $value . '</x-portal::input>';
+                    $str .= '<x-portal::input type="datetime-local" name="' . $name . '" label="' . $label . '" placeholder="' . $label . '" horizontal>' . $value . '</x-portal::input>';
                     break;
                 case 'googlemaps':
                     $str .= '<x-portal::input type="text" name="' . $name . '" label="' . $label . '" placeholder="Location" horizontal>' . $value . '</x-portal::input>';

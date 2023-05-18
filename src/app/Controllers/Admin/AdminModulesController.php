@@ -7,7 +7,7 @@ use Laililmahfud\Adminportal\Helpers\AdminPortal;
 use Laililmahfud\Adminportal\Helpers\ModuleBuilder;
 use Laililmahfud\Adminportal\Services\CmsModuleService;
 
-class AdminModulsController extends Controller
+class AdminModulesController extends Controller
 {
     public function __construct(
         public $moduleBuilder = new ModuleBuilder,
@@ -18,7 +18,7 @@ class AdminModulsController extends Controller
     {
         return view('portalmodule::app-module.index',[
             'icons' => listIcons(),
-            'moduls' => $this->cmsModuleService->treeModuls()
+            'modules' => $this->cmsModuleService->treeModules()
         ]);
     }
 
@@ -42,7 +42,7 @@ class AdminModulsController extends Controller
             'icon' => "isax {$request->menu_icon}",
         ],$request->id);
         $this->syncModulesSession();
-        return to_route('admin.cms-moduls.index')->with([
+        return to_route('admin.cms-modules.index')->with([
             'success' => __('adminportal.data_success_add'),
         ]);
     }
@@ -54,7 +54,7 @@ class AdminModulsController extends Controller
 
         $this->cmsModuleService->delete($id);
         $this->syncModulesSession();
-        return to_route('admin.cms-moduls.index')->with([
+        return to_route('admin.cms-modules.index')->with([
             'success' => __('adminportal.data_success_delete'),
         ]);
     }
@@ -95,7 +95,7 @@ class AdminModulsController extends Controller
             'actions' => $actions
         ]);
         $this->syncModulesSession();
-        return to_route('admin.cms-moduls.index')->with([
+        return to_route('admin.cms-modules.index')->with([
             'success' => __('adminportal.generate_module_success'),
         ]);
     }
@@ -104,6 +104,6 @@ class AdminModulsController extends Controller
     private function syncModulesSession(){
         $prefix = portalconfig('auth.session_name_prefix');
         $roles = admin()->role;
-        session()->put("{$prefix}.modules",AdminPortal::userModuls($roles->is_superadmin,$roles->permission_modules));
+        session()->put("{$prefix}.modules",AdminPortal::userModules($roles->is_superadmin,$roles->permission_modules));
     }
 }

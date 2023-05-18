@@ -28,17 +28,17 @@ class AdminRolePermissionController extends AdminController
 
     public function create(Request $request)
     {
-        $moduls = $this->rolePermissionService->listModuls();
-        if(empty($moduls)) return back()->with(['error'=> 'Please add at least one module']);
-        $this->data =  ['moduls' => $moduls];
+        $modules = $this->rolePermissionService->listModules();
+        if(empty($modules)) return back()->with(['error'=> 'Please add at least one module']);
+        $this->data =  ['modules' => $modules];
         return parent::create($request);
     }
 
     public function edit(Request $request,$id)
     {
-        $moduls = $this->rolePermissionService->listModuls();
-        if(empty($moduls)) return back()->with(['error'=> 'Please add at least one module']);
-        $this->data =  ['moduls' => $moduls];
+        $modules = $this->rolePermissionService->listModules();
+        if(empty($modules)) return back()->with(['error'=> 'Please add at least one module']);
+        $this->data =  ['modules' => $modules];
         return parent::edit($request,$id);
     }
 }

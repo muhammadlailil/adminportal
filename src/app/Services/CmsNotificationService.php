@@ -33,7 +33,7 @@ class CmsNotificationService extends AdminService
 
     public function unreadNotification($limit = 10)
     {
-        $query = $this->model::select('title', 'description', 'id', 'created_at')
+        $query = $this->model::select('title', 'description', 'uuid', 'created_at')
             ->when(!admin()->role->is_superadmin, function ($q) {
                 $q->where('admin_id', admin()->user->id);
             })

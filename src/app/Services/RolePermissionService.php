@@ -38,7 +38,7 @@ class RolePermissionService extends AdminService
         return $this->model::whereUuid($uuid)->update($data);
     }
 
-    public function listModuls(){
+    public function listModules(){
         return json_decode($this->cmsModuleService->all()->values()->toJson());
     }
 
