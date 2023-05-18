@@ -70,8 +70,8 @@ trait JsonResponse
         if ($validator->fails()) {
             response()->json([
                 'status' => 422,
-                'error' => 'invalid_validate',
-                'message' => $validator->errors()
+                'message' => $validator->errors()->first(),
+                'error' => $validator->errors()
             ], 422)->send();
             exit();
         }
