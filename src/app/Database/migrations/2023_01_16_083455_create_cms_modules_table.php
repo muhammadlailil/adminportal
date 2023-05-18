@@ -23,7 +23,7 @@ return new class extends Migration
             $table->enum('type',['menu','module'])->default('menu');
             $table->string('controller')->nullable();
             $table->json('except_route')->nullable();
-            $table->uuid('parent_id')->nullable()->index('cms_module_parent_id');
+            $table->integer('parent_id')->nullable()->index('cms_module_parent_id');
             $table->integer('sorting')->default(1)->index('cms_module_sorting');
             $table->json('actions')->nullable();
         });
