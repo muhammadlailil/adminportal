@@ -2,6 +2,7 @@
 namespace Laililmahfud\Adminportal\Traits;
 
 use Laililmahfud\Adminportal\Api\Error;
+use Illuminate\Support\Facades\Validator;
 use Laililmahfud\Adminportal\Api\JwtToken;
 
 trait JsonResponse
@@ -61,5 +62,18 @@ trait JsonResponse
             return $decodedToken->data;
         }catch(\Exception $e){}
         return null;
+    }
+
+    public function validates($rules, $message = [], $attributes = [])
+    {
+        $validator = Validator::make(request()->all(), $rules, $message, $attributes);
+        if ($validator->fails()) {
+            response()->json([
+                'status' => 422,
+                'error' => 'invalid_validate',
+                'message' => $validator->errors()
+            ], 422)->send();
+            exit();
+        }
     }
 }
