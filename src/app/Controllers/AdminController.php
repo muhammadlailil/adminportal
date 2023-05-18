@@ -178,7 +178,7 @@ class AdminController extends Controller
                 "add" => $this->add && itcan($this->accessmodule("add")),
                 "filter" => $this->filter,
                 "bulkAction" => $this->bulkAction && itcan($this->accessmodule("delete")),
-                "tableAction" => $this->tableAction && itcan($this->accessmodule("edit")) || itcan($this->accessmodule("delete")),
+                "tableAction" => $this->tableAction && (itcan($this->accessmodule("edit")) || itcan($this->accessmodule("delete"))),
                 "import" => $this->import && itcan($this->accessmodule("add")),
                 "export" => $this->export,
             ],
