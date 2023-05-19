@@ -76,4 +76,14 @@ trait JsonResponse
             exit();
         }
     }
+
+    public function validateException($message = [])
+    {
+        return response()->json([
+            'status' => 422,
+            'message' => collect($message)->first(),
+            'error' => $message
+        ], 422);
+        exit();
+    }
 }
