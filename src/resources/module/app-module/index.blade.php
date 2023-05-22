@@ -88,6 +88,7 @@
                 window['select_menu_icon'].setValue(icon)
                 btnCancel.classList.remove('d-none')
                 titleForm.innerHTML = 'Update Static Menu';
+                formMenu.querySelector('input[name="id"]')?.remove()
                 formMenu.insertAdjacentHTML("beforeend", `<input type="hidden" name="id" value="${id}"/>`)
             })
         })
