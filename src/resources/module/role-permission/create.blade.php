@@ -32,7 +32,7 @@ document.querySelector('.btn-unselect').addEventListener('click',function(){
         </div>
         <div class="row" id="list-module-permission">
             @php
-            $listed = array_chunk($moduls, ceil(count($moduls) / 2));
+            $listed = array_chunk($modules, ceil(count($modules) / 2));
             $left = @$listed[0] ?? [];
             $right = @$listed[1] ?? [];
             @endphp
