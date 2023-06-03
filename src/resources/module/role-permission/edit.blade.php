@@ -16,9 +16,9 @@ document.querySelector('.btn-unselect').addEventListener('click',function(){
     {{$row->name}}
 </x-portal::input>
 <x-portal::input.radio.group name="is_superadmin" label="Superadmin" horizontal>
-    <x-portal::input.radio.group.option checked="{{$row->is_superadmin==1}}" class="me-4" name="is_superadmin" label="Yes" value="1">
+    <x-portal::input.radio.group.option selected="{{$row->is_superadmin==1}}" class="me-4" name="is_superadmin" label="Yes" value="1">
     </x-portal::input.radio.group.option>
-    <x-portal::input.radio.group.option checked="{{$row->is_superadmin==0}}" name="is_superadmin" label="No" value="0"></x-portal::input.radio.group.option>
+    <x-portal::input.radio.group.option selected="{{$row->is_superadmin==0}}" name="is_superadmin" label="No" value="0"></x-portal::input.radio.group.option>
 </x-portal::input.radio.group>
 @if(!$row->is_superadmin)
 <div class="form-group row permission" style="align-items: baseline;">
@@ -55,25 +55,25 @@ document.querySelector('.btn-unselect').addEventListener('click',function(){
                             <li class="list-group-item p-2 ps-0">
                                 <x-portal::input.checkbox.option required="false" name="permissions[][{{$item->id}}]"
                                     value="add admin.{{str()->slug($pathLeft)}}"
-                                    checked="{{$addLeft}}"
+                                    selected="{{$addLeft}}"
                                     label="add {{str()->slug($pathLeft,' ')}}"></x-portal::input.checkbox.option>
                             </li>
                             <li class="list-group-item p-2 ps-0">
                                 <x-portal::input.checkbox.option required="false" name="permissions[][{{$item->id}}]"
                                     value="view admin.{{str()->slug($pathLeft)}}"
-                                    checked="{{$viewLeft}}"
+                                    selected="{{$viewLeft}}"
                                     label="view {{str()->slug($pathLeft,' ')}}"></x-portal::input.checkbox.option>
                             </li>
                             <li class="list-group-item p-2 ps-0">
                                 <x-portal::input.checkbox.option required="false" name="permissions[][{{$item->id}}]"
                                     value="edit admin.{{str()->slug($pathLeft)}}"
-                                    checked="{{$editLeft}}"
+                                    selected="{{$editLeft}}"
                                     label="edit {{str()->slug($pathLeft,' ')}}"></x-portal::input.checkbox.option>
                             </li>
                             <li class="list-group-item p-2 ps-0">
                                 <x-portal::input.checkbox.option required="false" name="permissions[][{{$item->id}}]"
                                     value="delete admin.{{str()->slug($pathLeft)}}"
-                                    checked="{{$deleteLeft}}"
+                                    selected="{{$deleteLeft}}"
                                     label="delete {{str()->slug($pathLeft,' ')}}"></x-portal::input.checkbox.option>
                             </li>
                         </ul>
@@ -100,25 +100,25 @@ document.querySelector('.btn-unselect').addEventListener('click',function(){
                                 <li class="list-group-item p-2 ps-0">
                                     <x-portal::input.checkbox.option required="false" name="permissions[][{{$key->id}}]"
                                         value="add admin.{{str()->slug($pathRight)}}"
-                                        checked="{{$addRight}}"
+                                        selected="{{$addRight}}"
                                         label="add {{str()->slug($pathRight,' ')}}"></x-portal::input.checkbox.option>
                                 </li>
                                 <li class="list-group-item p-2 ps-0">
                                     <x-portal::input.checkbox.option required="false" name="permissions[][{{$key->id}}]"
                                         value="view admin.{{str()->slug($pathRight)}}"
-                                        checked="{{$viewRight}}"
+                                        selected="{{$viewRight}}"
                                         label="view {{str()->slug($pathRight,' ')}}"></x-portal::input.checkbox.option>
                                 </li>
                                 <li class="list-group-item p-2 ps-0">
                                     <x-portal::input.checkbox.option required="false" name="permissions[][{{$key->id}}]"
                                         value="edit admin.{{str()->slug($pathRight)}}"
-                                        checked="{{$editRight}}"
+                                        selected="{{$editRight}}"
                                         label="edit {{str()->slug($pathRight,' ')}}"></x-portal::input.checkbox.option>
                                 </li>
                                 <li class="list-group-item p-2 ps-0">
                                     <x-portal::input.checkbox.option required="false" name="permissions[][{{$key->id}}]"
                                         value="delete admin.{{str()->slug($pathRight)}}"
-                                        checked="{{$deleteRight}}"
+                                        selected="{{$deleteRight}}"
                                         label="delete {{str()->slug($pathRight,' ')}}"></x-portal::input.checkbox.option>
                                 </li>
                             </ul>
