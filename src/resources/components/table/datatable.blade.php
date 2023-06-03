@@ -62,7 +62,6 @@ $limit = request('limit');
 
 
 @php
-    $tableClass = ($result->count()>=2 || count($columns)>=7)?'table-responsive':'';
     $bulkAction = '';
     if(@$button['bulkAction']){
         $bulkAction = route("{$route}.bulk-action");
@@ -70,7 +69,7 @@ $limit = request('limit');
 @endphp
 <form action="{{$bulkAction}}" id="form-data-table" method="POST">
     @csrf
-    <div class="{{$tableClass}} datatable-content">
+    <div class="table-responsive datatable-content">
         <table id="app-datatable" class="table datatable" cellpadding="1" cellspacing="1">
             <thead>
                 <tr>
@@ -118,9 +117,10 @@ $limit = request('limit');
                 @endif
             </tbody>
         </table>
+        <br><br>
     </div>
 </form>
-<div class="d-flex paginate-footer justify-content-between">
+<div class="d-flex paginate-footer justify-content-between" style="margin-top: -50px">
     <div>
         {{ $result->appends(request()->query())->onEachSide(2)->links() }}
     </div>
