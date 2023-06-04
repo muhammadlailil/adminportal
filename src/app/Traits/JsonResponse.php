@@ -9,50 +9,50 @@ trait JsonResponse
 {
     public function sendSuccess($data, $message = "success")
     {
-        return response()->json([
+        response()->json([
             'status' => 200,
             'message' => $message,
             'data' => $data,
-        ]);
+        ])->send();
         exit();
     }
 
     public function sendMessage($message)
     {
-        return response()->json([
+        response()->json([
             'status' => 200,
             'message' => $message,
-        ]);
+        ])->send();
         exit();
     }
 
     public function unauthorized($message, $err = Error::UNAUTHORIZED)
     {
-        return response()->json([
+        response()->json([
             'status' => 401,
             'error' => $err,
             'message' => $message,
-        ], 401);
+        ], 401)->send();
         exit();
     }
 
     public function badRequest($message, $err = Error::BAD_REQUEST)
     {
-        return response()->json([
+        response()->json([
             'status' => 400,
             'error' => $err,
             'message' => $message,
-        ], 400);
+        ], 400)->send();
         exit();
     }
 
     public function forbidden($message, $err = Error::FORBIDDEN)
     {
-        return response()->json([
+        response()->json([
             'status' => 403,
             'error' => $err,
             'message' => $message,
-        ], 403);
+        ], 403)->send();
         exit();
     }
 
@@ -79,11 +79,11 @@ trait JsonResponse
 
     public function validateException($message = [])
     {
-        return response()->json([
+        response()->json([
             'status' => 422,
             'message' => collect($message)->first(),
             'error' => $message
-        ], 422);
+        ], 422)->send();
         exit();
     }
 }
