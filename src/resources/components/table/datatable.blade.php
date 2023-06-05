@@ -110,13 +110,14 @@ $limit = request('limit');
             </thead>
             <tbody>
                 {{$slot}}
-                @if(!$result->count())
-                <tr>
-                    <td class="no-data" colspan="{{count($columns)+2}}">@lang('adminportal.no_data_available')</td>
-                </tr>
-                @endif
             </tbody>
         </table>
+        @if(!$result->count())
+            <div class="text-center" id="table-empty-data">
+                <img src="{{ asset('adminportal/icons/empty-state.png') }}" alt="">
+                <h6 class="fw-bold">@lang('adminportal.no_data_available')</h6>
+            </div>
+        @endif
         <br><br>
     </div>
 </form>
