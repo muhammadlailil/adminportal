@@ -9,51 +9,46 @@ trait JsonResponse
 {
     public function sendSuccess($data, $message = "success")
     {
-        response()->json([
+        return response()->json([
             'status' => 200,
             'message' => $message,
             'data' => $data,
-        ])->send();
-        exit();
+        ]);
     }
 
     public function sendMessage($message)
     {
-        response()->json([
+        return response()->json([
             'status' => 200,
             'message' => $message,
-        ])->send();
-        exit();
+        ]);
     }
 
     public function unauthorized($message, $err = Error::UNAUTHORIZED)
     {
-        response()->json([
+        return response()->json([
             'status' => 401,
             'error' => $err,
             'message' => $message,
-        ], 401)->send();
-        exit();
+        ], 401);
     }
 
     public function badRequest($message, $err = Error::BAD_REQUEST)
     {
-        response()->json([
+        return response()->json([
             'status' => 400,
             'error' => $err,
             'message' => $message,
-        ], 400)->send();
-        exit();
+        ], 400);
     }
 
     public function forbidden($message, $err = Error::FORBIDDEN)
     {
-        response()->json([
+        return response()->json([
             'status' => 403,
             'error' => $err,
             'message' => $message,
-        ], 403)->send();
-        exit();
+        ], 403);
     }
 
     public function auth(){
@@ -68,7 +63,7 @@ trait JsonResponse
     {
         $validator = Validator::make(request()->all(), $rules, $message, $attributes);
         if ($validator->fails()) {
-            response()->json([
+            return response()->json([
                 'status' => 422,
                 'message' => $validator->errors()->first(),
                 'error' => $validator->errors()
@@ -79,11 +74,10 @@ trait JsonResponse
 
     public function validateException($message = [])
     {
-        response()->json([
+        return response()->json([
             'status' => 422,
             'message' => collect($message)->first(),
             'error' => $message
-        ], 422)->send();
-        exit();
+        ], 422);
     }
 }
