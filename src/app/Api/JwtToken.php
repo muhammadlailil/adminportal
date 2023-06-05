@@ -8,7 +8,7 @@ use Illuminate\Support\Str;
 class JwtToken
 {
     protected static $algorithm = 'HS256';
-    private static $expired = "+12 hours";
+    private static $expired = "+1 days";
     private static $data = [];
 
     public static function setData($data){

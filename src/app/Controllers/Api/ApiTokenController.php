@@ -53,6 +53,9 @@ class ApiTokenController extends ApiController
      * Request renew token to extend the token expiration period 
      * @sorting 2
      * @authenticated
+     * 
+     * @header key string required
+     * 
      * @response {
      *  "status": 200,
      *  "message": "success",
@@ -69,6 +72,12 @@ class ApiTokenController extends ApiController
             return $this->unauthorized('Your token was not found !');
         }
         try {
+            $token = base64_decode($request->header('key'));
+            $tokens = explode('|', $token);
+            if ($tokens[0] != date('Y-m-d') || $tokens[1] != $this->apiSecretKey) {
+                return $this->unauthorized("Token was invalid",Error::INVALID_TOKEN);
+            }
+
             $payload = JwtToken::decode();
             $newToken = JwtToken::setData($payload->data)->build();
         } catch (\Exception$e) {
