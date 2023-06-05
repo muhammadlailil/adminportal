@@ -9,6 +9,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Laililmahfud\Adminportal\Helpers\ExportPdf;
 use Laililmahfud\Adminportal\Helpers\ExportExcel;
 use Laililmahfud\Adminportal\Models\CmsImportLog;
+use Laililmahfud\Adminportal\Helpers\BadRequestException;
 
 class AdminController extends Controller
 {
@@ -250,10 +251,8 @@ class AdminController extends Controller
 
             $successMessage = @$this->message['store'] ?? __('adminportal.data_success_add');
             return redirect(return_url() ?: route("{$this->routePath}.index"))->with(['success' => $successMessage]);
-        } catch (\Exception $e) {
-
-            $errorMessage = @$this->message['failed_store'] ?? __('adminportal.data_failed_add', ['reason' => $e->getMessage()]);
-            return redirect()->back()->with(['error' =>  $errorMessage]);
+        } catch (BadRequestException $e) {
+            return redirect()->back()->with(['error' =>  $e->getMessage()]);
         }
     }
 
@@ -272,33 +271,29 @@ class AdminController extends Controller
 
             $successMessage = @$this->message['update'] ?? __('adminportal.data_success_update');
             return redirect(return_url() ?: route("{$this->routePath}.index"))->with(['success' => $successMessage]);
-        } catch (\Exception $e) {
-
-            $errorMessage = @$this->message['failed_update'] ?? __('adminportal.data_failed_update', ['reason' => $e->getMessage()]);
-            return redirect()->back()->with(['error' => $errorMessage]);
+        } catch (BadRequestException $e) {
+            return redirect()->back()->with(['error' =>  $e->getMessage()]);
         }
     }
 
     public function destroy(Request $request, $id)
     {
-        if(!itcan($this->accessmodule("delete"))) return redirect()->back()->with(['alert_error' => __('adminportal.dont_have_access')]);
-     
+        if (!itcan($this->accessmodule("delete"))) return redirect()->back()->with(['alert_error' => __('adminportal.dont_have_access')]);
+
         try {
             $this->moduleService()->deleteByUuid($id);
 
             $successMessage = @$this->message['delete'] ?? __('adminportal.data_success_delete');
             return redirect(return_url() ?: route("{$this->routePath}.index"))->with(['success' =>  $successMessage]);
-        } catch (\Exception $e) {
-
-            $errorMessage = @$this->message['failed_delete'] ?? __('adminportal.data_failed_delete', ['reason' => $e->getMessage()]);
-            return redirect()->back()->with(['error' =>  $errorMessage]);
+        } catch (BadRequestException $e) {
+            return redirect()->back()->with(['error' =>  $e->getMessage()]);
         }
     }
 
     public function export(Request $request)
     {
-        if(!itcan($this->accessmodule("view"))) return redirect()->back()->with(['alert_error' => __('adminportal.dont_have_access')]);
-       
+        if (!itcan($this->accessmodule("view"))) return redirect()->back()->with(['alert_error' => __('adminportal.dont_have_access')]);
+
 
         $file_format = $request->file_format;
         $data = $this->moduleService()->datatable($request, null);
@@ -331,7 +326,7 @@ class AdminController extends Controller
      */
     public function import(Request $request)
     {
-        if(!itcan($this->accessmodule("add"))) return redirect()->back()->with(['alert_error' => __('adminportal.dont_have_access')]);
+        if (!itcan($this->accessmodule("add"))) return redirect()->back()->with(['alert_error' => __('adminportal.dont_have_access')]);
 
         if (!$this->importExcel)  return redirect()->back()->with(['error' => "Please define importExcel class first"]);
 
@@ -360,7 +355,7 @@ class AdminController extends Controller
         $bulk_action = $request->bulk_action;
         $selected_ids = $request->selected_ids;
         if ($bulk_action == 'delete') {
-            if(!itcan($this->accessmodule("delete"))) return to_route('admin.dashboard')->with(['alert_error' => __('adminportal.dont_have_access')]);
+            if (!itcan($this->accessmodule("delete"))) return to_route('admin.dashboard')->with(['alert_error' => __('adminportal.dont_have_access')]);
             $this->moduleService()->bulkDeleteByUuid($selected_ids);
 
             $successMessage = @$this->message['bulk_delete'] ?? __('adminportal.data_success_delete');
