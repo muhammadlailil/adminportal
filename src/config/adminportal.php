@@ -64,6 +64,7 @@ return [
      */
     'auth' => [
         'session_name_prefix' => 'admin.auth',
+        'logout_url' => 'admin/logout'
     ],
 
     /*

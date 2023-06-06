@@ -42,6 +42,8 @@ class AdminMainController extends Controller
 
     public function logout(Request $request)
     {
+        if(portalconfig('auth.logout_url')!==portalconfig('admin_path').'/logout') abort(404);
+        
         AdminPortal::logout();
 
         return to_route('admin.auth.index');

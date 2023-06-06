@@ -80,7 +80,7 @@
         </ul>
     </nav>
     <div class="nav-navigation-bottom text-white text-center ps-0">
-        <a href="javascript:;" data-toggle="confirmation" data-message="{{__('adminportal.logout_confirmation')}}" data-action="{{route('admin.auth.logout')}}"
+        <a href="javascript:;" data-toggle="confirmation" data-message="{{__('adminportal.logout_confirmation')}}" data-action="{{url(portalconfig('auth.logout_url'))}}"
             class="nav-link justify-content-center d-flex align-items-center p-3">
             <i class="isax icon-logout nav-icon me-2"></i>
             Log out
