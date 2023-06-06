@@ -110,6 +110,9 @@ if(!function_exists('adminUrl')){
 if (!function_exists('canDo')) {
     function itcan($action)
     {
+        if($action=='view admin.notification'){
+            return true;
+        }
         $role = admin()->role;
         if($role->is_superadmin){
             return true;
