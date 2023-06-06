@@ -37,7 +37,7 @@ class AdminPortalInstallationCommand extends Command
      */
     public function handle()
     {
-        $this->createIndexController();
+        $this->publishAdminController();
 
         $this->call('adminportal:api-key');
         $this->call('vendor:publish', ['--provider' => 'Laililmahfud\Adminportal\AdminPortalServiceProvider']);
@@ -52,7 +52,7 @@ class AdminPortalInstallationCommand extends Command
         $this->call('adminportal:migration');
     }
 
-    protected function createIndexController()
+    protected function publishAdminController()
     {
         $controllerDir = app_path('Http/Controllers/Admin');
         if (!file_exists($controllerDir)) {
@@ -61,6 +61,10 @@ class AdminPortalInstallationCommand extends Command
         if (!file_exists("{$controllerDir}/AdminIndexController.php")) {
             $controllerTemplate = file_get_contents(__DIR__ . '/../../stubs/AdminIndexController.php.stub');
             file_put_contents($controllerDir . '/AdminIndexController.php', $controllerTemplate);
+        }
+        if (!file_exists("{$controllerDir}/AdminNotificationController.php")) {
+            $controllerTemplate = file_get_contents(__DIR__ . '/../../stubs/AdminNotificationController.php.stub');
+            file_put_contents($controllerDir . '/AdminNotificationController.php', $controllerTemplate);
         }
     }
 

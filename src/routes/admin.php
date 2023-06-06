@@ -6,7 +6,7 @@ use App\Http\Controllers\Admin\AdminIndexController;
 use Laililmahfud\Adminportal\Controllers\Admin\AdminMainController;
 use Laililmahfud\Adminportal\Controllers\Admin\AdminUsersController;
 use Laililmahfud\Adminportal\Controllers\Admin\AdminModulesController;
-use Laililmahfud\Adminportal\Controllers\Admin\AdminNotificationController;
+use App\Http\Controllers\Admin\AdminNotificationController;
 use Laililmahfud\Adminportal\Controllers\Admin\AdminRolePermissionController;
 
 Route::group(['prefix' => 'auth', 'as' => 'auth.', 'controller' => AdminMainController::class], function () {
