@@ -37,7 +37,7 @@ class ApiPortalMiddleware
         }catch(\Exception $e){
             if($e instanceof ExpiredException)  return $this->unauthorized("Your token was expired !",Error::EXPIRED_TOKEN);
 
-            return $this->unauthorized('Your token was invalid',Error::INVALID_LOGIN);
+            return $this->unauthorized('Your token was invalid',Error::INVALID_TOKEN);
         }
         return $next($request);
     }
