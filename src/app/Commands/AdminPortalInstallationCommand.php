@@ -81,6 +81,10 @@ class AdminPortalInstallationCommand extends Command
 
     protected function createPartialAssetFile()
     {
+        $adminDir = resource_path('views/admin');
+        if (!file_exists($adminDir)) {
+            @mkdir($adminDir, 0755);
+        }
         $partials_dir = resource_path('views/admin/partials');
         if (!file_exists($partials_dir)) {
             @mkdir($partials_dir, 0755);
