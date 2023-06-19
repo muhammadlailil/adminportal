@@ -107,7 +107,7 @@ if(!function_exists('adminUrl')){
     }
 }
 
-if (!function_exists('canDo')) {
+if (!function_exists('itcan')) {
     function itcan($action)
     {
         if($action=='view admin.notification'){
