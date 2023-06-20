@@ -53,7 +53,7 @@ class AdminPortal
     public static function listDatabaseTables()
     {
         $excludedTables = ['migrations', 'personal_access_tokens', 'jobs', 'failed_jobs', 'roles_permission'];
-        $tables = DB::select("SELECT table_name as name FROM information_schema.tables WHERE table_schema = '" . env('DB_DATABASE') . "' AND table_name NOT LIKE 'cms_%' AND table_name NOT IN ('" . implode("','", $excludedTables) . "')");
+        $tables = DB::select("SELECT table_name as name FROM information_schema.tables WHERE table_schema = '" . config('database.connections')[config('database.default')]['database'] . "' AND table_name NOT LIKE 'cms_%' AND table_name NOT IN ('" . implode("','", $excludedTables) . "')");
         $tables[] = (object)['name' => 'cms_admin'];
         return $tables;
     }
