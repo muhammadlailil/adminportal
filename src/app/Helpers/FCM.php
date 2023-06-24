@@ -14,7 +14,7 @@ class FCM
 
     public function __construct()
     {
-        self::$firebaseKey  =  config('app.fcm_key');
+        self::$firebaseKey  =  config('services.firebase.fcm_key');
     }
 
     public static function ios($regIds = [])
