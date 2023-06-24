@@ -2,6 +2,7 @@
 
 namespace Laililmahfud\Adminportal\Helpers;
 
+use Illuminate\Support\Facades\Bus;
 use Illuminate\Support\Facades\Http;
 
 class FCM
@@ -43,6 +44,18 @@ class FCM
      * ]);
      * 
      */
+
+    /**
+     * dispatch function to send fcm notification as queue
+     */
+    public static function dispatch($data)
+    {
+        Bus::chain([
+            function () use ($data) {
+                self::send($data);
+            },
+        ])->dispatch();
+    }
     public static function send($data)
     {
         if (count(self::$regIds)) {
