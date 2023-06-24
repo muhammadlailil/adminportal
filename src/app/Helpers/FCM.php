@@ -50,16 +50,37 @@ class FCM
      */
     public static function dispatch($data)
     {
+        $regIds = self::$regIds;
+        $platform = self::$platform;
+        $firebaseKey = self::$firebaseKey;
+        $firebaseUrl = self::$firebaseUrl;
         Bus::chain([
-            function () use ($data) {
-                self::send($data);
+            function () use ($data, $regIds, $platform, $firebaseKey, $firebaseUrl) {
+                self::sendFirebaseNotification(
+                    $data,
+                    $regIds,
+                    $platform,
+                    $firebaseKey,
+                    $firebaseUrl
+                );
             },
         ])->dispatch();
     }
     public static function send($data)
     {
-        if (count(self::$regIds)) {
-            $regIds = array_values(array_unique(self::$regIds));
+        self::sendFirebaseNotification(
+            data: $data,
+            regIds: self::$regIds,
+            platform: self::$platform,
+            firebaseKey: self::$firebaseKey,
+            firebaseUrl: self::$firebaseUrl
+        );
+    }
+
+    public static function sendFirebaseNotification($data, $regIds, $platform, $firebaseKey, $firebaseUrl)
+    {
+        if (count($regIds)) {
+            $regIds = array_values(array_unique($regIds));
 
             $postData = [
                 'registration_ids' => $regIds,
@@ -68,7 +89,7 @@ class FCM
                 'priority' => 'high',
             ];
 
-            if (self::$platform == "ios") {
+            if ($platform == "ios") {
                 $postData['notification'] = [
                     'sound' => 'default',
                     'title' => trim(strip_tags($data['title'])),
@@ -76,8 +97,9 @@ class FCM
                 ];
             }
             $response = Http::withHeaders([
-                'Authorization' => "key=" . self::$firebaseKey
-            ])->post(self::$firebaseUrl, $postData);
+                'Authorization' => "key=" . $firebaseKey
+            ])->post($firebaseUrl, $postData);
+            logger($response->body());
             return  $response->json();
         }
     }
