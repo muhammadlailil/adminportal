@@ -166,13 +166,21 @@ List of application configuration
 
 ## ✨ Form Component
 ### input (time,date,email,number)
+🚴 in progres 
 ### checkbox
+🚴 in progres 
 ### image
+🚴 in progres 
 ### radio
+🚴 in progres 
 ### select
+🚴 in progres 
 ### wysiwyg
+🚴 in progres 
 ### password
+🚴 in progres 
 ### textarea
+🚴 in progres 
 
 <br>
 
