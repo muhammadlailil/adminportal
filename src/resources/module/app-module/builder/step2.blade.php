@@ -4,7 +4,7 @@
             <tr>
                 <td>Label</td>
                 <td>Name</td>
-                <td>Join (Opsional)</td>
+                <td>Join (Optional)</td>
                 <td></td>
                 <td>
                     <button type="button" onclick="addMoreTable()" class="btn btn-dark btn-sm text-upper w-100 justify-content-center">
