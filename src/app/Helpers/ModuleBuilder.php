@@ -289,7 +289,9 @@ class ModuleBuilder
                     $str .= '<x-portal::input type="number" step="any" name="' . $name . '" label="' . $label . '" placeholder="' . $label . '" horizontal>' . $value . '</x-portal::input>';
                     break;
                 case 'radio':
-                    $str .= '<x-portal::input type="number" name="' . $name . '" label="' . $label . '" placeholder="' . $label . '" class="input-money" horizontal>' . $value . '</x-portal::input>';
+                    $str .= '<x-portal::input.radio.group name="' . $name . '" label="' . $label . '" horizontal>';
+                    $str .= '   <x-portal::input.radio.group.option checked class="me-4" name="status" label="Option" value="Option"></x-portal::input.radio.group.option>';
+                    $str .= '/x-portal::input.radio.group>';
                     break;
                 case 'select':
                     $str .= '<x-portal::input.select name="' . $name . '" label="' . $label . '" horizontal>' . "\r\n";
