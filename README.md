@@ -150,66 +150,111 @@ List of application configuration
 1. First create your migrate table or use existing table. Your table must have an id column and a uuid column
 2. Go to **Module Management** menu then go navigate to **GENERATE NEW MODULE** button
     ### Step 1 - Configuration
-    - **Table**  ➡️ The table that you will use for the module to be created. 
-    - **Module Name**  ➡️ The name of the Module / Menu to be generated
-    - **Module Path** ➡️  Url of the module, by default admin prefix will be added (based on settings)
-    - **Controller Name** ➡️ The name of the controller to be created, the controller will be stored in the `app > Http > Controllers > Admin` folder
-    - **Module Icon** ➡️ Icon of the menu to be used in the sidebar. We use iconsax in the whole application. You can see more detailed list of icons [here](https://github.com/muhammadlailil/iconsax)
+    - **Table** 
+        - The table that you will use for the module to be created. 
+    - **Module Name**  
+        - The name of the Module / Menu to be generated
+    - **Module Path**
+        - Url of the module, by default admin prefix will be added (based on settings)
+    - **Controller Name**
+        - The name of the controller to be created, the controller will be stored in the `app > Http > Controllers > Admin` folder
+    - **Module Icon**
+        - Icon of the menu to be used in the sidebar. We use iconsax in the whole application. You can see more detailed list of icons [here](https://github.com/muhammadlailil/iconsax)
     - **Configuration**
-        - **Bulk Action?** ➡️  You can tick to display activate the bulk-action function in the list table
-        - **Create?** ➡️ You can tick to display Add button in table view
-        - **Edit?** ➡️  You can tick to display Edit button in list of data table
-        - **Filter?** ➡️  You can tick to display Filter button in table view
-        - **Import?** ➡️  You can tick to display Import button in table view
-        - **Export?** ➡️ You can tick to display Export button in table view
+        - **Bulk Action?**
+            -  You can tick to display activate the bulk-action function in the list table
+        - **Create?**
+            - You can tick to display Add button in table view
+        - **Edit?**
+            -  You can tick to display Edit button in list of data table
+        - **Filter?**
+            -  You can tick to display Filter button in table view
+        - **Import?**
+            -  You can tick to display Import button in table view
+        - **Export?**
+            - You can tick to display Export button in table view
     
     <br>
 
     ### Step 2 - Table View
-    - **Label** ➡️ Label of row table
-    - **Name** ➡️ The field name according to the current table
-    - **Join (Optional)** ➡️ Join relation table
+    - **Label**
+        - Label of row table
+    - **Name**
+        - The field name according to the current table
+    - **Join (Optional)**
+        - Join relation table
 
     <br>
 
     ### Step 3 - Form View
-    - **Label** ➡️ Label of form field
-    - **Name** ➡️ Name of form field
-    - **Type** ➡️ Type of form field
-    - **Rule** ➡️ Rules validation for store and update function
-    - **Create Rule** ➡️ Rules validation for store function only
-    - **Update Rule** ➡️ Rules validation for update function only
+    - **Label**
+        - Label of form field
+    - **Name**
+        - Name of form field
+    - **Type**
+        - Type of form field
+    - **Rule**
+        - Rules validation for store and update function
+    - **Create Rule**
+        - Rules validation for store function only
+    - **Update Rule**
+        - Rules validation for update function only
 
 ### New Static Module
 Just go to **Module Management** menu, and on the right side of the card you will find the **Create Static Menu** form to create a new static module
 
 ## ⚓️ CRUD Controller Configuration
 Available configuration for controller
-- `protected $routePath` ➡️ Route base name for the controller module | String
-- `protected $pageTitle` ➡️ Module title on the screen page | String
-- `protected $resourcePath` ➡️ Base resource path for the module | String
-- `protected $moduleService` ➡️ Service class for handling crud function | Class
-- `protected $importExcel` ➡️ Import class for handling import excel function (using laravel excel) | Class
-- `protected $tableColumns` ➡️ List of main table view column | array 
-- `protected $rules` ➡️ Rules validation for store and update function | array
-- `protected $createRules` ➡️ Rules validation for store function only | array
-- `protected $updateRules` ➡️ Rules validation for update function only | array
-- `protected $add` ➡️ Indicates if the user can add record, this will display add button | boolean
-- `protected $filter` ➡️ Indicates if the user can filter record, this will display filter button | boolean
-- `protected $import` ➡️ Indicates if the user can import record, this will display import button | boolean
-- `protected $export` ➡️ Indicates if the user can export record, this will display export button | boolean
-- `protected $bulkAction` ➡️ Indicates if the user can do bulk action of the record, this will display checkbox in the table | boolean
-- `protected $tableAction` ➡️ Indicates if the table has action function, this will show action column table | boolean
-- `protected $perPage` ➡️ The paginate per page item list | integer
-- `protected $data ` ➡️ The variable for assign data to view | array
-- `protected $message ` ➡️ Custom message actions | array
-    - store ➡️ Custom alert message for store success function
-    - failed_store ➡️ Custom alert message for failed store function
-    - update ➡️ Custom alert message for update success function
-    - failed_update ➡️ Custom alert message for failed update function
-    - delete ➡️ Custom alert message for delete success function
-    - failed_delete ➡️ Custom alert message for failed delete function
-    - bulk_delete ➡️ Custom alert message for bulk delete success function
+- `protected $routePath`
+    - Route base name for the controller module | String
+- `protected $pageTitle`
+    - Module title on the screen page | String
+- `protected $resourcePath`
+    - Base resource path for the module | String
+- `protected $moduleService`
+    - Service class for handling crud function | Class
+- `protected $importExcel`
+    - Import class for handling import excel function (using laravel excel) | Class
+- `protected $tableColumns`
+    - List of main table view column | array 
+- `protected $rules`
+    - Rules validation for store and update function | array
+- `protected $createRules`
+    - Rules validation for store function only | array
+- `protected $updateRules`
+    - Rules validation for update function only | array
+- `protected $add`
+    - Indicates if the user can add record, this will display add button | boolean
+- `protected $filter`
+    - Indicates if the user can filter record, this will display filter button | boolean
+- `protected $import`
+    - Indicates if the user can import record, this will display import button | boolean
+- `protected $export`
+    - Indicates if the user can export record, this will display export button | boolean
+- `protected $bulkAction`
+    - Indicates if the user can do bulk action of the record, this will display checkbox in the table | boolean
+- `protected $tableAction`
+    - Indicates if the table has action function, this will show action column table | boolean
+- `protected $perPage`
+    - The paginate per page item list | integer
+- `protected $data `
+    - The variable for assign data to view | array
+- `protected $message `
+    - Custom message actions | array
+    - store
+        - Custom alert message for store success function
+    - failed_store
+        - Custom alert message for failed store function
+    - update
+        - Custom alert message for update success function
+    - failed_update
+        - Custom alert message for failed update function
+    - delete
+        - Custom alert message for delete success function
+    - failed_delete
+        - Custom alert message for failed delete function
+    - bulk_delete
+        - Custom alert message for bulk delete success function
 
 <br>
 
@@ -226,7 +271,7 @@ Available configuration for controller
     ```
 - ### image
     ```html
-        <x-portal::input.image name="name_of_input_request" label="Label" placeholder="Placeholder" horizontal></x-portal::input.image>
+    <x-portal::input.image name="name_of_input_request" label="Label" placeholder="Placeholder" horizontal></x-portal::input.image>
     ```
 - ### radio
     ```html
