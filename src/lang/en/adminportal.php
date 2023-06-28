@@ -48,7 +48,7 @@ return [
     "generate_new_module" => "Generate New Module",
     "step_1_configuration" => "Step 1 - Configuration",
     "step_2_table_view" => "Step 2 - Table View",
-    "step_3_form_view" => "Step 2 - Form View",
+    "step_3_form_view" => "Step 3 - Form View",
     "add_more" => "Add More",
 
     "generate_module_success" => "New module generate successfully !",
