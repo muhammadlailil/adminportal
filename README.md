@@ -15,6 +15,8 @@
 Adminportal is a simple crud module generator for Laravel by making it easy for developers to customize the appearance of the generated modules. 
 By providing several built-in features that will make it easier and faster for developers to build applications.
 
+## 🔑 License
+Adminportal is under [MIT License](https://opensource.org/license/mit/)
 
 ## 📖 Table Of Contents
 <div>
