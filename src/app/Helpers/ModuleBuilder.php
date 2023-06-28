@@ -1,6 +1,7 @@
 <?php
 namespace Laililmahfud\Adminportal\Helpers;
 
+use Illuminate\Support\Str;
 use Laililmahfud\Adminportal\Helpers\AdminPortal;
 
 class ModuleBuilder
@@ -49,7 +50,7 @@ class ModuleBuilder
     {
         $table = request('table');
 
-        $modelName = str_replace(' ', '', ucwords(str_replace(["-", "_"], [" ", " "], $table)));
+        $modelName = Str::singular(str_replace(' ', '', ucwords(str_replace(["-", "_"], [" ", " "], $table))));
         $modelDir = app_path('Models');
         if (!file_exists($modelDir)) {
             @mkdir($modelDir, 0755);
