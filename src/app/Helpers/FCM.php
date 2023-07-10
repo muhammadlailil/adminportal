@@ -99,8 +99,7 @@ class FCM
             $response = Http::withHeaders([
                 'Authorization' => "key=" . $firebaseKey
             ])->post($firebaseUrl, $postData);
-            logger($response->body());
-            return  $response->json();
+            return  $response->body();
         }
     }
 }
