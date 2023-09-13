@@ -252,7 +252,7 @@ class AdminController extends Controller
             $successMessage = @$this->message['store'] ?? __('adminportal.data_success_add');
             return redirect(return_url() ?: route("{$this->routePath}.index"))->with(['success' => $successMessage]);
         } catch (BadRequestException $e) {
-            return redirect()->back()->with(['error' =>  $e->getMessage()]);
+            return redirect()->back()->withInput($request->input())->with(['error' =>  $e->getMessage()]);
         }
     }
 
@@ -272,7 +272,7 @@ class AdminController extends Controller
             $successMessage = @$this->message['update'] ?? __('adminportal.data_success_update');
             return redirect(return_url() ?: route("{$this->routePath}.index"))->with(['success' => $successMessage]);
         } catch (BadRequestException $e) {
-            return redirect()->back()->with(['error' =>  $e->getMessage()]);
+            return redirect()->back()->withInput($request->input())->with(['error' =>  $e->getMessage()]);
         }
     }
 
