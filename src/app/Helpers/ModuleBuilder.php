@@ -413,7 +413,7 @@ class ModuleBuilder
                 if ($joinQuery) {
                     $filterQuery .= "                ";
                 }
-                $filterQuery .= '$q->orWhere("' . $join . '.' . $table_join_relation[$y] . '", "like", "%" . $search . "%");' . "\r\n";
+                $filterQuery .= '$query->orWhere("' . $join . '.' . $table_join_relation[$y] . '", "like", "%" . $search . "%");' . "\r\n";
                 $joinQuery .= 'join("' . $join . '", "' . $table . '.' . $join . '_id", "' . $join . '.id")' . "\r\n";
                 $selectField .= ',"' . $join . '.' . $table_join_relation[$y] . ' as ' . $join . '_' . $table_join_relation[$y] . '"';
                 $tableSelect = "{$table}.";
@@ -426,7 +426,7 @@ class ModuleBuilder
                 if (($i == 0 && $joinQuery) || ($i != 0 && !$joinQuery)) {
                     $filterQuery .= '                ';
                 }
-                $filterQuery .= '$q->orWhere("' . $tableSelect . $col . '", "like", "%" . $search . "%");';
+                $filterQuery .= '$query->orWhere("' . $tableSelect . $col . '", "like", "%" . $search . "%");';
                 if ($i != count($table_columns) - 1) {
                     $filterQuery .= "\r\n";
                 }
@@ -436,7 +436,7 @@ class ModuleBuilder
             $filterQuery .= ";";
         }
         $whereCondition = ($joinQuery) ? '            ->' : '';
-        $whereCondition .= 'where(function ($q) use ($search) {
+        $whereCondition .= 'where(function ($query) use ($search) {
                 ' . $filterQuery . '
             })';
         $selectList = "\r\n" . '            ->select(' . $selectField . ')';

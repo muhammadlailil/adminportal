@@ -3,7 +3,7 @@ namespace Laililmahfud\Adminportal\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Laililmahfud\Adminportal\Traits\HasDatatable;
-use Laililmahfud\Adminportal\Models\RolesPermission;
+use Laililmahfud\Adminportal\Models\CmsRolesPermission;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Laililmahfud\Adminportal\Traits\HasUuid;
 
@@ -20,6 +20,6 @@ class CmsAdmin extends Model
 
     public function roles()
     {
-        return $this->belongsTo(RolesPermission::class, 'role_permission_id', 'id');
+        return $this->belongsTo(CmsRolesPermission::class, 'role_permission_id', 'id');
     }
 }

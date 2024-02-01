@@ -3,7 +3,7 @@ namespace Laililmahfud\Adminportal\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use Laililmahfud\Adminportal\Controllers\AdminController;
-use Laililmahfud\Adminportal\Models\RolesPermission;
+use Laililmahfud\Adminportal\Models\CmsRolesPermission;
 use Laililmahfud\Adminportal\Services\CmsAdminService;
 
 class AdminUsersController extends AdminController
@@ -40,7 +40,7 @@ class AdminUsersController extends AdminController
     public function create(Request $request)
     {
         $this->data =  [
-            'roles' => RolesPermission::all(['name', 'id']),
+            'roles' => CmsRolesPermission::all(['name', 'id']),
         ];
         return parent::create($request);
     }
@@ -48,7 +48,7 @@ class AdminUsersController extends AdminController
     public function edit(Request $request,$id)
     {
         $this->data =  [
-            'roles' => RolesPermission::all(['name', 'id']),
+            'roles' => CmsRolesPermission::all(['name', 'id']),
         ];
         return parent::edit($request,$id);
     }

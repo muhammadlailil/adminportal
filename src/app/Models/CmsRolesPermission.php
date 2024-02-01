@@ -7,11 +7,11 @@ use Laililmahfud\Adminportal\Traits\HasUuid;
 use Laililmahfud\Adminportal\Traits\HasDatatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class RolesPermission extends Model
+class CmsRolesPermission extends Model
 {
     use HasFactory,HasUuid,HasDatatable;
 
-    protected $table = 'roles_permission';
+    protected $table = 'cms_roles_permission';
     protected $fillable = ['name', 'is_superadmin','permissions','permission_modules'];
 
     protected $casts = [

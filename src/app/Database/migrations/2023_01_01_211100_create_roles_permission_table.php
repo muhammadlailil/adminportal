@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('roles_permission', function (Blueprint $table) {
+        Schema::create('cms_roles_permission', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid')->unique();
             $table->timestamps();

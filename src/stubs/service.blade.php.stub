@@ -13,7 +13,7 @@ class [serviceName] extends AdminService
 
     public function datatable(Request $request, $perPage = 10)
     {
-        $search = $request->search ?? '';
+        $search = $request->get('search','');
         
         return $this->model::[defaultQuery]
             ->datatable($perPage, "[tableName].created_at");

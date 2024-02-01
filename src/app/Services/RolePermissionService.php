@@ -3,13 +3,13 @@ namespace Laililmahfud\Adminportal\Services;
 
 use Illuminate\Http\Request;
 use Laililmahfud\Adminportal\Services\AdminService;
-use Laililmahfud\Adminportal\Models\RolesPermission;
+use Laililmahfud\Adminportal\Models\CmsRolesPermission;
 use Laililmahfud\Adminportal\Services\CmsModuleService;
 
 class RolePermissionService extends AdminService
 {
     public function __construct(
-        public $model = RolesPermission::class,
+        public $model = CmsRolesPermission::class,
         public $cmsModuleService = new CmsModuleService,
     ) {}
 

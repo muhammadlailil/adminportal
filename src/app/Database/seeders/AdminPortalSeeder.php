@@ -5,7 +5,7 @@ namespace Laililmahfud\Adminportal\Database\seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use Laililmahfud\Adminportal\Models\CmsAdmin;
-use Laililmahfud\Adminportal\Models\RolesPermission;
+use Laililmahfud\Adminportal\Models\CmsRolesPermission;
 
 class AdminPortalSeeder extends Seeder
 {
@@ -21,9 +21,9 @@ class AdminPortalSeeder extends Seeder
 
     private static function seedCmsUser()
     {
-        $privileges = RolesPermission::where('is_superadmin', 1)->first();
+        $privileges = CmsRolesPermission::where('is_superadmin', 1)->first();
         if (!$privileges) {
-            $privileges = RolesPermission::create([
+            $privileges = CmsRolesPermission::create([
                 'name' => 'Super Admin',
                 'is_superadmin' => 1,
             ]);
