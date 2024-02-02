@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->string('profile',250);
-            $table->foreignId('role_permission_id')->constrained('roles_permission')->onDelete('cascade');
+            $table->foreignId('role_permission_id')->constrained('cms_roles_permission')->onDelete('cascade');
             $table->boolean('status')->default(true);
         });
     }
