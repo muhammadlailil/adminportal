@@ -20,13 +20,13 @@ class CmsAdminService extends AdminService
     public function datatable(Request $request, $perPage = 10)
     {
         $search = $request->search ?? '';
-        return $this->model::join('roles_permission', 'cms_admin.role_permission_id', 'roles_permission.id')
+        return $this->model::join('cms_roles_permission', 'cms_admin.role_permission_id', 'cms_roles_permission.id')
             ->where(function ($q) use ($search) {
                 $q->where('cms_admin.name', 'like', "%{$search}%");
                 $q->orWhere('cms_admin.email', 'like', "%{$search}%");
-                $q->orWhere('roles_permission.name', 'like', "%{$search}%");
+                $q->orWhere('cms_roles_permission.name', 'like', "%{$search}%");
             })
-            ->select(['cms_admin.uuid', 'cms_admin.name', 'cms_admin.profile', 'cms_admin.email', 'cms_admin.status', 'roles_permission.name as role_name'])
+            ->select(['cms_admin.uuid', 'cms_admin.name', 'cms_admin.profile', 'cms_admin.email', 'cms_admin.status', 'cms_roles_permission.name as role_name'])
             ->datatable($perPage, "cms_admin.created_at");
     }
 

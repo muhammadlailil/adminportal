@@ -15,14 +15,14 @@ class AdminUsersController extends AdminController
 
     protected $tableColumns = [
         ["label" => "Name", "name" => "cms_admin.name"], ["label" => "Email", "name" => "cms_admin.email"],
-        ["label" => "Role", "name" => "roles_permission.name"], ["label" => "Status", "name" => "cms_admin.status"],
+        ["label" => "Role", "name" => "cms_roles_permission.name"], ["label" => "Status", "name" => "cms_admin.status"],
     ];
 
     protected $rules = [
         "name" => "required",
         "email" => "required|email",
         'password' => 'min:8|max:50|regex:/^.*(?=.{3,})(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).*$/',
-        "role_permission_id" => "required|exists:roles_permission,id",
+        "role_permission_id" => "required|exists:cms_roles_permission,id",
         "status" => "required|int|in:1,0",
     ];
 
