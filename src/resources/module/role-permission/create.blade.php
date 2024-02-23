@@ -87,22 +87,22 @@ document.querySelector('.btn-unselect').addEventListener('click',function(){
                         <li class="list-group-item ps-0 pt-1">
                             <ul class="p-0">
                                 <li class="list-group-item p-2 ps-0">
-                                    <x-portal::input.checkbox.option required="false" name="permissions[][$key->id]"
+                                    <x-portal::input.checkbox.option required="false" name="permissions[][{{$key->id}}]"
                                         value="add admin.{{str()->slug($pathRight)}}"
                                         label="add {{str()->slug($pathRight,' ')}}"></x-portal::input.checkbox.option>
                                 </li>
                                 <li class="list-group-item p-2 ps-0">
-                                    <x-portal::input.checkbox.option required="false" name="permissions[][$key->id]"
+                                    <x-portal::input.checkbox.option required="false" name="permissions[][{{$key->id}}]"
                                         value="view admin.{{str()->slug($pathRight)}}"
                                         label="view {{str()->slug($pathRight,' ')}}"></x-portal::input.checkbox.option>
                                 </li>
                                 <li class="list-group-item p-2 ps-0">
-                                    <x-portal::input.checkbox.option required="false" name="permissions[][$key->id]"
+                                    <x-portal::input.checkbox.option required="false" name="permissions[][{{$key->id}}]"
                                         value="edit admin.{{str()->slug($pathRight)}}"
                                         label="edit {{str()->slug($pathRight,' ')}}"></x-portal::input.checkbox.option>
                                 </li>
                                 <li class="list-group-item p-2 ps-0">
-                                    <x-portal::input.checkbox.option required="false" name="permissions[][$key->id]"
+                                    <x-portal::input.checkbox.option required="false" name="permissions[][{{$key->id}}]"
                                         value="delete admin.{{str()->slug($pathRight)}}"
                                         label="delete {{str()->slug($pathRight,' ')}}"></x-portal::input.checkbox.option>
                                 </li>
