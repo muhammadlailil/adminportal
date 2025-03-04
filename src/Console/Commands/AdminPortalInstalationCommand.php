@@ -3,9 +3,12 @@
 namespace Laililmahfud\Adminportal\Console\Commands;
 
 use Illuminate\Console\Command;
+use Laililmahfud\Adminportal\Enums\UserStatus;
 use function Laravel\Prompts\info;
-use function Laravel\Prompts\password;
 use function Laravel\Prompts\text;
+use Illuminate\Support\Facades\Hash;
+use function Laravel\Prompts\password;
+use Laililmahfud\Adminportal\Models\CmsAdmin;
 
 
 class AdminPortalInstalationCommand extends Command
@@ -38,13 +41,24 @@ class AdminPortalInstalationCommand extends Command
                                                                        
    ASCII;
         info($logo);
-        $this->call('icons:cache');
         $account = $this->askAccountCredential();
 
-        info("Successfully published assets!");
-        // $this->info($account->name);
-        // $this->info($account->email);
-        // $this->info($account->password);
+        $this->publishStub();
+        // $this->call('adminportal:migration');
+
+        info("Create permission ...");
+        $this->call('db:seed', ['--class' => 'Laililmahfud\Adminportal\Seeders\AdminCmsRolePermissionSeeder']);
+
+        CmsAdmin::create([
+            'name' => $account->name,
+            'email' => $account->email,
+            'role_permission_id' => 1,
+            'status' => UserStatus::Active,
+            'email_verified_at' => now(),
+            'password' => Hash::make($account->password)
+       ]);
+       $this->call('icons:cache');
+       info('Instalation finished, now you can login whit your account.');
     }
 
     private function askAccountCredential()
@@ -76,4 +90,41 @@ class AdminPortalInstalationCommand extends Command
             'password' => $password,
         ];
     }
+
+    private function publishStub()
+    {
+        // Publish dashboard controller
+        info("Generate controller ...");
+        $controllerDir = app_path('Http/Controllers/Admin');
+        if (!file_exists($controllerDir)) {
+            @mkdir($controllerDir, 0755);
+        }
+
+        if (!file_exists("{$controllerDir}/AdminDashboardController.php")) {
+            $controllerTemplate = file_get_contents(__DIR__ . '/../../../resources/stubs/Controllers/Admin/AdminDashboardController.php.stub');
+            file_put_contents($controllerDir . '/AdminDashboardController.php', $controllerTemplate);
+        }
+
+        // Publish dashboard view
+        info("Generate views ...");
+        $adminModuleDir = resource_path('views/admin');
+        if (!file_exists($adminModuleDir)) {
+            @mkdir($adminModuleDir, 0755);
+        }
+        if (!file_exists("{$adminModuleDir}/dashboard.blade.php")) {
+            $dashboardViewtemplate = file_get_contents(__DIR__ . '/../../../resources/stubs/views/admin/dashboard.blade.php.stub');
+            file_put_contents($adminModuleDir . '/dashboard.blade.php', $dashboardViewtemplate);
+        }
+
+        // Publish admin layout component
+        $componentsDir = resource_path('views/components');
+        if (!file_exists($componentsDir)) {
+            @mkdir($componentsDir, 0755);
+        }
+        if (!file_exists("{$componentsDir}/admin.blade.php")) {
+            $adminLayoutComponent = file_get_contents(__DIR__ . '/../../../resources/stubs/views/components/admin.blade.php.stub');
+            file_put_contents($componentsDir . '/admin.blade.php', $adminLayoutComponent);
+        }
+    }
+
 }

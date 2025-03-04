@@ -1,4 +1,4 @@
-<x-portal::layout.admin>
+<x-admin>
     <x-portal::separator class="my-5" />
     <div class="flex flex-1 flex-col space-y-2 overflow-hidden md:space-y-2 lg:flex-row lg:space-x-12 lg:space-y-0"
         x-data="{
@@ -72,4 +72,4 @@
             </div>
         </div>
     </div>
-</x-portal::layout.admin>
+</x-admin>

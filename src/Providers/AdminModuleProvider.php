@@ -27,30 +27,32 @@ class AdminModuleProvider extends ServiceProvider
       */
      public function boot()
      {
-          $namespace = portal('controllers.namespace');
-          foreach (File::allFiles(portal('controllers.path')) as $file) {
-               $class = $namespace . '\\' . str_replace('.php', '', $file->getRelativePathname());
-               if (!class_exists($class)) {
-                    continue;
-               }
-               if (is_subclass_of($class, AdminModule::class)) {
-                    if ((new ReflectionClass($class))->isAbstract()) {
+          if (!$this->app->runningInConsole()) {
+               $namespace = portal('controllers.namespace');
+               foreach (File::allFiles(portal('controllers.path')) as $file) {
+                    $class = $namespace . '\\' . str_replace('.php', '', $file->getRelativePathname());
+                    if (!class_exists($class)) {
                          continue;
                     }
-                    app(ModuleRegistry::class)->register($class);
+                    if (is_subclass_of($class, AdminModule::class)) {
+                         if ((new ReflectionClass($class))->isAbstract()) {
+                              continue;
+                         }
+                         app(ModuleRegistry::class)->register($class);
+                    }
                }
-          }
 
-          foreach (File::allFiles(__DIR__ . "/../Http/Controllers") as $file) {
-               $class = 'Laililmahfud\Adminportal\Http\Controllers\\' . str_replace('.php', '', $file->getRelativePathname());
-               if (!class_exists($class)) {
-                    continue;
-               }
-               if (is_subclass_of($class, AdminModule::class)) {
-                    if ((new ReflectionClass($class))->isAbstract()) {
+               foreach (File::allFiles(__DIR__ . "/../Http/Controllers") as $file) {
+                    $class = 'Laililmahfud\Adminportal\Http\Controllers\\' . str_replace('.php', '', $file->getRelativePathname());
+                    if (!class_exists($class)) {
                          continue;
                     }
-                    app(ModuleRegistry::class)->register($class);
+                    if (is_subclass_of($class, AdminModule::class)) {
+                         if ((new ReflectionClass($class))->isAbstract()) {
+                              continue;
+                         }
+                         app(ModuleRegistry::class)->register($class);
+                    }
                }
           }
      }

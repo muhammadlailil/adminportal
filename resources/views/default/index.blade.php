@@ -1,4 +1,4 @@
-<x-portal::layout.admin :route="$route">
+<x-admin :route="$route">
     <x-slot:button-action>
         @if (@$actions['import'])
             <div>
@@ -137,4 +137,4 @@
         </x-portal::alert-dialog>
     @endif
     @yield('html')
-</x-portal::layout.admin>
+</x-admin>

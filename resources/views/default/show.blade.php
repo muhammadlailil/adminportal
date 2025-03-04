@@ -1,3 +1,3 @@
-<x-portal::layout.admin>
+<x-admin>
    @include($view)
-</x-portal::layout.admin>
+</x-admin>
