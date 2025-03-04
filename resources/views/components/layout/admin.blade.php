@@ -143,7 +143,7 @@
                     </div>
                 @endif
 
-                <div class="ml-auto flex items-center space-x-4">
+                <div class="ml-auto flex items-center gap-3">
                     @if (portal('darkmode'))
                         <x-portal::layout.theme-toggle />
                     @endif
