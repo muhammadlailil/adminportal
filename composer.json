@@ -6,7 +6,7 @@
     "autoload": {
         "psr-4": {
             "Laililmahfud\\Adminportal\\": "src/",
-            "Laililmahfud\\Adminportal\\\\Seeders\\": "database/seeders/"
+            "Laililmahfud\\Adminportal\\Seeders\\": "database/seeders/"
         }
     },
     "authors": [

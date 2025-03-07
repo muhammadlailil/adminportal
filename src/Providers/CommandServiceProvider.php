@@ -4,6 +4,7 @@ namespace Laililmahfud\Adminportal\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Laililmahfud\Adminportal\Console\Commands\AdminPortalInstalationCommand;
+use Laililmahfud\Adminportal\Console\Commands\AdminPortalMigrationCommand;
 
 class CommandServiceProvider extends ServiceProvider
 {
@@ -11,7 +12,8 @@ class CommandServiceProvider extends ServiceProvider
     {
         if ($this->app->runningInConsole()) {
             $this->commands([
-                AdminPortalInstalationCommand::class
+                AdminPortalInstalationCommand::class,
+                AdminPortalMigrationCommand::class
             ]);
         }
     }
