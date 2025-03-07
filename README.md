@@ -7,7 +7,7 @@
 
 
 ## About Admin Portal
--
+See our documentation for installation and configuration [here](https://muhammadlailil.github.io/portal-docs/adminportal/index.html).
 
 ## Installation
 
@@ -19,8 +19,7 @@ composer require laililmahfud/adminportal
 
 ## License
 
-Portal UI is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Admin Portal is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 
-## Credits
-
-- 
+## Question
+If you have any question just submit in github issue [here](https://github.com/muhammadlailil/adminportal/issues)
