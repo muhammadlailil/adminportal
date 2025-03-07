@@ -1,6 +1,7 @@
 <?php
 namespace Laililmahfud\Adminportal\Http\Crud;
 
+use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Laililmahfud\Adminportal\Http\Exception\BadRequestException;
@@ -105,7 +106,12 @@ trait AdminModuleController
                     ...static::$rules->create,
                ]);
 
-               app(static::$action->create)->handle($request);
+               $action = static::$action->create;               
+               if($action instanceof Closure){
+                    $action($request);
+               }else{
+                    app($action)->handle($request);
+               }
 
                return redirect(route_from_current('index'))->withToast([
                     'title' => 'Congratulation !',
@@ -159,7 +165,12 @@ trait AdminModuleController
                     ...static::$rules->update,
                ]);
 
-               app(static::$action->update)->handle($request, $uuid);
+               $action = static::$action->update;               
+               if($action instanceof Closure){
+                    $action($request,$uuid);
+               }else{
+                    app($action)->handle($request, $uuid);
+               }
 
                return redirect(route_from_current('index'))->withToast([
                     'title' => 'Congratulation !',
@@ -189,7 +200,14 @@ trait AdminModuleController
 
 
           try {
-               app(static::$action->delete)->handle($uuid);
+
+               
+               $action = static::$action->delete;               
+               if($action instanceof Closure){
+                    $action($uuid);
+               }else{
+                    app($action)->handle($uuid);
+               }
 
                return redirect(route_from_current('index'))->withToast([
                     'title' => 'Congratulation !',
@@ -243,8 +261,14 @@ trait AdminModuleController
                $request->validate([
                     'file' => 'required|file|mimes:' . static::$action->import->validation
                ]);
-
-               app(static::$action->import->action)->handle($request->file('file'));
+               
+               $file = $request->file('file');
+               $action = static::$action->import->action;               
+               if($action instanceof Closure){
+                    $action($file);
+               }else{
+                    app($action)->handle($file);
+               }
 
                return redirect(route_from_current('index'))->withToast([
                     'title' => 'Congratulation !',
@@ -271,10 +295,16 @@ trait AdminModuleController
           abort_if(!$request->admin(true)?->can('view', static::$policy), Response::HTTP_UNAUTHORIZED);
 
           try {
-               $action = collect(static::$action->export)->where('type', $request->type)->first();
-               abort_if(!$action, Response::HTTP_NOT_FOUND);
+               $actions = collect(static::$action->export)->where('type', $request->type)->first();
+               abort_if(!$actions, Response::HTTP_NOT_FOUND);
 
-               return app($action->handle)->handle($request);
+               $action = $actions->handle;               
+               if($action instanceof Closure){
+                    return $action($request);
+               }else{
+                    return app($action)->handle($request);
+               }
+
           } catch (BadRequestException $e) {
                return redirect()->back()
                     ->withToast([

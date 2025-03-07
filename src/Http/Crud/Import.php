@@ -1,5 +1,6 @@
 <?php
 namespace Laililmahfud\Adminportal\Http\Crud;
+use Closure;
 
 class Import
 {
@@ -9,7 +10,7 @@ class Import
      public string $validation;
      public string $action;
 
-     public static function make(string $class): Import
+     public static function make(string|Closure $class): Import
      {
           $static = app(static::class);
           $static->action = $class;

@@ -1,5 +1,6 @@
 <?php
 namespace Laililmahfud\Adminportal\Http\Crud;
+use Closure;
 
 class Export
 {
@@ -9,7 +10,7 @@ class Export
      public string $handle;
 
 
-     public static function pdf(string $handle)
+     public static function pdf(string|Closure $handle)
      {
           $static = app(static::class);
           $static->type = "pdf";
@@ -19,7 +20,7 @@ class Export
           return $static;
      }
 
-     public static function xls(string $handle)
+     public static function xls(string|Closure $handle)
      {
           $static = app(static::class);
           $static->type = "xls";
@@ -29,7 +30,7 @@ class Export
           return $static;
      }
 
-     public static function csv(string $handle)
+     public static function csv(string|Closure $handle)
      {
           $static = app(static::class);
           $static->type = "csv";

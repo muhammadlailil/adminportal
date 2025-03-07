@@ -2,8 +2,9 @@
 namespace Laililmahfud\Adminportal\Repositories;
 
 use Illuminate\Http\Request;
-use Laililmahfud\Adminportal\Enums\UserStatus;
+use Illuminate\Support\Facades\Hash;
 use Laililmahfud\Adminportal\Models\CmsAdmin;
+use Laililmahfud\Adminportal\Enums\UserStatus;
 
 class CmsAdminRepository extends AdminRepository
 {
@@ -34,6 +35,21 @@ class CmsAdminRepository extends AdminRepository
                ->paginate($limit);
      }
 
+     public function update(Request $request,$uuid)
+     {
+          $props = [
+               'name' => $request->name,
+               'email' => $request->email,
+               'role_permission_id' => $request->role_permission_id,
+               'status' => $request->status,
+          ];
+
+          $props = array_merge($props, $request->filled('password') ? ['password' => Hash::make($request->password)] : []);
+
+          return $this->model::query()
+               ->where('uuid', $uuid)
+               ->update($props);
+     }
      public function deleteByListId(array $id)
      {
           return $this->model::query()
@@ -50,10 +66,10 @@ class CmsAdminRepository extends AdminRepository
                ]);
      }
 
-     public function update($id, $props)
-     {
-          return $this->model::query()
-               ->where('id', $id)
-               ->update($props);
-     }
+     // public function update($id, $props)
+     // {
+     //      return $this->model::query()
+     //           ->where('id', $id)
+     //           ->update($props);
+     // }
 }

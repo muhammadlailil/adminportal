@@ -1,11 +1,13 @@
 <?php
 namespace Laililmahfud\Adminportal\Http\Crud;
 
+use Closure;
+
 class Action
 {
-     public ?string $create = null;
-     public ?string $update = null;
-     public ?string $delete = null;
+     public string|Closure|null $create = null;
+     public string|Closure|null $update = null;
+     public string|Closure|null $delete = null;
      public bool $detail = false;
      public bool $filter = false;
      public bool $bulkAction = false;

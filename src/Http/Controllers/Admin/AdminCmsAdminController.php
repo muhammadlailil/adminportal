@@ -23,7 +23,8 @@ class AdminCmsAdminController extends Crud\AdminModule
           return $action
                ->crud(
                     create: Actions\CmdAdmin\CreateCmsAdmin::class,
-                    update: Actions\CmdAdmin\UpdateCmsAdmin::class,
+                    // update: Actions\CmdAdmin\UpdateCmsAdmin::class,
+                    update: fn(Request $request, $uuid) => app(CmsAdminRepository::class)->update($request, $uuid),
                     delete: Actions\CmdAdmin\DeleteCmsAdmin::class,
                )
                ->import(
