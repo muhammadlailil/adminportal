@@ -41,14 +41,11 @@ class AdminPortalInstalationCommand extends Command
                                                                        
    ASCII;
         info($logo);
-        $account = $this->askAccountCredential();
-
         $this->publishStub();
-        // $this->call('adminportal:migration');
-
+        $this->call('adminportal:migration');
         info("Create permission ...");
         $this->call('db:seed', ['--class' => 'Laililmahfud\Adminportal\Seeders\AdminCmsRolePermissionSeeder']);
-
+        $account = $this->askAccountCredential();
         CmsAdmin::create([
             'name' => $account->name,
             'email' => $account->email,
@@ -58,6 +55,9 @@ class AdminPortalInstalationCommand extends Command
             'password' => Hash::make($account->password)
        ]);
        $this->call('icons:cache');
+       $this->call('vendor:publish', ['--tag' => 'portal:lang', '--force' => true]);
+       $this->call('vendor:publish', ['--tag' => 'portal:config', '--force' => true]);
+       $this->call('vendor:publish', ['--tag' => 'portal:asset', '--force' => true]);
        info('Instalation finished, now you can login whit your account.');
     }
 

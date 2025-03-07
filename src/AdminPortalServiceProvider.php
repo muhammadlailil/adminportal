@@ -43,6 +43,9 @@ class AdminPortalServiceProvider extends ServiceProvider
         $router->aliasMiddleware('admin-verified', EnsureEmailIsVerified::class);
 
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'portal');
+        $this->publishes([__DIR__ . '/../resources/public' => public_path(''),], 'portal:asset');
+        $this->publishes([__DIR__ . '/../config/adminportal.php' => config_path('adminportal.php')], 'portal:config');
+        $this->publishes([__DIR__.'/../resources/lang' => base_path('lang')], 'portal:lang');
 
         $this->app->register(AdminModuleProvider::class);
         $this->app->register(AuthGuardServiceProvider::class);
@@ -50,7 +53,7 @@ class AdminPortalServiceProvider extends ServiceProvider
         $this->app->register(ConfigPreferenceServiceProvider::class);
         $this->app->register(CommandServiceProvider::class);
         $this->app->register(RouteServiceProvider::class);
-        
+
     }
 
 }
