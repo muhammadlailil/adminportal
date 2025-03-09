@@ -30,7 +30,7 @@ class AdminModuleProvider extends ServiceProvider
           if (!$this->app->runningInConsole()) {
                $namespace = portal('controllers.namespace');
                foreach (File::allFiles(portal('controllers.path')) as $file) {
-                    $class = $namespace . '\\' . str_replace('.php', '', $file->getRelativePathname());
+                    $class = $namespace . '\\' . str_replace('.php', '', str_replace('/','\\',$file->getRelativePathname()));
                     if (!class_exists($class)) {
                          continue;
                     }
@@ -43,7 +43,7 @@ class AdminModuleProvider extends ServiceProvider
                }
 
                foreach (File::allFiles(__DIR__ . "/../Http/Controllers") as $file) {
-                    $class = 'Laililmahfud\Adminportal\Http\Controllers\\' . str_replace('.php', '', $file->getRelativePathname());
+                    $class = 'Laililmahfud\Adminportal\Http\Controllers\\' . str_replace('.php', '', str_replace('/','\\',$file->getRelativePathname()));
                     if (!class_exists($class)) {
                          continue;
                     }
