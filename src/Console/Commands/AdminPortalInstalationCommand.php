@@ -55,6 +55,7 @@ class AdminPortalInstalationCommand extends Command
             'password' => Hash::make($account->password)
        ]);
        $this->call('icons:cache');
+       $this->call('vendor:publish', ['--tag' => 'portal-ui:asset', '--force' => true]);
        $this->call('vendor:publish', ['--tag' => 'portal:lang', '--force' => true]);
        $this->call('vendor:publish', ['--tag' => 'portal:config', '--force' => true]);
        $this->call('vendor:publish', ['--tag' => 'portal:asset', '--force' => true]);

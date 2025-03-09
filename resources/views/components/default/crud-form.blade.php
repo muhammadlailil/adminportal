@@ -1,5 +1,5 @@
 <x-portal::dialog id="crud-form" size="lg">
-    <form x-data="{ submited: false }" x-ref="crudFormElement" id="crudFormElement" x-on:submit="submited=true" method="POST">
+    <form x-data="{ submited: false }" x-ref="crudFormElement" id="crudFormElement" x-on:submit="submited=true" method="POST" enctype="multipart/form-data">
         @csrf
         <x-portal::dialog.header>
             <x-portal::dialog.title>

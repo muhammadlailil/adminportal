@@ -64,7 +64,11 @@ if (!function_exists('route_from_current')) {
           $routes = request()->route()->getName();
           $routes = explode(".", $routes);
           $routes[count($routes) - 1] = $key;
-          return route(implode(".", $routes), $props);
+          $routename = implode(".", $routes);
+          if (\Illuminate\Support\Facades\Route::has($routename)) {
+               return route($routename, $props);
+          }
+          return null;
      }
 }
 
@@ -78,8 +82,8 @@ if (!function_exists('is_active_menu')) {
 if (!function_exists('is_active_main_menu')) {
      function is_active_main_menu($childrens)
      {
-          foreach($childrens as $child){
-               if(request()->is("{$child->url}*")){
+          foreach ($childrens as $child) {
+               if (request()->is("{$child->url}*")) {
                     return true;
                }
           }
@@ -89,9 +93,9 @@ if (!function_exists('is_active_main_menu')) {
 
 
 if (!function_exists('breadcrumb')) {
-     function breadcrumb($title = null,$action = null)
+     function breadcrumb($title = null, $action = null)
      {
-          if(!$title && !$action){
+          if (!$title && !$action) {
                return [
                     [
                          'label' => 'Dashboard',

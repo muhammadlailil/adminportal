@@ -23,7 +23,9 @@ class AdminSessionGuard extends SessionGuard
           }
 
 
-          $id = $this->session->get($this->getName());
+          if(!$id = $this->session->get($this->getName())){
+               return null;
+          }
 
           $this->user = CmsAdmin::find($id);
           return $this->user;
