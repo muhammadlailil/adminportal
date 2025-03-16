@@ -15,7 +15,7 @@
                     <x-portal::form action="{{ route('admin.verification.update') }}" method="POST"
                         id="form-resend-link">
                         @csrf
-                        <x-portal::button x-bind:loading="submited" type="submit" class="w-full">
+                        <x-portal::button x-bind:loading="submitted" type="submit" class="w-full">
                             {{ __('adminportal.label.resend_verification_email') }}
                         </x-portal::button>
                     </x-portal::form>

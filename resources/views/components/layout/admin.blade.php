@@ -7,6 +7,7 @@
     <title>{{ @$pageTitle }} - {{ config('app.name') }}</title>
     <link rel="shortcut icon" href="{{ asset(portal('favicon')) }}" type="image/x-icon">
     @portalUI
+    @include('admin.partials.css')
 
 </head>
 
@@ -239,6 +240,7 @@
         const LANG = @json(__('adminportal.expose'))
     </script>
     <script src="{{ asset('adminportal/js/admin.js') }}"></script>
+    @include('admin.partials.js')
 </body>
 
 </html>

@@ -29,7 +29,7 @@
                             <x-portal::button variant="outline" x-on:click="dialog='';$refs.fileImport.value=''">
                                 {{ __('adminportal.cancel') }}
                             </x-portal::button>
-                            <x-portal::button type="submit" x-bind:loading="submited">
+                            <x-portal::button type="submit" x-bind:loading="submitted">
                                 {{ __('adminportal.import') }}
                             </x-portal::button>
                         </x-portal::dialog.footer>

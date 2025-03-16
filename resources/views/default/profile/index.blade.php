@@ -39,7 +39,7 @@
                             placeholder="shadcn" type="text" value="{{ admin()->name }}" />
                         <x-portal::form.input name="email" label="{{ __('adminportal.form.email') }}"
                             placeholder="name@example.com" value="{{ admin()->email }}" type="email" />
-                        <x-portal::button x-bind:loading="submited" type="submit">
+                        <x-portal::button x-bind:loading="submitted" type="submit">
                             {{ __('adminportal.save') }}
                         </x-portal::button>
                     </x-portal::form>
@@ -64,7 +64,7 @@
                             label="{{ __('adminportal.form.password_confirmation') }}" placeholder="********" viewable
                             required />
 
-                        <x-portal::button x-bind:loading="submited" type="submit">
+                        <x-portal::button x-bind:loading="submitted" type="submit">
                             {{ __('adminportal.save') }}
                         </x-portal::button>
                     </x-portal::form>

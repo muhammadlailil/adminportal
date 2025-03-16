@@ -7,7 +7,6 @@ use Laililmahfud\Adminportal\Enums\UserStatus;
 use function Laravel\Prompts\info;
 use function Laravel\Prompts\text;
 use Illuminate\Support\Facades\Hash;
-use function Laravel\Prompts\password;
 use Laililmahfud\Adminportal\Models\CmsAdmin;
 
 

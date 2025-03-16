@@ -11,13 +11,11 @@ class ExportCmsAdmin
      {
 
           $items = CmsAdmin::with(['permission:id,name'])->get();
-          $headers = [
-               'Content-Type' => 'text/csv',
-               'Content-Disposition' => 'attachment; filename="cms-admin.csv"',
-          ];
+        
+          $filePath = storage_path('app/public/temp/cms-admin.csv');
 
           // Open output stream for CSV
-          $output = fopen('php://output', 'w');
+          $output = fopen($filePath, 'w');
           fputcsv($output, [
                'Name',
                'Email',
@@ -39,6 +37,6 @@ class ExportCmsAdmin
           fclose($output);
 
           // Return the response with headers
-          return response('', 200, $headers);
+          return response()->download($filePath)->deleteFileAfterSend(true);
      }
 }

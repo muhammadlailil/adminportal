@@ -1,0 +1,45 @@
+<?php
+namespace App\Repository;
+
+use App\Models\[modelName];
+use Illuminate\Http\Request;
+use Laililmahfud\Adminportal\Repositories\AdminRepository;
+
+class [repositoryName] extends AdminRepository
+{
+     public function __construct(
+          public $model = [modelName]::class
+     ) {
+     }
+
+     public function datatable(Request $request, $limit)
+     {
+          return $this->model::query()
+               ->search([
+                    'name'
+               ])
+               ->sorting("created_at")
+               ->paginate($limit);
+     }
+
+
+     public function store(Request $request)
+     {
+          $data = $request->only([
+               'name'
+          ]);
+          return $this->model::query()
+               ->create($data);
+     }
+
+     public function update(Request $request, $uuid)
+     {
+          $data = $request->only([
+               'name'
+          ]);
+          return $this->model::query()
+               ->where('uuid', $uuid)
+               ->update($data);
+     }
+
+}

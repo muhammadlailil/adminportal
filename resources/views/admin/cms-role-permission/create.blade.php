@@ -46,7 +46,7 @@
             <div class="flex md:flex-row flex-col-reverse gap-3">
                 <x-portal::button variant="outline"
                     href="{{ route_from_current('index') }}">Cancel</x-portal::button>
-                <x-portal::button x-bind:loading="submited" type="submit">Submit</x-portal::button>
+                <x-portal::button x-bind:loading="submitted" type="submit">Submit</x-portal::button>
             </div>
         </div>
     </div>

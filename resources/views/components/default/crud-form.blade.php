@@ -1,5 +1,5 @@
 <x-portal::dialog id="crud-form" size="lg">
-    <form x-data="{ submited: false }" x-ref="crudFormElement" id="crudFormElement" x-on:submit="submited=true" method="POST" enctype="multipart/form-data">
+    <form x-data="{ submitted: false }" x-ref="crudFormElement" id="crudFormElement" x-on:submit="submitted=true" method="POST" enctype="multipart/form-data">
         @csrf
         <x-portal::dialog.header>
             <x-portal::dialog.title>
@@ -18,7 +18,7 @@
             <x-portal::button variant="outline" type="button" x-on:click="toggleDialog('crud-form')">
                 {{ __('adminportal.cancel') }}
             </x-portal::button>
-            <x-portal::button type="submit" x-bind:loading="submited">
+            <x-portal::button type="submit" x-bind:loading="submitted">
                 {{ __('adminportal.save') }}
             </x-portal::button>
         </x-portal::dialog.footer>

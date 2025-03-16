@@ -22,7 +22,7 @@
                         <x-portal::form.input type="email" name="email" label="{{ __('adminportal.form.email') }}"
                             required placeholder="name@example.com" value="{{ old('email') }}" />
 
-                        <x-portal::button x-bind:loading="submited" type="submit" class="w-full">
+                        <x-portal::button x-bind:loading="submitted" type="submit" class="w-full">
                             {{ __('adminportal.auth.forgot_password.continue') }}
                         </x-portal::button>
                     </x-portal::form>

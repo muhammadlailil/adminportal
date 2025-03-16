@@ -32,7 +32,7 @@
                             label="{{ __('adminportal.form.password_confirmation') }}" placeholder="********" viewable
                             required />
 
-                        <x-portal::button x-bind:loading="submited" type="submit" class="w-full">
+                        <x-portal::button x-bind:loading="submitted" type="submit" class="w-full">
                             {{ __('adminportal.auth.reset_password.title') }}
                         </x-portal::button>
                     </x-portal::form>

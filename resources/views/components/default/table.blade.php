@@ -26,8 +26,8 @@
         <div class="flex space-x-2 w-full">
             <form action="{{ request()->url() }}" method="get" class="md:w-fit w-full">
                 {!! input_hidden_query(['search']) !!}
-                <x-portal::input type="text" placeholder="Search {{@$pageTitle}} ..." name="search" class="w-[150px] lg:w-[300px]"
-                    value="{{ strip_tags(request('search') ?? '') }}" />
+                <x-portal::input type="text" placeholder="Search {{ @$pageTitle }} ..." name="search"
+                    class="w-[150px] lg:w-[300px]" value="{{ strip_tags(request('search') ?? '') }}" />
             </form>
             @if (@$actions['filter'])
                 <x-portal::popover>
@@ -80,8 +80,7 @@
                         @foreach ($actions['bulk_actions'] as $bulk)
                             <x-portal::dropdown-menu.item data-action="{{ $bulk['key'] }}"
                                 data-label="{{ $bulk['label'] }}" data-dialog="{{ $bulk['dialog'] }}"
-                                x-bind:data-selected="selectedTableID"
-                                data-variant="{{ $bulk['variant'] }}"
+                                x-bind:data-selected="selectedTableID" data-variant="{{ $bulk['variant'] }}"
                                 variant="{{ $bulk['variant'] }}" x-data-bulk-action-confirmation dismissible
                                 class="{{ $bulk['variant'] == 'danger' ? 'text-red-600' : '' }}">
                                 @svg("tabler-{$bulk['icon']}", [
@@ -120,6 +119,14 @@
         </thead>
         <tbody class="divide-y divide-border">
             {{ $slot }}
+            @if (!count($result))
+                <tr class="transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
+                    <td class="p-2 align-middle [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] text-[15px] h-24 text-center"
+                        colspan="{{ count($columns) + 2 }}">
+                        No results.
+                    </td>
+                </tr>
+            @endif
         </tbody>
     </x-portal::table>
     <div class="flex items-center justify-between">

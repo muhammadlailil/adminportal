@@ -27,34 +27,34 @@ class AdminModuleProvider extends ServiceProvider
       */
      public function boot()
      {
-          if (!$this->app->runningInConsole()) {
-               $namespace = portal('controllers.namespace');
-               foreach (File::allFiles(portal('controllers.path')) as $file) {
-                    $class = $namespace . '\\' . str_replace('.php', '', str_replace('/','\\',$file->getRelativePathname()));
-                    if (!class_exists($class)) {
-                         continue;
-                    }
-                    if (is_subclass_of($class, AdminModule::class)) {
-                         if ((new ReflectionClass($class))->isAbstract()) {
-                              continue;
-                         }
-                         app(ModuleRegistry::class)->register($class);
-                    }
+          // if (!$this->app->runningInConsole()) {
+          $namespace = portal('controllers.namespace');
+          foreach (File::allFiles(portal('controllers.path')) as $file) {
+               $class = $namespace . '\\' . str_replace('.php', '', str_replace('/', '\\', $file->getRelativePathname()));
+               if (!class_exists($class)) {
+                    continue;
                }
-
-               foreach (File::allFiles(__DIR__ . "/../Http/Controllers") as $file) {
-                    $class = 'Laililmahfud\Adminportal\Http\Controllers\\' . str_replace('.php', '', str_replace('/','\\',$file->getRelativePathname()));
-                    if (!class_exists($class)) {
+               if (is_subclass_of($class, AdminModule::class)) {
+                    if ((new ReflectionClass($class))->isAbstract()) {
                          continue;
                     }
-                    if (is_subclass_of($class, AdminModule::class)) {
-                         if ((new ReflectionClass($class))->isAbstract()) {
-                              continue;
-                         }
-                         app(ModuleRegistry::class)->register($class);
-                    }
+                    app(ModuleRegistry::class)->register($class);
                }
           }
+
+          foreach (File::allFiles(__DIR__ . "/../Http/Controllers") as $file) {
+               $class = 'Laililmahfud\Adminportal\Http\Controllers\\' . str_replace('.php', '', str_replace('/', '\\', $file->getRelativePathname()));
+               if (!class_exists($class)) {
+                    continue;
+               }
+               if (is_subclass_of($class, AdminModule::class)) {
+                    if ((new ReflectionClass($class))->isAbstract()) {
+                         continue;
+                    }
+                    app(ModuleRegistry::class)->register($class);
+               }
+          }
+          // }
      }
 
 }

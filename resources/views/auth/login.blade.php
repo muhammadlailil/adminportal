@@ -34,7 +34,7 @@
                                 </x-portal::link>
                             @endif
                         </div>
-                        <x-portal::button x-bind:loading="submited" type="submit" class="w-full">
+                        <x-portal::button x-bind:loading="submitted" type="submit" class="w-full">
                             {{ __('adminportal.auth.login.title') }}
                         </x-portal::button>
                     </x-portal::form>

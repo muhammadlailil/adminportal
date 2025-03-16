@@ -1,0 +1,12 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+use Laililmahfud\Adminportal\Traits\HasUuid;
+use Laililmahfud\Adminportal\Traits\HasDatatable;
+
+class [modelName] extends Model
+{
+    use HasUuid, HasDatatable;
+}
