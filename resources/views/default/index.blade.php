@@ -26,7 +26,7 @@
                             </x-portal::form.description>
                         </x-portal::dialog.content>
                         <x-portal::dialog.footer>
-                            <x-portal::button variant="outline" x-on:click="dialog='';$refs.fileImport.value=''">
+                            <x-portal::button variant="outline" type="button" x-on:click="dialog='';$refs.fileImport.value=''">
                                 {{ __('adminportal.cancel') }}
                             </x-portal::button>
                             <x-portal::button type="submit" x-bind:loading="submitted">
