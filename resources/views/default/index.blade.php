@@ -7,7 +7,7 @@
                     <x-tabler-upload class="h-4.5" />
                 </x-portal::button>
                 <x-portal::dialog id="import-data" dismissible>
-                    <x-portal::form action="{{ @$route['import'] }}" method="POST" enctype="multipart/form-data">
+                    <x-portal::form action="{{ @$route['import'] }}" method="POST" enctype="multipart/form-data" class="!space-y-0">
                         @csrf
                         <x-portal::dialog.header>
                             <x-portal::dialog.title>
