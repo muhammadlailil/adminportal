@@ -43,7 +43,7 @@
                             <div class="space-y-2 p-5">
                                 <x-portal::dialog.title>Filter</x-portal::dialog.title>
                             </div>
-                            <div class="grid gap-2 px-5 py-1 max-h-[400px] overflow-auto">
+                            <div class="grid gap-2 px-5 py-1 max-h-[400px]">
                                 {{ @$filterForm }}
                             </div>
                             <div class="flex flex-col-reverse sm:flex-row sm:justify-end gap-2 p-5">

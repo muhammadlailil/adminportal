@@ -39,8 +39,6 @@ Route::middleware(['admin-guest'])->as('auth.')->group(function () {
           }
 
      }
-
-
 });
 if (portal('authentication.verification')) {
      Route::controller(AdminEmailVerificationController::class)

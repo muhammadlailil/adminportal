@@ -27,7 +27,9 @@ class AdminModuleProvider extends ServiceProvider
       */
      public function boot()
      {
-          if (!$this->app->runningInConsole() || in_array('route:list', request()->server('argv') ?? [])) {
+          $commandAllowed = ['route:list','optimize','route:optimize'];
+          $inAllowedCommand = array_filter($commandAllowed, fn($item) => in_array($item, request()->server('argv') ?? []));
+          if (!$this->app->runningInConsole() || $inAllowedCommand) {
                $namespace = portal('controllers.namespace');
                foreach (File::allFiles(portal('controllers.path')) as $file) {
                     $class = $namespace . '\\' . str_replace('.php', '', str_replace('/', '\\', $file->getRelativePathname()));
