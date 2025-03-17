@@ -101,7 +101,7 @@
                 <x-portal::sidebar.footer.profile title="{{ admin()->name }}" description="{{ admin()->email }}"
                     alias="{{ str()->initial(admin()->name) }}">
                     <x-portal::dropdown-menu.separator />
-                    <x-portal::dropdown-menu.item as="a" href="{{ route('admin.profile.index') }}">
+                    <x-portal::dropdown-menu.item as="a" href="{{ route(config('adminportal.profile')) }}">
                         <x-tabler-settings class="h-4 w-4" />
                         Account
                     </x-portal::dropdown-menu.item>
@@ -151,7 +151,7 @@
                     <x-portal::layout.profile title="{{ admin()->name }}" description="{{ admin()->email }}"
                         alias="{{ str()->initial(admin()->name) }}">
                         <x-portal::dropdown-menu.separator />
-                        <x-portal::dropdown-menu.item as="a" href="{{ route('admin.profile.index') }}">
+                        <x-portal::dropdown-menu.item as="a" href="{{ route(config('adminportal.profile')) }}">
                             <x-tabler-settings class="h-4 w-4" />
                             Account
                         </x-portal::dropdown-menu.item>

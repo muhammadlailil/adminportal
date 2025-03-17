@@ -116,6 +116,18 @@ class AdminPortalInstalationCommand extends Command
             file_put_contents($adminModuleDir . '/dashboard.blade.php', $dashboardViewtemplate);
         }
 
+        $partialsDir = resource_path('views/admin/partials');
+        if (!file_exists($partialsDir)) {
+            @mkdir($partialsDir, 0755);
+        }
+        
+        if (!file_exists("{$partialsDir}/css.blade.php")) {
+            file_put_contents($adminModuleDir . '/css.blade.php', '');
+        }
+        if (!file_exists("{$partialsDir}/js.blade.php")) {
+            file_put_contents($adminModuleDir . '/js.blade.php', '');
+        }
+
         // Publish admin layout component
         $componentsDir = resource_path('views/components');
         if (!file_exists($componentsDir)) {

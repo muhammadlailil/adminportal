@@ -56,14 +56,16 @@ Route::post('logout', [AdminAuthenticateSessionController::class, 'destroy'])->m
 Route::middleware(['admin-auth', 'admin-verified'])->group(function () {
 
      Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
-     Route::controller(AdminProfileController::class)
-          ->prefix('profile')
-          ->as('profile.')
-          ->group(function () {
-               Route::get('/', 'index')->name('index');
-               Route::post('/update', 'update')->name('update');
-               Route::post('/update/password', 'updatePassword')->name('update-password');
-          });
+     if (config('adminportal.profile') == 'admin.profile.index') {
+          Route::controller(AdminProfileController::class)
+               ->prefix('profile')
+               ->as('profile.')
+               ->group(function () {
+                    Route::get('/', 'index')->name('index');
+                    Route::post('/update', 'update')->name('update');
+                    Route::post('/update/password', 'updatePassword')->name('update-password');
+               });
+     }
 
      foreach (app(ModuleRegistry::class)->routes() as $route) {
           Route::resource($route['url'], $route['controller'])->only($route['resources']);

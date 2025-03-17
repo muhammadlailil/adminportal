@@ -51,6 +51,7 @@ return [
       */
      'toast' => 'top-right',
 
+     'profile' => 'admin.profile.index',
 
      /*
      | --------------------------------------------
