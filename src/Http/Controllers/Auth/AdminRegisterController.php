@@ -20,13 +20,13 @@ class AdminRegisterController
      {
           $request->validate([
                'name' => ['required', 'string', 'max:255'],
-               'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . CmsAdmin::class],
+               'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . config('adminportal.authentication.model')],
                'password' => ['required', 'confirmed', Rules\Password::defaults()],
           ]);
 
           $rolePermission = CmsRolePermission::where('is_superadmin', false)->firstOrFail();
 
-          $user = CmsAdmin::create([
+          $user = app(config('adminportal.authentication.model'))->create([
                'name' => $request->name,
                'email' => $request->email,
                'password' => Hash::make($request->password),

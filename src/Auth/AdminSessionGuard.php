@@ -3,7 +3,6 @@
 namespace Laililmahfud\Adminportal\Auth;
 
 use Illuminate\Auth\SessionGuard;
-use Illuminate\Support\Facades\Cache;
 use Laililmahfud\Adminportal\Models\CmsAdmin;
 
 class AdminSessionGuard extends SessionGuard
@@ -27,7 +26,7 @@ class AdminSessionGuard extends SessionGuard
                return null;
           }
 
-          $this->user = CmsAdmin::find($id);
+          $this->user = app(config('adminportal.authentication.model'))->find($id);
           return $this->user;
      }
 

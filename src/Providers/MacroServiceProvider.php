@@ -31,8 +31,9 @@ class MacroServiceProvider extends ServiceProvider
                if (!$admin = admin()) {
                     return null;
                }
-               if ($eloquent && !$admin instanceof CmsAdmin) {
-                    $admin = CmsAdmin::findOrFail($admin->id);
+               $model = config('adminportal.authentication.model');
+               if ($eloquent && !$admin instanceof $model) {
+                    $admin = app($model)->findOrFail($admin->id);
                }
                return $admin;
           });

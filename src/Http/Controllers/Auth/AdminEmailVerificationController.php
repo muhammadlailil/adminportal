@@ -28,7 +28,7 @@ class AdminEmailVerificationController
                return to_route('admin.verification.notice')->with('error', __('adminportal.label.link_verification_expired'));
           }
 
-          $user = CmsAdmin::firstByUuid($uuid);
+          $user = app(config('adminportal.authentication.model'))->firstByUuid($uuid);
 
           if (!hash_equals((string) $hash, sha1($user->email))) {
                return abort(403);

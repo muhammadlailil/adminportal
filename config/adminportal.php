@@ -59,6 +59,7 @@ return [
      | 
      */
      'authentication' => [
+          'model' => Laililmahfud\Adminportal\Models\CmsAdmin::class,
           'verification' => true,
           'login' => [
                'route' => 'admin.auth.login',

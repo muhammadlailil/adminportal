@@ -102,7 +102,7 @@ class AuthGuardServiceProvider extends ServiceProvider
 
           Config::set('auth.providers.admin', [
                'driver' => 'eloquent',
-               'model' => CmsAdmin::class,
+               'model' => config('adminportal.authentication.model'),
           ]);
 
           Config::set('auth.passwords.admin', [
@@ -113,7 +113,7 @@ class AuthGuardServiceProvider extends ServiceProvider
 
      private function defineGate()
      {
-          Gate::define('create', function (CmsAdmin $admin, $scope) {
+          Gate::define('create', function ($admin, $scope) {
                $permission = $admin->permission;
                if ($permission->is_superadmin) {
                     return true;
@@ -121,7 +121,7 @@ class AuthGuardServiceProvider extends ServiceProvider
                return in_array("create:" . $scope, $permission->permissions);
           });
 
-          Gate::define('update', function (CmsAdmin $admin, $scope) {
+          Gate::define('update', function ($admin, $scope) {
                $permission = $admin->permission;
                if ($permission->is_superadmin) {
                     return true;
@@ -129,7 +129,7 @@ class AuthGuardServiceProvider extends ServiceProvider
                return in_array("update:" . $scope, $permission->permissions);
           });
 
-          Gate::define('delete', function (CmsAdmin $admin, $scope) {
+          Gate::define('delete', function ($admin, $scope) {
                $permission = $admin->permission;
                if ($permission->is_superadmin) {
                     return true;
@@ -137,7 +137,7 @@ class AuthGuardServiceProvider extends ServiceProvider
                return in_array("delete:" . $scope, $permission->permissions);
           });
 
-          Gate::define('view', function (CmsAdmin $admin, $scope) {
+          Gate::define('view', function ($admin, $scope) {
                $permission = $admin->permission;
                if ($permission->is_superadmin) {
                     return true;
@@ -145,7 +145,7 @@ class AuthGuardServiceProvider extends ServiceProvider
                return in_array("view:" . $scope, $permission->permissions);
           });
 
-          Gate::define('bulk-action', function (CmsAdmin $admin, $scope) {
+          Gate::define('bulk-action', function ($admin, $scope) {
                $permission = $admin->permission;
                if ($permission->is_superadmin) {
                     return true;

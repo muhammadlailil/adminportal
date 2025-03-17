@@ -51,7 +51,7 @@ class AdminForgotPasswordController
 
           $status = Password::broker('admin')->reset(
                $request->only('email', 'password', 'password_confirmation', 'token'),
-               function (CmsAdmin $user, string $password) {
+               function ($user, string $password) {
                     $user->forceFill([
                          'password' => Hash::make($password),
                     ])->save();
