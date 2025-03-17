@@ -42,15 +42,16 @@ Route::middleware(['admin-guest'])->as('auth.')->group(function () {
 
 
 });
-
-Route::controller(AdminEmailVerificationController::class)
-     ->as('verification.')
-     ->prefix('email/verify')
-     ->group(function () {
-          Route::get('{uuid}/{hash}', 'store')->name('verify');
-          Route::get('', 'index')->middleware(['admin-auth'])->name('notice');
-          Route::post('', 'update')->middleware(['throttle:2,1'])->name('update');
-     });
+if (portal('authentication.verification')) {
+     Route::controller(AdminEmailVerificationController::class)
+          ->as('verification.')
+          ->prefix('email/verify')
+          ->group(function () {
+               Route::get('{uuid}/{hash}', 'store')->name('verify');
+               Route::get('', 'index')->middleware(['admin-auth'])->name('notice');
+               Route::post('', 'update')->middleware(['throttle:2,1'])->name('update');
+          });
+}
 Route::post('logout', [AdminAuthenticateSessionController::class, 'destroy'])->middleware(['admin-auth'])->name('auth.logout');
 Route::middleware(['admin-auth', 'admin-verified'])->group(function () {
 
