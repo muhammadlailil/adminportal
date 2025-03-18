@@ -18,13 +18,13 @@ trait AdminModuleController
                     'create' => 'Create',
                     'edit' => 'Update',
                     default => 'List',
-               },title : static::$title),
-               'pageTitle' => static::$title,
+               },title : static::getTitle()),
+               'pageTitle' => static::getTitle(),
                'pageDescription' => match ($route) {
-                    'index' => static::$description ?? "Manage your " . static::$title . " data here.",
-                    'create' => static::$description ?? "Add your new " . static::$title . " data here.",
-                    'edit' => static::$description ?? "Update your " . static::$title . " data here.",
-                    'show' => static::$description ?? "See detail your " . static::$title . " data here.",
+                    'index' => static::$description ?? "Manage your " . static::getTitle() . " data here.",
+                    'create' => static::$description ?? "Add your new " . static::getTitle() . " data here.",
+                    'edit' => static::$description ?? "Update your " . static::getTitle() . " data here.",
+                    'show' => static::$description ?? "See detail your " . static::getTitle() . " data here.",
                     default => '',
                },
           ];
@@ -146,7 +146,7 @@ trait AdminModuleController
                     'method' => 'PATCH'
                ],
                ...$allProps(),
-               ...$updateProps(),
+               ...$updateProps($uuid),
           ];
           if(!@$data['row']){
                $data['row'] = app(static::$repository)->findByUuid($uuid);;

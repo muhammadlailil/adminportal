@@ -12,10 +12,10 @@ class AdminModule
     protected static string $description;
     protected static string $policy;
     protected static string $repository;
-    protected static string $title;
+    protected static string $title = "";
     protected static string $icon = "";
     protected static string $group = "General";
-    protected static string $resourcePath;
+    protected static string $resourcePath = "";
     protected static string $parent = "";
     protected static string $parentIcon = "";
     protected static bool $bottomNavigation = false;
@@ -244,6 +244,10 @@ class AdminModule
     public static function navigationBadge()
     {
         return null;
+    }
+
+    public static function getTitle(){
+        return static::$title;
     }
 
 }

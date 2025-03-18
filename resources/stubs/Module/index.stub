@@ -10,7 +10,7 @@
             {{ $row->name }}
         </x-portal::table.cell>
 
-        <x-portal::table.cell class="font-medium text-right !py-2">
+        <x-portal::table.cell class="font-normal text-right !py-2">
             <x-portal::dropdown-menu class="flex justify-end">
                 <x-portal::dropdown-menu.trigger variant="ghost" class="h-fit !px-1 !py-1">
                     <x-tabler-dots class="h-4.5" />
