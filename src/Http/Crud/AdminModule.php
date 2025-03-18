@@ -21,6 +21,7 @@ class AdminModule
     protected static bool $bottomNavigation = false;
     protected static bool $hideNavigation = false;
     protected static int $sorting = 0;
+    protected static int $parentSorting = 0;
     protected static Crud\Action $action;
     protected static Crud\Table $table;
     protected static Crud\SharedProp $shared;
@@ -206,6 +207,7 @@ class AdminModule
            'title' => static::$title,
            'icon' => static::$icon,
            'sorting' => static::$sorting,
+           'parent_sorting' => static::$parentSorting,
            'url' => portal("admin_path")."/".static::$url,
            'parent' => static::$parent,
            'parent_icon' => static::$parentIcon,

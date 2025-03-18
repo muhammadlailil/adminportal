@@ -87,8 +87,10 @@ class ModuleRegistry
             $childrens = $navigations
                 ->where('parent', '!=', '')
                 ->where('parent', $item['parent']);
+            $sorting = count($childrens) ? $item['parent_sorting'] : $item['sorting'];
+            $sorting = $sorting ?: count($navigations);
             return (object) [
-                'sorting' => $item['sorting'] ?: count($navigations),
+                'sorting' => $sorting,
                 'title' => $item['parent'] ?: $item['title'],
                 'icon' => $item['parent_icon'] ?: $item['icon'],
                 'url' => !$item['parent'] ? $item['url'] : null,
