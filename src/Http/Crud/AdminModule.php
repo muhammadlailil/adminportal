@@ -253,4 +253,8 @@ class AdminModule
     public static function getNavigationTitle(){
         return static::$title;
     }
+
+    public static function expose(){
+        return true;
+    }
 }

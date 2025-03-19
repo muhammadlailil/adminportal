@@ -23,6 +23,9 @@ return [
      */
     'darkmode' => true,
      
+    
+    'cms_admin_module' => true,
+
      /*
      | --------------------------------------------
      | Application logo and favicon

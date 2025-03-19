@@ -102,7 +102,9 @@ class AdminCmsAdminController extends Crud\AdminModule
                });
      }
 
-
+     public static function expose(){
+          return config('adminportal.cms_admin_module');
+     }
      /*
       |
       |  #[Route(url: '/approve', method: 'POST', name: 'approve')]

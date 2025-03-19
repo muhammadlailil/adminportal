@@ -63,8 +63,9 @@ class AdminCmsRolePermissionController extends Crud\AdminModule
      {
           return $share
                ->all(function () {
-                    return [
-                         'modules' => [
+                    $modules = [];
+                    if (config('adminportal.cms_admin_module')) {
+                         $modules = [
                               [
                                    'policy' => 'user-admin',
                                    'title' => 'User Admin',
@@ -78,9 +79,15 @@ class AdminCmsRolePermissionController extends Crud\AdminModule
                                         'bulk-action:delete-user-admin',
                                         'bulk-action:update-status-user-admin'
                                    ]
-                              ],
-                              ...app(ModuleRegistry::class)->modules()
-                         ]
+                              ]
+                         ];
+                    }
+                    $modules = [
+                         ...$modules,
+                         ...app(ModuleRegistry::class)->modules(resolve: true)
+                    ];
+                    return [
+                         'modules' => $modules
                     ];
                });
      }

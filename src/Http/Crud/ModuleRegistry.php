@@ -16,22 +16,28 @@ class ModuleRegistry
 
     public function routes(): Collection
     {
-        return collect($this->modules)->map(function ($class) {
-            $resources = $class::getRoutes();
-            return [
-                'url' => $resources['prefix'],
-                'controller' => $class,
-                'resources' => $resources['resources'],
-                'additionals' => $resources['additionals']
-            ];
-        });
-
+        $routes = [];
+        foreach($this->modules as $class){
+            if($class::expose()){
+                $resources = $class::getRoutes();
+                $routes[] = [
+                    'url' => $resources['prefix'],
+                    'controller' => $class,
+                    'resources' => $resources['resources'],
+                    'additionals' => $resources['additionals']
+                ];
+            }
+        }
+        return collect($routes);
     }
 
-    public function modules($badge = false): array
+    public function modules($badge = false,$resolve = false): array
     {
         $modules = [];
-        foreach ($this->modules as $class) {
+        foreach ($this->modules as $class) {            
+            if($resolve){
+                $class::resolve();
+            }
             if ($module = $class::getModule()) {
                 if($badge){
                     $module['badge'] = $class::navigationBadge();
@@ -45,7 +51,7 @@ class ModuleRegistry
     public function navigations()
     {
         $permission = admin()->permission;
-        $modules = collect($this->modules(true))
+        $modules = collect($this->modules(badge : true))
             ->when(!$permission->is_superadmin, fn($modules) => $modules->filter(fn($module) => in_array("view:" . $module['policy'], $permission->permissions ?: [])))
             ->toArray();
 
