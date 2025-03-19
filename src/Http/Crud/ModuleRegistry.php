@@ -46,7 +46,7 @@ class ModuleRegistry
     {
         $permission = admin()->permission;
         $modules = collect($this->modules(true))
-            ->when(!$permission->is_superadmin, fn($modules) => $modules->filter(fn($module) => in_array("view:" . $module['policy'], $permission->permissions)))
+            ->when(!$permission->is_superadmin, fn($modules) => $modules->filter(fn($module) => in_array("view:" . $module['policy'], $permission->permissions ?: [])))
             ->toArray();
 
         $modules = collect([

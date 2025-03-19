@@ -88,7 +88,7 @@ class AuthGuardServiceProvider extends ServiceProvider
                if($permission?->is_superadmin){
                     return true;
                }
-               return in_array($ability.":" . $argument, $permission->permissions);
+               return in_array($ability.":" . $argument, $permission->permissions ?: []);
           });
 
      }
@@ -118,7 +118,7 @@ class AuthGuardServiceProvider extends ServiceProvider
                if ($permission->is_superadmin) {
                     return true;
                }
-               return in_array("create:" . $scope, $permission->permissions);
+               return in_array("create:" . $scope, $permission->permissions ?: []);
           });
 
           Gate::define('update', function ($admin, $scope) {
@@ -126,7 +126,7 @@ class AuthGuardServiceProvider extends ServiceProvider
                if ($permission->is_superadmin) {
                     return true;
                }
-               return in_array("update:" . $scope, $permission->permissions);
+               return in_array("update:" . $scope, $permission->permissions ?: []);
           });
 
           Gate::define('delete', function ($admin, $scope) {
@@ -134,7 +134,7 @@ class AuthGuardServiceProvider extends ServiceProvider
                if ($permission->is_superadmin) {
                     return true;
                }
-               return in_array("delete:" . $scope, $permission->permissions);
+               return in_array("delete:" . $scope, $permission->permissions ?: []);
           });
 
           Gate::define('view', function ($admin, $scope) {
@@ -142,7 +142,7 @@ class AuthGuardServiceProvider extends ServiceProvider
                if ($permission->is_superadmin) {
                     return true;
                }
-               return in_array("view:" . $scope, $permission->permissions);
+               return in_array("view:" . $scope, $permission->permissions ?: []);
           });
 
           Gate::define('bulk-action', function ($admin, $scope) {
@@ -150,7 +150,7 @@ class AuthGuardServiceProvider extends ServiceProvider
                if ($permission->is_superadmin) {
                     return true;
                }
-               return in_array("bulk-action:" . $scope, $permission->permissions);
+               return in_array("bulk-action:" . $scope, $permission->permissions ?: []);
           });
      }
 
