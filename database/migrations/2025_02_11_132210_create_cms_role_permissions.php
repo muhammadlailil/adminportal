@@ -16,7 +16,7 @@ return new class extends Migration
             $table->uuid('uuid')->unique();
             $table->timestamps();
             $table->string('name',150);
-            $table->string('alias',150);
+            $table->string('alias',200)->index();
             $table->boolean('is_superadmin');
             $table->json('permissions')->nullable();
         });

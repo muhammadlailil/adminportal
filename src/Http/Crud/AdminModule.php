@@ -204,7 +204,7 @@ class AdminModule
         return [
            'group' => static::$group,
            'policy' => static::$policy,
-           'title' => static::$title,
+           'title' => static::getNavigationTitle(),
            'icon' => static::$icon,
            'sorting' => static::$sorting,
            'parent_sorting' => static::$parentSorting,
@@ -250,4 +250,7 @@ class AdminModule
         return static::$title;
     }
 
+    public static function getNavigationTitle(){
+        return static::$title;
+    }
 }
