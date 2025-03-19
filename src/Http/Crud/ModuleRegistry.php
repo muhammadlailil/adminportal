@@ -34,15 +34,17 @@ class ModuleRegistry
     public function modules($badge = false,$resolve = false): array
     {
         $modules = [];
-        foreach ($this->modules as $class) {            
-            if($resolve){
-                $class::resolve();
-            }
-            if ($module = $class::getModule()) {
-                if($badge){
-                    $module['badge'] = $class::navigationBadge();
+        foreach ($this->modules as $class) {   
+            if($class::expose()){         
+                if($resolve){
+                    $class::resolve();
                 }
-                $modules[] = $module;
+                if ($module = $class::getModule()) {
+                    if($badge){
+                        $module['badge'] = $class::navigationBadge();
+                    }
+                    $modules[] = $module;
+                }
             }
         }
         return $modules;
