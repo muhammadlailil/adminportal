@@ -17,14 +17,12 @@ class AdminCmsRolePermissionSeeder extends Seeder
         if (!$haveSuperadminPermission) {
             $adminportalPermission = [
                 [
-                    'uuid' => Str::uuid(),
                     'name' => 'Superadmin',
                     'alias' => 'superadmin',
                     'is_superadmin' => true,
                     'created_at' => now(),
                 ],
                 [
-                    'uuid' => Str::uuid(),
                     'name' => 'Team Support',
                     'alias' => 'team-support',
                     'is_superadmin' => false,

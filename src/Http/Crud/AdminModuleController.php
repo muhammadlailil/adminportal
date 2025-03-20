@@ -65,8 +65,9 @@ trait AdminModuleController
      public function show(Request $request, $uuid)
      {
           abort_if(!$request->admin(true)?->can('view', static::$policy), Response::HTTP_UNAUTHORIZED);
+          $id = id_from_uuid($uuid);
 
-          $row = app(static::$repository)->findByUuid($uuid);
+          $row = app(static::$repository)->firstOrFail($id);
           $detailProps = static::$shared->detail;
 
           $data = [
@@ -136,6 +137,7 @@ trait AdminModuleController
 
      public function edit(Request $request,$uuid){
           abort_if(!$request->admin(true)?->can('update', static::$policy), Response::HTTP_UNAUTHORIZED);
+          $id = id_from_uuid($uuid);
 
           $updateProps = static::$shared->update;
           $allProps = static::$shared->all;
@@ -146,19 +148,23 @@ trait AdminModuleController
                     'method' => 'PATCH'
                ],
                ...$allProps(),
-               ...$updateProps($uuid),
+               ...$updateProps($id),
           ];
           if(!@$data['row']){
-               $data['row'] = app(static::$repository)->findByUuid($uuid);;
+               $data['row'] = app(static::$repository)->firstOrFail($id);;
           }
           return view("portal::default.form", $data);
      }
      public function update(Request $request, $uuid)
      {
           abort_if(!$request->admin(true)?->can('update', static::$policy), Response::HTTP_UNAUTHORIZED);
+          $id = id_from_uuid($uuid);
 
 
-          $request->merge(['uuid' => $uuid]);
+          $request->merge([
+               'id' => $id,
+               'uuid' => $uuid
+          ]);
           try {
                $request->validate([
                     ...static::$rules->all,
@@ -167,9 +173,9 @@ trait AdminModuleController
 
                $action = static::$action->update;               
                if($action instanceof Closure){
-                    $action($request,$uuid);
+                    $action($request,$id);
                }else{
-                    app($action)->handle($request, $uuid);
+                    app($action)->handle($request, $id);
                }
 
                return redirect(route_from_current('index'))->withToast([
@@ -182,7 +188,9 @@ trait AdminModuleController
                return redirect()->back()
                     ->withErrors($e->errors())
                     ->withInput()
-                    ->with('openDialog', 'update-crud-form');
+                    ->with([
+                         'openDialog'=> 'update-crud-form'
+                    ]);
           } catch (BadRequestException $e) {
                return redirect()->back()
                     ->withToast([
@@ -197,6 +205,7 @@ trait AdminModuleController
      public function destroy(Request $request, $uuid)
      {
           abort_if(!$request->admin(true)?->can('delete', static::$policy), Response::HTTP_UNAUTHORIZED);
+          $id = id_from_uuid($uuid);
 
 
           try {
@@ -204,9 +213,9 @@ trait AdminModuleController
                
                $action = static::$action->delete;               
                if($action instanceof Closure){
-                    $action($uuid);
+                    $action($id);
                }else{
-                    app($action)->handle($uuid);
+                    app($action)->handle($id);
                }
 
                return redirect(route_from_current('index'))->withToast([

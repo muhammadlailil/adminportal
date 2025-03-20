@@ -1,9 +1,8 @@
 <?php
-namespace Laililmahfud\Adminportal\Actions\CmdAdmin;
+namespace Laililmahfud\Adminportal\Actions\CmsAdmin;
 
 use Illuminate\Support\Str;
 use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Laililmahfud\Adminportal\Models\CmsAdmin;
@@ -35,7 +34,6 @@ class ImportCmsAdmin
                }
 
                $chunks[] = [
-                    'uuid' => DB::raw("uuid()"),
                     'name' => $row[0],
                     'email' => $row[1],
                     'role_permission_id' => $permission->id,

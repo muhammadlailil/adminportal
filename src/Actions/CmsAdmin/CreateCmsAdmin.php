@@ -1,5 +1,5 @@
 <?php
-namespace Laililmahfud\Adminportal\Actions\CmdAdmin;
+namespace Laililmahfud\Adminportal\Actions\CmsAdmin;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;

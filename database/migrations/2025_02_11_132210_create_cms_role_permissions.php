@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('cms_role_permissions', function (Blueprint $table) {
             $table->id();
-            $table->uuid('uuid')->unique();
             $table->timestamps();
             $table->string('name',150);
             $table->string('alias',200)->index();

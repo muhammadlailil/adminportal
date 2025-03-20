@@ -22,16 +22,16 @@ class AdminCmsAdminController extends Crud\AdminModule
      {
           return $action
                ->crud(
-                    create: Actions\CmdAdmin\CreateCmsAdmin::class,
-                    // update: Actions\CmdAdmin\UpdateCmsAdmin::class,
-                    update: fn(Request $request, $uuid) => app(CmsAdminRepository::class)->update($request, $uuid),
-                    delete: Actions\CmdAdmin\DeleteCmsAdmin::class,
+                    create: Actions\CmsAdmin\CreateCmsAdmin::class,
+                    // update: Actions\CmsAdmin\UpdateCmsAdmin::class,
+                    update: fn(Request $request, $id) => app(CmsAdminRepository::class)->update($request, $id),
+                    delete: Actions\CmsAdmin\DeleteCmsAdmin::class,
                )
                ->import(
-                    Crud\Import::make(Actions\CmdAdmin\ImportCmsAdmin::class)->csv(sample: url('import-format/format-import-cms-admin.csv'))
+                    Crud\Import::make(Actions\CmsAdmin\ImportCmsAdmin::class)->csv(sample: url('import-format/format-import-cms-admin.csv'))
                )
                ->export([
-                    Crud\Export::csv(Actions\CmdAdmin\ExportCmsAdmin::class),
+                    Crud\Export::csv(Actions\CmsAdmin\ExportCmsAdmin::class),
                     // Crud\Export::pdf(ExportUser::class),
                     // Crud\Export::xls(ExportUser::class),
                ])
@@ -87,7 +87,7 @@ class AdminCmsAdminController extends Crud\AdminModule
                     'email' => [
                          'required',
                          'email',
-                         Rule::unique('cms_admins')->ignore(request()->route('user_admin'), 'uuid'),
+                         Rule::unique('cms_admins')->ignore(id_from_uuid(request()->route('user_admin'))),
                     ]
                ]);
      }

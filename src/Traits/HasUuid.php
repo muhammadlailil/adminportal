@@ -1,23 +1,16 @@
 <?php
 namespace Laililmahfud\Adminportal\Traits;
 
-use Illuminate\Support\Str;
-use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 trait HasUuid
 {
-    protected static function boot()
+    protected function uuid(): Attribute
     {
-        parent::boot();
-        static::creating(function ($model) {
-            if (empty($model->uuid)) {
-                $model->uuid = Str::uuid()->toString();
-            }
-        });
-    }
-
-    public function scopeFirstByUuid(Builder $query, $uuid)
-    {
-        return $query->whereUuid($uuid)->firstOrFail();
+        return Attribute::make(
+            get: function ($value, $attribute) {
+                return id_to_uuid($attribute['id']);
+            },
+        );
     }
 }

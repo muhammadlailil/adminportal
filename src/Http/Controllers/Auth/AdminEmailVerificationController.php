@@ -3,7 +3,6 @@ namespace Laililmahfud\Adminportal\Http\Controllers\Auth;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
-use Laililmahfud\Adminportal\Models\CmsAdmin;
 use Laililmahfud\Adminportal\Events\RefreshSession;
 use Laililmahfud\Adminportal\Notifications\VerificationEmailNotification;
 
@@ -27,8 +26,9 @@ class AdminEmailVerificationController
           if (!URL::hasValidSignature($request)) {
                return to_route('admin.verification.notice')->with('error', __('adminportal.label.link_verification_expired'));
           }
+          $id = id_from_uuid($uuid);
 
-          $user = app(config('adminportal.authentication.model'))->firstByUuid($uuid);
+          $user = app(config('adminportal.authentication.model'))->firstOrFail($id);
 
           if (!hash_equals((string) $hash, sha1($user->email))) {
                return abort(403);

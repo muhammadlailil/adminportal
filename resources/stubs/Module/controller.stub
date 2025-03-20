@@ -19,8 +19,8 @@ class [controllerName] extends Crud\AdminModule
           return $action
                ->crud(
                     create: fn(Request $request) => app([repositoryName]::class)->store($request),
-                    update: fn(Request $request, $uuid) => app([repositoryName]::class)->update($request, $uuid),
-                    delete: fn($uuid) => app([repositoryName]::class)->deleteByUuid($uuid),
+                    update: fn(Request $request, $id) => app([repositoryName]::class)->update($request, $id),
+                    delete: fn($id) => app([repositoryName]::class)->delete($id),
                )
                ->bulkActions([
                     Crud\BulkAction::make("Delete")

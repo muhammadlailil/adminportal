@@ -32,13 +32,13 @@ class [repositoryName] extends AdminRepository
                ->create($data);
      }
 
-     public function update(Request $request, $uuid)
+     public function update(Request $request, $id)
      {
           $data = $request->only([
                'name'
           ]);
           return $this->model::query()
-               ->where('uuid', $uuid)
+               ->where('id', $id)
                ->update($data);
      }
 

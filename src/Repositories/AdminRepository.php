@@ -10,6 +10,11 @@ class AdminRepository
           return $this->model::query()->where('uuid', $uuid)->firstOrFail();
      }
 
+     public function firstOrFail($id)
+     {
+          return $this->model::query()->where('id', $id)->firstOrFail();
+     }
+
      public function deleteByListId(array $id)
      {
           return $this->model::query()
@@ -17,10 +22,10 @@ class AdminRepository
                ->delete();
      }
 
-     public function deleteByUuid($uuid)
+     public function delete($id)
      {
           return $this->model::query()
-               ->where('uuid', $uuid)
+               ->where('id', $id)
                ->delete();
      }
 }

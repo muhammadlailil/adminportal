@@ -1,14 +1,14 @@
 <?php
-namespace Laililmahfud\Adminportal\Actions\CmdAdmin;
+namespace Laililmahfud\Adminportal\Actions\CmsAdmin;
 
 use Laililmahfud\Adminportal\Models\CmsAdmin;
 
 class DeleteCmsAdmin
 {
-     public function handle($uuid)
+     public function handle($id)
      {
           return CmsAdmin::query()
-               ->where('uuid', $uuid)
+               ->where('id', $id)
                ->firstOrFail()
                ->delete();
      }

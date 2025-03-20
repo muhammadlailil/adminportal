@@ -127,3 +127,26 @@ if (!function_exists('navigations')) {
           return app(ModuleRegistry::class)->navigations();
      }
 }
+
+if (!function_exists('id_to_uuid')) {
+     function id_to_uuid($id)
+     {
+          if(!$id){
+               return null;
+          }
+          $compressed = gzcompress($id);
+          return substr(base64_encode($compressed), 0, 36);
+     }
+}
+
+
+if (!function_exists('id_from_uuid')) {
+     function id_from_uuid($uuid)
+     {
+          if(!$uuid){
+               return null;
+          }
+          $decoded = base64_decode($uuid);
+          return gzuncompress($decoded);
+     }
+}

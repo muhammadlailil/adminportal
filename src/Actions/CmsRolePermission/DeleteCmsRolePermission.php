@@ -5,10 +5,10 @@ use Laililmahfud\Adminportal\Models\CmsRolePermission;
 
 class DeleteCmsRolePermission
 {
-     public function handle($uuid)
+     public function handle($id)
      {
           return CmsRolePermission::query()
-               ->where('uuid', $uuid)
+               ->where('id', $id)
                ->delete();
      }
 }

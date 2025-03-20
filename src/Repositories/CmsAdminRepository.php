@@ -35,7 +35,7 @@ class CmsAdminRepository extends AdminRepository
                ->paginate($limit);
      }
 
-     public function update(Request $request,$uuid)
+     public function update(Request $request,$id)
      {
           $props = [
                'name' => $request->name,
@@ -47,7 +47,7 @@ class CmsAdminRepository extends AdminRepository
           $props = array_merge($props, $request->filled('password') ? ['password' => Hash::make($request->password)] : []);
 
           return $this->model::query()
-               ->where('uuid', $uuid)
+               ->where('id', $id)
                ->update($props);
      }
      public function deleteByListId(array $id)
@@ -65,11 +65,4 @@ class CmsAdminRepository extends AdminRepository
                     'status' => UserStatus::from($status)
                ]);
      }
-
-     // public function update($id, $props)
-     // {
-     //      return $this->model::query()
-     //           ->where('id', $id)
-     //           ->update($props);
-     // }
 }
