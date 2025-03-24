@@ -1,5 +1,5 @@
 <?php
-namespace Laililmahfud\Adminportal\Http\Exception;
+namespace Laililmahfud\Adminportal\Http\Exceptions;
 
 class BadRequestException  extends \Exception
 {
