@@ -51,7 +51,7 @@ if (portal('authentication.verification')) {
           });
 }
 Route::post('logout', [AdminAuthenticateSessionController::class, 'destroy'])->middleware(['admin-auth'])->name('auth.logout');
-Route::middleware(['admin-auth', 'admin-verified'])->group(function () {
+Route::middleware(config('adminportal.middleware'))->group(function () {
 
      Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
      if (config('adminportal.profile') == 'admin.profile.index') {

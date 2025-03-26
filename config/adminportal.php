@@ -21,10 +21,10 @@ return [
      | Enable disable dark mode
      | --------------------------------------------
      */
-    'darkmode' => true,
-     
-    
-    'cms_admin_module' => true,
+     'darkmode' => true,
+
+
+     'cms_admin_module' => true,
 
      /*
      | --------------------------------------------
@@ -55,6 +55,11 @@ return [
      'toast' => 'top-right',
 
      'profile' => 'admin.profile.index',
+
+     'middleware' => [
+          'admin-auth',
+          'admin-verified'
+     ],
 
      /*
      | --------------------------------------------
