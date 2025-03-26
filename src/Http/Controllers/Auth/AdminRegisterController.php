@@ -6,7 +6,6 @@ use Illuminate\Validation\Rules;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Auth\Events\Registered;
-use Laililmahfud\Adminportal\Models\CmsAdmin;
 use Laililmahfud\Adminportal\Models\CmsRolePermission;
 
 class AdminRegisterController

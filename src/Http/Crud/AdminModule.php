@@ -209,7 +209,7 @@ class AdminModule
            'sorting' => static::$sorting,
            'parent_sorting' => static::$parentSorting,
            'url' => portal("admin_path")."/".static::$url,
-           'parent' => static::$parent,
+           'parent' => static::getNavigationParentTitle(),
            'parent_icon' => static::$parentIcon,
            'is_bottom' => static::$bottomNavigation,
            'permissions' => $permission ? self::getPermission() : []
@@ -252,6 +252,10 @@ class AdminModule
 
     public static function getNavigationTitle(){
         return static::$title;
+    }
+
+    public static function getNavigationParentTitle(){
+        return static::$parent;
     }
 
     public static function expose(){
