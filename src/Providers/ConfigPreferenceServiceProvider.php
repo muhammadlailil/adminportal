@@ -29,7 +29,7 @@ class ConfigPreferenceServiceProvider extends ServiceProvider
      {
 
           Model::unguard();
-          Model::shouldBeStrict();
+          // Model::shouldBeStrict();
 
           Date::use(CarbonImmutable::class);
           DB::prohibitDestructiveCommands($this->app->isProduction());
