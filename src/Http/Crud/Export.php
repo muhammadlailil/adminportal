@@ -14,7 +14,7 @@ class Export
      {
           $static = app(static::class);
           $static->type = "pdf";
-          $static->label = "pdf";
+          $static->label = "Export to pdf";
           $static->icon = "file-type-pdf";
           $static->handle = $handle;
           return $static;
@@ -24,7 +24,7 @@ class Export
      {
           $static = app(static::class);
           $static->type = "xls";
-          $static->label = "xls";
+          $static->label = "Export to xls";
           $static->icon = "file-type-xls";
           $static->handle = $handle;
           return $static;
@@ -34,8 +34,26 @@ class Export
      {
           $static = app(static::class);
           $static->type = "csv";
-          $static->label = "csv";
+          $static->label = "Export to csv";
           $static->icon = "file-type-csv";
+          $static->handle = $handle;
+          return $static;
+     }
+
+     public static function make($label){
+          $static = app(static::class);
+          $static->label = $label;
+          return $static;
+     }
+
+     public static function icon($icon){
+          $static = app(static::class);
+          $static->label = $icon;
+          return $static;
+     }
+
+     public static function action($handle){
+          $static = app(static::class);
           $static->handle = $handle;
           return $static;
      }

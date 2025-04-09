@@ -132,7 +132,7 @@ class AdminModule
 
         $actions['export'] = collect($action->export)->map(fn(Export $export) => [
             'key' => $export->type,
-            'label' => "Export to " . $export->label,
+            'label' => $export->label,
             'icon' => $export->icon,
         ]);
         $actions['bulk_actions'] = collect($action->bulkActions)->map(fn(BulkAction $action) => [
