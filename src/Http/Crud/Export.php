@@ -43,22 +43,20 @@ class Export
      public static function make($label, $type = null)
      {
           $static = app(static::class);
-          $static->tyoe = $type ?: str()->slug($label);
+          $static->type = $type ?: str()->slug($label);
           $static->label = $label;
           return $static;
      }
 
-     public static function icon($icon)
+     public function icon($icon)
      {
-          $static = app(static::class);
-          $static->label = $icon;
-          return $static;
+          $this->icon = $icon;
+          return $this;
      }
 
-     public static function action($handle)
+     public function action($handle)
      {
-          $static = app(static::class);
-          $static->handle = $handle;
-          return $static;
+          $this->handle = $handle;
+          return $this;
      }
 }

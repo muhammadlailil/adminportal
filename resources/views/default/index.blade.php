@@ -43,7 +43,7 @@
                     {{ __('adminportal.export') }}
                     <x-tabler-download class="h-4.5" />
                 </x-portal::dropdown-menu.trigger>
-                <x-portal::dropdown-menu.content class="w-40" align="end" side="bottom">
+                <x-portal::dropdown-menu.content class="min-w-40" align="end" side="bottom">
                     @foreach (@$actions['export'] as $export)
                         <form action="{{ @$route['export'] }}" method="POST">
                             @csrf
