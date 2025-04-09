@@ -40,19 +40,23 @@ class Export
           return $static;
      }
 
-     public static function make($label){
+     public static function make($label, $type = null)
+     {
           $static = app(static::class);
+          $static->tyoe = $type ?: str()->slug($label);
           $static->label = $label;
           return $static;
      }
 
-     public static function icon($icon){
+     public static function icon($icon)
+     {
           $static = app(static::class);
           $static->label = $icon;
           return $static;
      }
 
-     public static function action($handle){
+     public static function action($handle)
+     {
           $static = app(static::class);
           $static->handle = $handle;
           return $static;
