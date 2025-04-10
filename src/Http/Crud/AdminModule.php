@@ -132,7 +132,7 @@ class AdminModule
 
         $actions['export'] = collect($action->export)->map(fn(Export $export) => [
             'key' => $export->type,
-            'label' => $export->label,
+            'label' => "Export to " . $export->label,
             'icon' => $export->icon,
         ]);
         $actions['bulk_actions'] = collect($action->bulkActions)->map(fn(BulkAction $action) => [
@@ -143,6 +143,7 @@ class AdminModule
             'dialog' => $action->dialogConfirmation
         ]);
         $actions['in_left'] = $action->actionInLeft;
+        $actions['action'] = $action->action;
         $actions['popup_form'] = $action->crudPopup;
 
         return $actions;
@@ -257,7 +258,6 @@ class AdminModule
     public static function getNavigationParentTitle(){
         return static::$parent;
     }
-
     public static function expose(){
         return true;
     }

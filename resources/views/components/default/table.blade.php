@@ -102,7 +102,7 @@
                         <x-portal::checkbox x-on:click="toggleSelectAll" />
                     </x-portal::table.head>
                 @endif
-                @if (@$actions['in_left'])
+                @if (@$actions['in_left'] && @$actions['action'])
                     <x-portal::table.head>Action</x-portal::table.head>
                 @endif
                 @foreach ($columns as $column)
@@ -110,7 +110,7 @@
                         {{ $column['label'] }}
                     </x-portal::table.head>
                 @endforeach
-                @if (!@$actions['in_left'])
+                @if (!@$actions['in_left'] && @$actions['action'])
                     <x-portal::table.head class="[&>*]:justify-end">
                         {{ __('adminportal.action') }}
                     </x-portal::table.head>

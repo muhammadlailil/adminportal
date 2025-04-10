@@ -13,6 +13,7 @@ class Action
      public bool $bulkAction = false;
      public bool $actionInLeft = false;
      public bool $crudPopup = false;
+     public bool $action = true;
      /**
       * @var Export[]
       */
@@ -88,6 +89,12 @@ class Action
      public function detail(): Action
      {
           $this->detail = true;
+          return $this;
+     }
+
+     public function noAction(): Action
+     {
+          $this->action = false;
           return $this;
      }
 
