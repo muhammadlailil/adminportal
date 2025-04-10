@@ -48,6 +48,7 @@
                         <form action="{{ @$route['export'] }}" method="POST">
                             @csrf
                             <input type="hidden" name="type" value="{{ $export['key'] }}">
+                            {!! input_hidden_query() !!}
                             <x-portal::dropdown-menu.item as="button" type="submit" dismissible>
                                 <span>
                                     @svg("tabler-{$export['icon']}", [
