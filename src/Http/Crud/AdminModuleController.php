@@ -4,7 +4,7 @@ namespace Laililmahfud\Adminportal\Http\Crud;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Laililmahfud\Adminportal\Http\Exception\BadRequestException;
+use Laililmahfud\Adminportal\Http\Exceptions\BadRequestException;
 
 trait AdminModuleController
 {
