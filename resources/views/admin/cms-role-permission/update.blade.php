@@ -72,7 +72,7 @@
                }">
                     <x-portal::form.item name="permission">
                          <x-portal::form.label class="flex gap-2">
-                              {{ $module['title'] }}
+                              {{ @$module['title_page'] ?: @$module['title'] }}
                               <x-portal::checkbox id="{{ $module['policy'] }}" value="{{ $module['policy'] }}"
                                    name="module[]" x-on:change="select" />
                          </x-portal::form.label>

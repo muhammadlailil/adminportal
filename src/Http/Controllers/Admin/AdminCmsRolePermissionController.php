@@ -84,6 +84,19 @@ class AdminCmsRolePermissionController extends Crud\AdminModule
                     }
                     $modules = [
                          ...$modules,
+                         ...[
+                              [
+                                   'policy' => 'cms-role-permission',
+                                   'title' => 'Roles & Permission',
+                                   'permissions' => [
+                                        'view:cms-role-permission',
+                                        'create:cms-role-permission',
+                                        'update:cms-role-permission',
+                                        'delete:cms-role-permission',
+                                        'bulk-action:delete-cms-role-permission',
+                                   ]
+                              ]
+                         ],
                          ...app(ModuleRegistry::class)->modules(resolve: true)
                     ];
                     return [

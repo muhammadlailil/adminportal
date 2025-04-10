@@ -206,6 +206,7 @@ class AdminModule
            'group' => static::$group,
            'policy' => static::$policy,
            'title' => static::getNavigationTitle(),
+           'title_page' => static::getTitle(),
            'icon' => static::$icon,
            'sorting' => static::$sorting,
            'parent_sorting' => static::$parentSorting,
