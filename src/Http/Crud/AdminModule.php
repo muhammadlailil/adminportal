@@ -122,6 +122,7 @@ class AdminModule
     public static function getActions(): array
     {
         $actions = [];
+        $permission = admin()->permission;
         $action = self::$action;
 
         foreach (['create', 'update', 'delete', 'detail', 'import', 'bulkAction', 'filter'] as $key) {
@@ -130,18 +131,31 @@ class AdminModule
             }
         }
 
-        $actions['export'] = collect($action->export)->map(fn(Export $export) => [
-            'key' => $export->type,
-            'label' => "Export to " . $export->label,
-            'icon' => $export->icon,
-        ]);
-        $actions['bulk_actions'] = collect($action->bulkActions)->map(fn(BulkAction $action) => [
-            'key' => $action->key,
-            'label' => $action->label . " Selected",
-            'icon' => $action->icon,
-            'variant' => $action->variant,
-            'dialog' => $action->dialogConfirmation
-        ]);
+        $exports = [];
+        foreach($action->export as $export){
+            if(in_array("export".static::$policy,$permission->permissions ?: []) || $permission->is_superadmin){
+                $exports[] = [
+                    'key' => $export->type,
+                    'label' => "Export to " . $export->label,
+                    'icon' => $export->icon,
+                ];
+            }
+        }
+        $actions['export'] = $exports;
+
+        $bulk_actions = [];
+        foreach($action->bulkActions as $bulkAction){
+            if(in_array("bulk-action:".$bulkAction->key."-".static::$policy,$permission->permissions ?: []) || $permission->is_superadmin){
+                $bulk_actions[] = [
+                    'key' => $bulkAction->key,
+                    'label' => $bulkAction->label . " Selected",
+                    'icon' => $bulkAction->icon,
+                    'variant' => $bulkAction->variant,
+                    'dialog' => $bulkAction->dialogConfirmation
+                ];
+            }
+        }
+        $actions['bulk_actions'] = $bulk_actions;
         $actions['in_left'] = $action->actionInLeft;
         $actions['action'] = $action->action;
         $actions['popup_form'] = $action->crudPopup;

@@ -301,7 +301,7 @@ trait AdminModuleController
 
      public function export(Request $request)
      {
-          abort_if(!$request->admin(true)?->can('view', static::$policy), Response::HTTP_UNAUTHORIZED);
+          abort_if(!$request->admin(true)?->can('export', static::$policy), Response::HTTP_UNAUTHORIZED);
 
           try {
                $actions = collect(static::$action->export)->where('type', $request->type)->first();
