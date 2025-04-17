@@ -44,7 +44,13 @@ class MacroServiceProvider extends ServiceProvider
 
           Str::macro('initial', function ($string) {
                $nameParts = explode(" ", $string);
-               $initials = strtoupper($nameParts[0][0] . $nameParts[1][0]);
+               $str = $nameParts[0][0];
+               if( @$nameParts[1]){
+                    $str .=  @$nameParts[1][0];
+               }else{
+                    $str .= @$nameParts[0][1];
+               }
+               $initials = strtoupper($str);
                return $initials;
           });
      }
