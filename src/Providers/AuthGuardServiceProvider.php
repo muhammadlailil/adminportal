@@ -96,7 +96,7 @@ class AuthGuardServiceProvider extends ServiceProvider
      private function configureAuthGuards()
      {
           Config::set('auth.guards.admin', [
-               'driver' => 'admin',
+               'driver' => 'session',
                'provider' => 'admin',
           ]);
 

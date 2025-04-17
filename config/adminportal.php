@@ -58,7 +58,8 @@ return [
 
      'middleware' => [
           'admin-auth',
-          'admin-verified'
+          'admin-verified',
+          'auth:admin'
      ],
 
      /*
