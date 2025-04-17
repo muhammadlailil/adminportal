@@ -27,7 +27,7 @@ trait HasDatatable
           if ($filters = request('filter')) {
                foreach ($filters as $key => $filter) {
                     $scope = @$scopes[$key];
-                    if ($scope && $filter) {
+                    if ($scope && !is_null($filter)) {
                          $scope($query, $filter);
                     }
                }
