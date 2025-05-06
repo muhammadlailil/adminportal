@@ -1,6 +1,6 @@
 <x-admin :route="$route">
     <x-slot:button-action>
-        @if (@$actions['import'] && admin(true)?->can('create', $policy))
+        @if (@$actions['import'] && admin()?->can('create', $policy))
             <div>
                 <x-portal::button variant="outline" type="button" x-on:click="dialog='import-data'">
                     {{ __('adminportal.import') }}
@@ -62,7 +62,7 @@
                 </x-portal::dropdown-menu.content>
             </x-portal::dropdown-menu>
         @endif
-        @if (admin(true)?->can('create', $policy))
+        @if (admin()?->can('create', $policy))
             @if (@$actions['create'])
                 @if ($actions['popup_form'])
                     <div>
