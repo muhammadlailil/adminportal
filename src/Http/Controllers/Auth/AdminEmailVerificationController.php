@@ -28,7 +28,7 @@ class AdminEmailVerificationController
           }
           $id = id_from_uuid($uuid);
 
-          $user = app(config('adminportal.authentication.model'))->firstOrFail($id);
+          $user = app(config('adminportal.authentication.model'))->where('id', $id)->firstOrFail();
 
           if (!hash_equals((string) $hash, sha1($user->email))) {
                return abort(403);
