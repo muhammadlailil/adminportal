@@ -16,13 +16,17 @@
                     <x-tabler-dots class="h-4.5" />
                 </x-portal::dropdown-menu.trigger>
                 <x-portal::dropdown-menu.content class="w-fit" align="end">
-                    <x-portal::dropdown-menu.item href="{{route('admin.[url].edit',$row->uuid)}}" as="a">
-                        Edit
-                    </x-portal::dropdown-menu.item>
+                    @if (admin(true)?->can('update', [url]))
+                        <x-portal::dropdown-menu.item href="{{route('admin.[url].edit',$row->uuid)}}" as="a">
+                            Edit
+                        </x-portal::dropdown-menu.item>
+                    @endif
+                    @if (admin(true)?->can('delete', [url]))
                     <x-portal::dropdown-menu.item variant="danger" x-data-delete-confirmation="{{ $row->uuid }}"
                         dismissible class="text-red-600">
                         Delete
                     </x-portal::dropdown-menu.item>
+                    @endif
                 </x-portal::dropdown-menu.content>
             </x-portal::dropdown-menu>
         </x-portal::table.cell>

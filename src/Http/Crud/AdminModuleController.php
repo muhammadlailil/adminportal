@@ -54,6 +54,7 @@ trait AdminModuleController
                     'export' => count(static::$action->export) ? route_from_current('export') : null,
                     'bulk_actions' => count(static::$action->bulkActions) ? route_from_current('bulk-actions') : null,
                ],
+               'policy' => static::$policy,
                'import' => static::getImport(),
                'result' => app(static::$repository)->datatable($request, $table->limit),
                ...$allProps(),
@@ -72,6 +73,7 @@ trait AdminModuleController
 
           $data = [
                'row' => $row,
+               'policy' => static::$policy,
                'view' =>  static::$resourcePath . ".show",
                ...$detailProps($row)
           ];
@@ -85,6 +87,7 @@ trait AdminModuleController
           $allProps = static::$shared->all;
 
           $data = [
+               'policy' => static::$policy,
                'view' =>  static::$resourcePath . ".create",
                'action' => [
                     'route' => route_from_current('store'),
@@ -142,6 +145,7 @@ trait AdminModuleController
           $updateProps = static::$shared->update;
           $allProps = static::$shared->all;
           $data = [
+               'policy' => static::$policy,
                'view' =>  static::$resourcePath . ".update",
                'action' => [
                     'route' => route_from_current('update',$uuid),

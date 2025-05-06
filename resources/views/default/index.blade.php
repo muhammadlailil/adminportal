@@ -1,6 +1,6 @@
 <x-admin :route="$route">
     <x-slot:button-action>
-        @if (@$actions['import'])
+        @if (@$actions['import'] && admin(true)?->can('create', $policy))
             <div>
                 <x-portal::button variant="outline" type="button" x-on:click="dialog='import-data'">
                     {{ __('adminportal.import') }}
@@ -62,22 +62,24 @@
                 </x-portal::dropdown-menu.content>
             </x-portal::dropdown-menu>
         @endif
-        @if (@$actions['create'])
-            @if ($actions['popup_form'])
-                <div>
-                    <x-portal::button type="button" x-on:click="openCreateCrudForm">
+        @if (admin(true)?->can('create', $policy))
+            @if (@$actions['create'])
+                @if ($actions['popup_form'])
+                    <div>
+                        <x-portal::button type="button" x-on:click="openCreateCrudForm">
+                            {{ __('adminportal.create') }}
+                            <x-tabler-plus class="h-4.5" />
+                        </x-portal::button>
+                        <x-portal::default.crud-form>
+                            @include($view['form'])
+                        </x-portal::default.crud-form>
+                    </div>
+                @else
+                    <x-portal::button href="{{ route_from_current('create') }}">
                         {{ __('adminportal.create') }}
                         <x-tabler-plus class="h-4.5" />
                     </x-portal::button>
-                    <x-portal::default.crud-form>
-                        @include($view['form'])
-                    </x-portal::default.crud-form>
-                </div>
-            @else
-                <x-portal::button href="{{ route_from_current('create') }}">
-                    {{ __('adminportal.create') }}
-                    <x-tabler-plus class="h-4.5" />
-                </x-portal::button>
+                @endif
             @endif
         @endif
     </x-slot:button-action>
