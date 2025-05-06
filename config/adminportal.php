@@ -72,6 +72,7 @@ return [
           'model' => Laililmahfud\Adminportal\Models\CmsAdmin::class,
           'verification' => true,
           'login' => [
+               'show_appname' => true,
                'route' => 'admin.auth.login',
                'action' => 'admin.auth.login.attempt',
                'rate_limit' => [
@@ -79,6 +80,7 @@ return [
                ]
           ],
           'register' => [
+               'show_appname' => true,
                'enable' => true,
                'route' => 'admin.auth.register',
                'action' => 'admin.auth.register.attempt',
@@ -87,6 +89,7 @@ return [
                ]
           ],
           'forgot_password' => [
+               'show_appname' => true,
                'enable' => true,
                'route' => 'admin.auth.forgot-password',
                'action' => 'admin.auth.forgot-password.attempt',

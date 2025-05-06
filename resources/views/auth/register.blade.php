@@ -2,10 +2,12 @@
     <div class="container grid h-svh flex-col items-center justify-center lg:max-w-none lg:px-0 bg-background">
         <div class="mx-auto flex w-full flex-col justify-center space-y-2 sm:!w-[480px] lg:p-8 py-5">
             <div class="mb-4 flex items-center justify-center gap-2">
-                <img src="{{ asset(portal('logo')) }}" alt="{{ config('app.name') }}" class="h-8">
-                <h1 class="text-2xl font-semibold">
-                    {{ config('app.name') }}
-                </h1>
+                <img src="{{ asset(portal('logo')) }}" alt="{{ config('app.name') }}" class="{{ portal('authentication.register.show_appname') ? 'h-8' : 'h-10' }}">
+                @if(portal('authentication.register.show_appname'))
+                    <h1 class="text-2xl font-semibold">
+                        {{ config('app.name') }}
+                    </h1>
+                @endif
             </div>
             <div class="text-card-foreground shaxdow sm:p-6">
                 <div class="flex flex-col space-y-2 text-left">
