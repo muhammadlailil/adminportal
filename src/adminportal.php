@@ -135,7 +135,7 @@ if (!function_exists('id_to_uuid')) {
                return null;
           }
           $compressed = gzcompress($id);
-          return substr(base64_encode($compressed), 0, 36);
+          return base64_encode(substr(base64_encode($compressed), 0, 36));
      }
 }
 
@@ -147,6 +147,7 @@ if (!function_exists('id_from_uuid')) {
                return null;
           }
           $decoded = base64_decode($uuid);
+          $decoded = base64_decode($decoded);
           return gzuncompress($decoded);
      }
 }

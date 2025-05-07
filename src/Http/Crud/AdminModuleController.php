@@ -130,6 +130,7 @@ trait AdminModuleController
                     ->with('openDialog', 'create-crud-form');
           } catch (BadRequestException $e) {
                return redirect()->back()
+                    ->withInput()
                     ->withToast([
                          'title' => 'Oops! Something went wrong.',
                          'message' => $e->getMessage(),
@@ -197,6 +198,7 @@ trait AdminModuleController
                     ]);
           } catch (BadRequestException $e) {
                return redirect()->back()
+                    ->withInput()
                     ->withToast([
                          'title' => 'Oops! Something went wrong.',
                          'message' => $e->getMessage(),
@@ -295,6 +297,7 @@ trait AdminModuleController
                     ->with('openDialog', 'import-data');
           } catch (BadRequestException $e) {
                return redirect()->back()
+                    ->withInput()
                     ->withToast([
                          'title' => 'Oops! Something went wrong.',
                          'message' => $e->getMessage(),
