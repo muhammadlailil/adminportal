@@ -55,7 +55,7 @@ class AuthGuardServiceProvider extends ServiceProvider
 
           Event::listen(Registered::class, function ($event) {
                if (portal('authentication.verification')) {
-                    $event->user->notify(new VerificationEmailNotification());
+                    $event->user->sendVerificationEmailNoticiation();
                }
           });
 

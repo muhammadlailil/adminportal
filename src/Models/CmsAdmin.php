@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Laililmahfud\Adminportal\Traits\HasPermission;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laililmahfud\Adminportal\Notifications\ResetPasswordLinkNotification;
+use Laililmahfud\Adminportal\Notifications\VerificationEmailNotification;
 
 class CmsAdmin extends Authenticatable
 {
@@ -39,6 +40,10 @@ class CmsAdmin extends Authenticatable
     public function sendPasswordResetNotification($token)
     {
         $this->notify(new ResetPasswordLinkNotification($token));
+    }
+
+    public function sendVerificationEmailNoticiation(){
+        $this->notify(new VerificationEmailNotification());
     }
 
     public function permission() : HasOne{
