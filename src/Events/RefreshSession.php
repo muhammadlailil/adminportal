@@ -3,7 +3,6 @@
 namespace Laililmahfud\Adminportal\Events;
 
 use Illuminate\Queue\SerializesModels;
-use Laililmahfud\Adminportal\Models\CmsAdmin;
 
 class RefreshSession
 {
@@ -11,7 +10,7 @@ class RefreshSession
 
     public $user;
 
-    public function __construct(CmsAdmin $user)
+    public function __construct($user)
     {
         $this->user = $user;
     }
