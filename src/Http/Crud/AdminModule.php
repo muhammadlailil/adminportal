@@ -133,7 +133,7 @@ class AdminModule
 
         $exports = [];
         foreach($action->export as $export){
-            if(in_array("export".static::$policy,$permission->permissions ?: []) || $permission->is_superadmin){
+            if(in_array("export:".static::$policy,$permission->permissions ?: []) || $permission->is_superadmin){
                 $exports[] = [
                     'key' => $export->type,
                     'label' => "Export to " . $export->label,
