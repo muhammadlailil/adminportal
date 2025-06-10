@@ -14,7 +14,7 @@ class Export
      {
           $static = app(static::class);
           $static->type = "pdf";
-          $static->label = "Export to pdf";
+          $static->label = "pdf";
           $static->icon = "file-type-pdf";
           $static->handle = $handle;
           return $static;
@@ -24,7 +24,7 @@ class Export
      {
           $static = app(static::class);
           $static->type = "xls";
-          $static->label = "Export to xls";
+          $static->label = "xls";
           $static->icon = "file-type-xls";
           $static->handle = $handle;
           return $static;
@@ -34,7 +34,7 @@ class Export
      {
           $static = app(static::class);
           $static->type = "csv";
-          $static->label = "Export to csv";
+          $static->label = "csv";
           $static->icon = "file-type-csv";
           $static->handle = $handle;
           return $static;
