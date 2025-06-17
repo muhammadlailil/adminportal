@@ -50,27 +50,31 @@ class ModuleRegistry
         return $modules;
     }
 
-    public function navigations()
+    public function navigations($dashboard = true)
     {
         $permission = admin()->permission;
         $modules = collect($this->modules(badge : true))
             ->when(!$permission->is_superadmin, fn($modules) => $modules->filter(fn($module) => in_array("view:" . $module['policy'], $permission->permissions ?: [])))
             ->toArray();
 
-        $modules = collect([
-            [
-                'group' => 'General',
-                'policy' => 'public',
-                'sorting' => -1,
-                'parent' => null,
-                'parent_icon' => null,
-                'url' => portal('home_page'),
-                'title' => 'Dashboard',
-                'icon' => 'layout-dashboard',
-                'badge' => '0'
-            ],
-            ...$modules
-        ]);
+        if($dashboard){
+            $modules = collect([
+                [
+                    'group' => 'General',
+                    'policy' => 'public',
+                    'sorting' => -1,
+                    'parent' => null,
+                    'parent_icon' => null,
+                    'url' => portal('home_page'),
+                    'title' => 'Dashboard',
+                    'icon' => 'layout-dashboard',
+                    'badge' => '0'
+                ],
+                ...$modules
+            ]);
+        }else{
+            $modules = collect($modules);
+        }
 
         $top = $modules->where('is_bottom', false);
         $top = $top

@@ -26,6 +26,9 @@ return [
 
      'cms_admin_module' => true,
 
+     
+     'dashboard' => true,
+
      /*
      | --------------------------------------------
      | Application logo and favicon

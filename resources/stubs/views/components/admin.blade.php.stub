@@ -17,10 +17,10 @@
     deleteRoute: '{{ @$route['delete'] }}',
     openDialog: '{{ session('openDialog') }}',
     ...admin()
-}">
+}" class="duration-300">
     <x-portal::sidebar.provider>
         @php
-            $navigations = navigations();
+            $navigations = navigations(config('adminportal.dashboard'));
         @endphp
         <x-portal::sidebar>
             <x-portal::sidebar.logo title="{{ config('app.name') }}" description="{{ admin()->permission->name }}"

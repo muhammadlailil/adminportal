@@ -122,9 +122,9 @@ if (!function_exists('breadcrumb')) {
 
 
 if (!function_exists('navigations')) {
-     function navigations()
+     function navigations($dashboard = true)
      {
-          return app(ModuleRegistry::class)->navigations();
+          return app(ModuleRegistry::class)->navigations($dashboard);
      }
 }
 
