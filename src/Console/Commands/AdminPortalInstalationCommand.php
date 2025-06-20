@@ -122,10 +122,10 @@ class AdminPortalInstalationCommand extends Command
         }
         
         if (!file_exists("{$partialsDir}/css.blade.php")) {
-            file_put_contents($adminModuleDir . '/css.blade.php', '');
+            file_put_contents($partialsDir . '/css.blade.php', '');
         }
         if (!file_exists("{$partialsDir}/js.blade.php")) {
-            file_put_contents($adminModuleDir . '/js.blade.php', '');
+            file_put_contents($partialsDir . '/js.blade.php', '');
         }
 
         // Publish admin layout component
