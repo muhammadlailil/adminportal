@@ -14,7 +14,7 @@ class EnsureEmailIsVerified
       */
      public function handle(Request $request, Closure $next)
      {
-          if ($request->admin()->hasAttribute('email_verified_at') && !$request->admin()->email_verified_at) {
+          if ($request->admin()->hasAttribute('email_verified_at') && !$request->admin()->email_verified_at && portal('authentication.verification')) {
                return to_route('admin.verification.notice');
           }
 
