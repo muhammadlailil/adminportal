@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Validation\ValidationException;
 use Laililmahfud\Adminportal\Notifications\VerificationEmailNotification;
 
@@ -40,7 +41,7 @@ class AdminProfileController
 
                if ($request->admin()->isDirty('email')) {
                     $request->admin()->email_verified_at = null;
-                    $request->admin()->notify(new VerificationEmailNotification());
+                     event(new Registered($request->admin()));
                }
 
                $request->admin()->save();
