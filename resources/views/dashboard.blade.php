@@ -1,2 +1,0 @@
-<x-admin page-title="Dashboard">
-</x-admin>

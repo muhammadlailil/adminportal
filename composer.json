@@ -5,8 +5,7 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Laililmahfud\\Adminportal\\": "src/",
-            "Laililmahfud\\Adminportal\\Seeders\\": "database/seeders/"
+            "Laililmahfud\\Adminportal\\": "src/app"
         }
     },
     "authors": [
@@ -17,8 +16,11 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "php": "^8.2",
-        "laililmahfud/portal-ui": "^1.0"
+        "php": "^8.0.2",
+        "maatwebsite/excel": "^3.1",
+        "firebase/php-jwt": "^6.3",
+        "barryvdh/laravel-dompdf": "^2.0",
+        "laililmahfud/apdoc": "^0.0.6"
     },
     "extra": {
         "laravel": {

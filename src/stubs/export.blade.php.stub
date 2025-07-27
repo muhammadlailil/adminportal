@@ -1,0 +1,21 @@
+<table>
+    <thead>
+        <tr>
+            [columTable]
+        </tr>
+    </thead>
+    <tbody>
+    @foreach ($data as $row)
+    <tr>
+        [tableData]
+    </tr>
+    @endforeach
+    </tbody>
+</table>
+@if($type=='pdf')
+<style>
+    table tr th,table tr td{
+        font-size: 12px
+    }
+</style>
+@endif

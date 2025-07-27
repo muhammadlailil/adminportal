@@ -1,0 +1,25 @@
+<?php
+namespace App\Http\Controllers\Admin;
+
+use Illuminate\Http\Request;
+use Laililmahfud\Adminportal\Controllers\AdminController;
+use App\Services\[serviceName];
+[useClass]
+class [controllerName] extends AdminController
+{
+    protected $routePath = "[routePath]";
+    protected $pageTitle = "[pageTitle]";
+    protected $resourcePath = "[resourcePath]";
+    protected $crudService = [serviceName]::class;
+[configuration]
+
+    protected $tableColumns = [
+        [tableColumns]
+    ];
+
+    protected $rules = [
+        [rules]
+    ];
+    [createRules]
+    [updateRules]
+}
