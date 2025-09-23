@@ -7,7 +7,7 @@
 
 
 ## About Admin Portal
-See our documentation for installation and configuration [here](https://muhammadlailil.github.io/portal-docs/adminportal/index.html).
+See our documentation for installation and configuration [here](https://lailil-dev.gitbook.io/adminportal/).
 
 ## Installation
 

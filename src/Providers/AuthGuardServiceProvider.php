@@ -160,6 +160,14 @@ class AuthGuardServiceProvider extends ServiceProvider
                }
                return in_array("export:" . $scope, $permission->permissions ?: []);
           });
+
+          Gate::define('import', function ($admin, $scope) {
+               $permission = $admin->permission;
+               if ($permission->is_superadmin) {
+                    return true;
+               }
+               return in_array("import:" . $scope, $permission->permissions ?: []);
+          });
      }
 
 }

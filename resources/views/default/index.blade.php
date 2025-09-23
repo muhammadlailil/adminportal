@@ -1,6 +1,6 @@
 <x-admin :route="$route">
     <x-slot:button-action>
-        @if (@$actions['import'] && admin()?->can('create', $policy))
+        @if (@$actions['import'] && admin()?->can('import', $policy))
             <div>
                 <x-portal::button variant="outline" type="button" x-on:click="dialog='import-data'">
                     {{ __('adminportal.import') }}

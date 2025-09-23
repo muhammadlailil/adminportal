@@ -270,7 +270,7 @@ trait AdminModuleController
 
      public function import(Request $request)
      {
-          abort_if(!$request->admin(true)?->can('create', static::$policy), Response::HTTP_UNAUTHORIZED);
+          abort_if(!$request->admin(true)?->can('import', static::$policy), Response::HTTP_UNAUTHORIZED);
 
           try {
                $request->validate([
