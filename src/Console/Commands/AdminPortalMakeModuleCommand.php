@@ -14,7 +14,12 @@ class AdminPortalMakeModuleCommand extends Command
       *
       * @var string
       */
-     protected $signature = 'adminportal:module';
+     protected $signature = 'adminportal:module  
+                              {--table : table of module} 
+                              {--module : name of module} 
+                              {--url : url of module whitout admin prefix} 
+                              {--icon : icon of module} 
+                              {--controller : name of controller}';
 
      /**
       * The console command description.
@@ -38,47 +43,67 @@ class AdminPortalMakeModuleCommand extends Command
       */
      public function handle()
      {
-          while (true) {
-               $tableName = text(
-                    label: 'Table ?',
-                    required: true
-               );
-
+          $tableName = $this->option('table');
+          if($tableName){
                $tableExists = Schema::hasTable($tableName);
                if (!$tableExists) {
                     error("The table '$tableName' does not exist. Please try again.");
-               }else{
-                    break;
                }
+          }else{
+               while (true) {
+                    $tableName = text(
+                         label: 'Table ?',
+                         required: true
+                    );
 
+                    $tableExists = Schema::hasTable($tableName);
+                    if (!$tableExists) {
+                         error("The table '$tableName' does not exist. Please try again.");
+                    }else{
+                         break;
+                    }
+               }
+          }
+          
+          $moduleName = $this->option('module');
+          if(!$moduleName){
+               $moduleName = text(
+                    label: 'Module Name ?',
+                    required: true,
+                    default: ucwords(str_replace('_', ' ', $tableName)),
+               );
           }
 
-          $moduleName = text(
-               label: 'Module Name ?',
-               required: true,
-               default: ucwords(str_replace('_', ' ', $tableName)),
-          );
+          $moduleUrl = $this->option('url');
+          if(!$moduleUrl){
+               $moduleUrl = text(
+                    label: 'Module URL ?',
+                    required: true,
+                    default: Str::slug($tableName)
+               );
+          }
 
-          $moduleUrl = text(
-               label: 'Module URL ?',
-               required: true,
-               default: Str::slug($tableName)
-          );
-
-          $moduleIcon = text(
-               label: 'Module Icon ?',
-               required: true,
-               hint: 'User blade tabler icon https://blade-ui-kit.com/blade-icons',
-               default: 'database-plus'
-          );
-
+          $moduleIcon = $this->option('icon');
+          if(!$moduleIcon){
+               $moduleIcon = text(
+                    label: 'Module Icon ?',
+                    required: true,
+                    hint: 'User blade tabler icon https://blade-ui-kit.com/blade-icons',
+                    default: 'database-plus'
+               );
+          }
 
           $modelName = Str::singular(str_replace(' ', '', ucwords(str_replace(["-", "_"], [" ", " "], $tableName))));
-          $controllerName = text(
-               label: 'Controller Name ?',
-               required: true,
-               default: "Admin{$modelName}Controller"
-          );
+
+          $controllerName = $this->option('controller');
+          if(!$controllerName){
+               $controllerName = text(
+                    label: 'Controller Name ?',
+                    required: true,
+                    default: "Admin{$modelName}Controller"
+               );
+          }
+          
 
           $modelName = $this->generateModel($modelName);
           $repository = $this->generateRepository($modelName);
