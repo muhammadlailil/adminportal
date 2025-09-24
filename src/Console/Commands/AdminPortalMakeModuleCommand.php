@@ -15,11 +15,11 @@ class AdminPortalMakeModuleCommand extends Command
       * @var string
       */
      protected $signature = 'adminportal:module  
-                              {--table : table of module} 
-                              {--module : name of module} 
-                              {--url : url of module whitout admin prefix} 
-                              {--icon : icon of module} 
-                              {--controller : name of controller}';
+                              {--table= : table of module} 
+                              {--module= : name of module} 
+                              {--url= : url of module whitout admin prefix} 
+                              {--icon= : icon of module} 
+                              {--controller= : name of controller}';
 
      /**
       * The console command description.
