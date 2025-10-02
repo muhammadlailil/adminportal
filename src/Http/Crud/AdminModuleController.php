@@ -13,12 +13,12 @@ trait AdminModuleController
           static::resolve();
           $route = request()->route()->getActionMethod();
           $data = [
-               'breadcrumb' => breadcrumb(action : match ($route) {
+               'breadcrumb' => breadcrumb(action: match ($route) {
                     'show' => 'Detail',
                     'create' => 'Create',
                     'edit' => 'Update',
                     default => 'List',
-               },title : static::getTitle()),
+               }, title: static::getTitle()),
                'pageTitle' => static::getTitle(),
                'pageDescription' => match ($route) {
                     'index' => static::$description ?? "Manage your " . static::getTitle() . " data here.",
@@ -74,13 +74,14 @@ trait AdminModuleController
           $data = [
                'row' => $row,
                'policy' => static::$policy,
-               'view' =>  static::$resourcePath . ".show",
+               'view' => static::$resourcePath . ".show",
                ...$detailProps($row)
           ];
           return view("portal::default.show", $data);
      }
 
-     public function create(Request $request){
+     public function create(Request $request)
+     {
           abort_if(!$request->admin(true)?->can('create', static::$policy), Response::HTTP_UNAUTHORIZED);
 
           $createProps = static::$shared->create;
@@ -88,7 +89,7 @@ trait AdminModuleController
 
           $data = [
                'policy' => static::$policy,
-               'view' =>  static::$resourcePath . ".create",
+               'view' => static::$resourcePath . ".create",
                'action' => [
                     'route' => route_from_current('store'),
                     'method' => 'POST'
@@ -110,10 +111,10 @@ trait AdminModuleController
                     ...static::$rules->create,
                ]);
 
-               $action = static::$action->create;               
-               if($action instanceof Closure){
+               $action = static::$action->create;
+               if ($action instanceof Closure) {
                     $action($request);
-               }else{
+               } else {
                     app($action)->handle($request);
                }
 
@@ -139,7 +140,8 @@ trait AdminModuleController
           }
      }
 
-     public function edit(Request $request,$uuid){
+     public function edit(Request $request, $uuid)
+     {
           abort_if(!$request->admin(true)?->can('update', static::$policy), Response::HTTP_UNAUTHORIZED);
           $id = id_from_uuid($uuid);
 
@@ -147,16 +149,17 @@ trait AdminModuleController
           $allProps = static::$shared->all;
           $data = [
                'policy' => static::$policy,
-               'view' =>  static::$resourcePath . ".update",
+               'view' => static::$resourcePath . ".update",
                'action' => [
-                    'route' => route_from_current('update',$uuid),
+                    'route' => route_from_current('update', $uuid),
                     'method' => 'PATCH'
                ],
                ...$allProps(),
                ...$updateProps($id),
           ];
-          if(!@$data['row']){
-               $data['row'] = app(static::$repository)->firstOrFail($id);;
+          if (!@$data['row']) {
+               $data['row'] = app(static::$repository)->firstOrFail($id);
+               ;
           }
           return view("portal::default.form", $data);
      }
@@ -171,15 +174,19 @@ trait AdminModuleController
                'uuid' => $uuid
           ]);
           try {
+               $updateRules = array_map(function ($rule) use ($id) {
+                    return str_replace('{{id}}', $id, $rule);
+               }, static::$rules->update);
+               
                $request->validate([
                     ...static::$rules->all,
-                    ...static::$rules->update,
+                    ...$updateRules,
                ]);
 
-               $action = static::$action->update;               
-               if($action instanceof Closure){
-                    $action($request,$id);
-               }else{
+               $action = static::$action->update;
+               if ($action instanceof Closure) {
+                    $action($request, $id);
+               } else {
                     app($action)->handle($request, $id);
                }
 
@@ -194,7 +201,7 @@ trait AdminModuleController
                     ->withErrors($e->errors())
                     ->withInput()
                     ->with([
-                         'openDialog'=> 'update-crud-form'
+                         'openDialog' => 'update-crud-form'
                     ]);
           } catch (BadRequestException $e) {
                return redirect()->back()
@@ -216,11 +223,11 @@ trait AdminModuleController
 
           try {
 
-               
-               $action = static::$action->delete;               
-               if($action instanceof Closure){
+
+               $action = static::$action->delete;
+               if ($action instanceof Closure) {
                     $action($id);
-               }else{
+               } else {
                     app($action)->handle($id);
                }
 
@@ -242,7 +249,7 @@ trait AdminModuleController
 
      public function bulkActions(Request $request)
      {
-          abort_if(!$request->admin(true)?->can('bulk-action', $request->action.'-'.static::$policy), Response::HTTP_UNAUTHORIZED);
+          abort_if(!$request->admin(true)?->can('bulk-action', $request->action . '-' . static::$policy), Response::HTTP_UNAUTHORIZED);
 
           $action = collect(static::$action->bulkActions)->where('key', $request->action)->first();
           abort_if(!$action, Response::HTTP_NOT_FOUND);
@@ -276,12 +283,12 @@ trait AdminModuleController
                $request->validate([
                     'file' => 'required|file|mimes:' . static::$action->import->validation
                ]);
-               
+
                $file = $request->file('file');
-               $action = static::$action->import->action;               
-               if($action instanceof Closure){
+               $action = static::$action->import->action;
+               if ($action instanceof Closure) {
                     $action($file);
-               }else{
+               } else {
                     app($action)->handle($file);
                }
 
@@ -314,10 +321,10 @@ trait AdminModuleController
                $actions = collect(static::$action->export)->where('type', $request->type)->first();
                abort_if(!$actions, Response::HTTP_NOT_FOUND);
 
-               $action = $actions->handle;               
-               if($action instanceof Closure){
+               $action = $actions->handle;
+               if ($action instanceof Closure) {
                     return $action($request);
-               }else{
+               } else {
                     return app($action)->handle($request);
                }
 
