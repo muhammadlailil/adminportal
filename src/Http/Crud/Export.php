@@ -7,7 +7,7 @@ class Export
      public string $type;
      public string $label;
      public string $icon;
-     public string $handle;
+     public string|Closure $handle;
 
 
      public static function pdf(string|Closure $handle)

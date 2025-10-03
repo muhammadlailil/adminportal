@@ -8,7 +8,7 @@ class Import
      public string $format;
      public string $mimeType;
      public string $validation;
-     public string $action;
+     public string|Closure $action;
 
      public static function make(string|Closure $class): Import
      {
