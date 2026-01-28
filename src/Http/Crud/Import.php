@@ -29,7 +29,7 @@ class Import
      {
           $this->format = 'CSV';
           $this->mimeType = '.csv';
-          $this->validation = 'txt';
+          $this->validation = 'csv,txt';
           $this->sample = $sample;
           return $this;
      }
